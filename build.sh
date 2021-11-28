@@ -24,7 +24,12 @@ function build_kitsune_lib_repo () {
     cd $REPO_DIR
 
     # build repo library with qmake
-    /usr/lib/x86_64-linux-gnu/qt5/bin/qmake "$PARENT_DIR/$REPO_NAME/$REPO_NAME.pro" -spec linux-g++ "CONFIG += optimize_full staticlib"
+    if [[ $REPO_NAME == "libKitsunemimiHanamiSdk" ]]
+    then
+        /usr/lib/x86_64-linux-gnu/qt5/bin/qmake "$PARENT_DIR/$REPO_NAME/cpp/$REPO_NAME.pro" -spec linux-g++ "CONFIG += optimize_full staticlib"
+    else
+        /usr/lib/x86_64-linux-gnu/qt5/bin/qmake "$PARENT_DIR/$REPO_NAME/$REPO_NAME.pro" -spec linux-g++ "CONFIG += optimize_full staticlib"
+    fi
     /usr/bin/make -j$NUMBER_OF_THREADS
 
     # copy build-result and include-files into the result-directory
@@ -102,6 +107,7 @@ get_required_kitsune_lib_repo "libKitsunemimiSakuraNetwork" "master" 8
 get_required_kitsune_lib_repo "libKitsunemimiSakuraLang" "master" 1
 get_required_private_repo_github "libKitsunemimiSakuraDatabase" "master" 8
 get_required_private_repo_github "libKitsunemimiSakuraHardware" "master" 8
+get_required_private_repo_github "libKitsunemimiHanamiSdk" "master" 8
 echo ""
 echo "###########################################################################################################"
 echo ""

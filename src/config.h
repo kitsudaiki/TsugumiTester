@@ -34,6 +34,11 @@ void
 registerConfigs(Kitsunemimi::ErrorContainer &error)
 {
     Kitsunemimi::Hanami::registerBasicConfigs(error);
+
+    REGISTER_STRING_CONFIG( "connection", "host",      error, "", true);
+    REGISTER_INT_CONFIG(    "connection", "port",      error, 0,  true);
+    REGISTER_STRING_CONFIG( "connection", "test_user", error, "", true);
+    REGISTER_STRING_CONFIG( "connection", "test_pw",   error, "", true);
 }
 
 #endif // CONFIG_H

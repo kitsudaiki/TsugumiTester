@@ -5,6 +5,11 @@ CONFIG += console c++17
 CONFIG -= app_bundle
 
 
+LIBS += -L../libKitsunemimiHanamiSdk/src -lKitsunemimiHanamiSdk
+LIBS += -L../libKitsunemimiHanamiSdk/src/debug -lKitsunemimiHanamiSdk
+LIBS += -L../libKitsunemimiHanamiSdk/src/release -lKitsunemimiHanamiSdk
+INCLUDEPATH += ../libKitsunemimiHanamiSdk/cpp/include
+
 LIBS += -L../libKitsunemimiHanamiMessaging/src -lKitsunemimiHanamiMessaging
 LIBS += -L../libKitsunemimiHanamiMessaging/src/debug -lKitsunemimiHanamiMessaging
 LIBS += -L../libKitsunemimiHanamiMessaging/src/release -lKitsunemimiHanamiMessaging
@@ -90,13 +95,21 @@ LIBS += -L../libKitsunemimiCpu/src/debug -lKitsunemimiCpu
 LIBS += -L../libKitsunemimiCpu/src/release -lKitsunemimiCpu
 INCLUDEPATH += ../libKitsunemimiCpu/include
 
-
+LIBS += -lcryptopp -lssl -lsqlite3 -luuid -lcrypto
 
 INCLUDEPATH += $$PWD \
                src
 
-SOURCES += src/main.cpp
+SOURCES += src/main.cpp \
+    src/user/create_user.cpp \
+    src/user/delete_user.cpp \
+    src/user/list_user.cpp \
+    src/user/show_user.cpp
 
 HEADERS += \
     src/args.h \
-    src/config.h
+    src/config.h \
+    src/user/create_user.h \
+    src/user/delete_user.h \
+    src/user/list_user.h \
+    src/user/show_user.h
