@@ -101,15 +101,11 @@ INCLUDEPATH += $$PWD \
                src
 
 SOURCES += src/main.cpp \
-    src/user/create_user.cpp \
-    src/user/delete_user.cpp \
-    src/user/list_user.cpp \
-    src/user/show_user.cpp
+    src/rest_api_tests/misaka/user_tests.cpp \
+    src/rest_api_tests/rest_api_tests.cpp
 
 HEADERS += \
     src/args.h \
     src/config.h \
-    src/user/create_user.h \
-    src/user/delete_user.h \
-    src/user/list_user.h \
-    src/user/show_user.h
+    src/rest_api_tests/rest_api_tests.h \
+    src/rest_api_tests/misaka/user_tests.h
