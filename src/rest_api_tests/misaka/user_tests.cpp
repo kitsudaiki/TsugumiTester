@@ -26,40 +26,22 @@
 
 #include <libKitsunemimiJson/json_item.h>
 
-UserTests::UserTests()
+UserTests::UserTests() :
+    Kitsunemimi::CompareTestHelper("UserTests")
 {
-
 }
 
 /**
  * @brief UserTests::runTest
  * @return
  */
-bool
+void
 UserTests::runTest()
 {
-    if(create_test() == false)
-    {
-        std::cout<<"creaet users failed"<<std::endl;
-        return false;
-    }
-    if(show_test() == false)
-    {
-        std::cout<<"show users failed"<<std::endl;
-        return false;
-    }
-    if(list_test() == false)
-    {
-        std::cout<<"list users failed"<<std::endl;
-        return false;
-    }
-    if(delete_test() == false)
-    {
-        std::cout<<"delete users failed"<<std::endl;
-        return false;
-    }
-
-    return true;
+    TEST_EQUAL(create_test(), true);
+    TEST_EQUAL(show_test(), true);
+    TEST_EQUAL(list_test(), true);
+    TEST_EQUAL(delete_test(), true);
 }
 
 /**

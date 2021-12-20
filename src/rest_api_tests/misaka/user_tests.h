@@ -24,12 +24,14 @@
 #define USERTESTS_H
 
 #include <string>
+#include <libKitsunemimiCommon/test_helper/compare_test_helper.h>
 
 class UserTests
+        : public Kitsunemimi::CompareTestHelper
 {
 public:
     UserTests();
-    bool runTest();
+    void runTest();
 
 private:
     bool create_test();

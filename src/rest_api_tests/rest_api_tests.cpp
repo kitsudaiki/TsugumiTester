@@ -45,18 +45,12 @@ initClient()
     return true;
 }
 
-bool
+void
 testMisaka()
 {
-    std::cout<<"test users"<<std::endl;
+    std::cout<<"test misaka"<<std::endl;
     UserTests userTests;
-    if(userTests.runTest() == false)
-    {
-        std::cout<<"test users failed"<<std::endl;
-        return false;
-    }
-
-    return true;
+    userTests.runTest();
 }
 
 bool
@@ -66,11 +60,7 @@ runRestApiTests()
         return false;
     }
 
-    std::cout<<"test misaka"<<std::endl;
-    if(testMisaka() == false)
-    {
-        return false;
-    }
+    testMisaka();
 
     return true;
 }
