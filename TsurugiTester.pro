@@ -101,11 +101,13 @@ INCLUDEPATH += $$PWD \
                src
 
 SOURCES += src/main.cpp \
+    src/rest_api_tests/kyouko/cluster_tests.cpp \
     src/rest_api_tests/misaka/user_tests.cpp \
     src/rest_api_tests/rest_api_tests.cpp
 
 HEADERS += \
     src/args.h \
     src/config.h \
+    src/rest_api_tests/kyouko/cluster_tests.h \
     src/rest_api_tests/rest_api_tests.h \
     src/rest_api_tests/misaka/user_tests.h

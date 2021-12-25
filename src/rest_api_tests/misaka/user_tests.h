@@ -23,7 +23,6 @@
 #ifndef USERTESTS_H
 #define USERTESTS_H
 
-#include <string>
 #include <libKitsunemimiCommon/test_helper/compare_test_helper.h>
 
 class UserTests

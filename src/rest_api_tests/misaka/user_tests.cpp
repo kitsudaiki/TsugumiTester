@@ -26,8 +26,8 @@
 
 #include <libKitsunemimiJson/json_item.h>
 
-UserTests::UserTests() :
-    Kitsunemimi::CompareTestHelper("UserTests")
+UserTests::UserTests()
+    : Kitsunemimi::CompareTestHelper("UserTests")
 {
 }
 

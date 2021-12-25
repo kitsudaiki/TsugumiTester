@@ -28,6 +28,8 @@
 
 #include <rest_api_tests/misaka/user_tests.h>
 
+#include <rest_api_tests/kyouko/cluster_tests.h>
+
 bool
 initClient()
 {
@@ -46,6 +48,14 @@ initClient()
 }
 
 void
+testKyouko()
+{
+    std::cout<<"test kyouko"<<std::endl;
+    ClusterTests clusterTests;
+    clusterTests.runTest();
+}
+
+void
 testMisaka()
 {
     std::cout<<"test misaka"<<std::endl;
@@ -60,7 +70,8 @@ runRestApiTests()
         return false;
     }
 
-    testMisaka();
+    //testMisaka();
+    testKyouko();
 
     return true;
 }
