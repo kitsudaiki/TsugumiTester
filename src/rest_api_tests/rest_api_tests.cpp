@@ -53,7 +53,7 @@ testKyouko()
 {
     std::cout<<"test kyouko"<<std::endl;
     TemplateTest templateTest;
-    //ClusterTests clusterTests;
+    ClusterTests clusterTests;
 }
 
 void

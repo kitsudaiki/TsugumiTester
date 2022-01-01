@@ -38,8 +38,6 @@ TemplateTest::create_test()
         return false;
     }
 
-    std::cout<<jsonItem.toString(true)<<std::endl;
-
     // try to create user a second time with same name
     if(Kitsunemimi::Hanami::createTemplate(result,
                                            m_templateName,
@@ -74,8 +72,6 @@ TemplateTest::show_test()
         return false;
     }
 
-    std::cout<<jsonItem.toString(true)<<std::endl;
-
     // try to get non-existing user
     if(Kitsunemimi::Hanami::getTemplate(result, "fail", error)) {
         return false;
@@ -105,8 +101,6 @@ TemplateTest::list_test()
         return false;
     }
 
-    std::cout<<jsonItem.toString(true)<<std::endl;
-
     return true;
 }
 
@@ -130,8 +124,6 @@ TemplateTest::delete_test()
         LOG_ERROR(error);
         return false;
     }
-
-    std::cout<<jsonItem.toString(true)<<std::endl;
 
     // try the delete a non-existing user
     if(Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error)) {
