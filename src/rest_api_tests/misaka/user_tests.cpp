@@ -29,15 +29,6 @@
 UserTests::UserTests()
     : Kitsunemimi::CompareTestHelper("UserTests")
 {
-}
-
-/**
- * @brief UserTests::runTest
- * @return
- */
-void
-UserTests::runTest()
-{
     TEST_EQUAL(create_test(), true);
     TEST_EQUAL(show_test(), true);
     TEST_EQUAL(list_test(), true);

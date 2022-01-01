@@ -8,7 +8,6 @@ class ClusterTests
 {
 public:
     ClusterTests();
-    void runTest();
 
 private:
     bool create_generate_test();
@@ -18,6 +17,7 @@ private:
     bool delete_test();
 
     std::string m_clusterName = "test_cluster";
+    std::string m_templateUuid = "test_template";
 };
 
 #endif // CLUSTERTESTS_H

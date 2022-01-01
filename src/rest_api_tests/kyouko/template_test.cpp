@@ -1,31 +1,31 @@
-#include "cluster_tests.h"
+#include "template_test.h"
 
-#include <libKitsunemimiHanamiSdk/actions/cluster.h>
+#include <libKitsunemimiHanamiSdk/actions/template.h>
 
 #include <libKitsunemimiJson/json_item.h>
 
-ClusterTests::ClusterTests()
-    : Kitsunemimi::CompareTestHelper("ClusterTests")
+TemplateTest::TemplateTest()
+    : Kitsunemimi::CompareTestHelper("TemplateTest")
 {
-    TEST_EQUAL(create_generate_test(), true);
-    TEST_EQUAL(create_template_test(), true);
+    TEST_EQUAL(create_test(), true);
     TEST_EQUAL(show_test(), true);
     TEST_EQUAL(list_test(), true);
     TEST_EQUAL(delete_test(), true);
 }
 
 bool
-ClusterTests::create_generate_test()
+TemplateTest::create_test()
 {
-    std::cout<<"cluster create"<<std::endl;
+    std::cout<<"template create"<<std::endl;
 
     Kitsunemimi::ErrorContainer error;
 
     std::string result;
-    if(Kitsunemimi::Hanami::createCluster(result,
-                                          m_clusterName,
-                                          m_templateUuid,
-                                          error) == false)
+    if(Kitsunemimi::Hanami::createTemplate(result,
+                                           m_templateName,
+                                           784,
+                                           10,
+                                           error) == false)
     {
         LOG_ERROR(error);
         return false;
@@ -41,10 +41,11 @@ ClusterTests::create_generate_test()
     std::cout<<jsonItem.toString(true)<<std::endl;
 
     // try to create user a second time with same name
-    if(Kitsunemimi::Hanami::createCluster(result,
-                                          m_clusterName,
-                                          m_templateUuid,
-                                          error) == false)
+    if(Kitsunemimi::Hanami::createTemplate(result,
+                                           m_templateName,
+                                           784,
+                                           10,
+                                           error))
     {
         return false;
     }
@@ -53,20 +54,14 @@ ClusterTests::create_generate_test()
 }
 
 bool
-ClusterTests::create_template_test()
+TemplateTest::show_test()
 {
-    return true;
-}
-
-bool
-ClusterTests::show_test()
-{
-    std::cout<<"cluster show"<<std::endl;
+    std::cout<<"template show"<<std::endl;
 
     Kitsunemimi::ErrorContainer error;
 
     std::string result;
-    if(Kitsunemimi::Hanami::getCluster(result, m_clusterName, error) == false)
+    if(Kitsunemimi::Hanami::getTemplate(result, m_templateName, error) == false)
     {
         LOG_ERROR(error);
         return false;
@@ -82,7 +77,7 @@ ClusterTests::show_test()
     std::cout<<jsonItem.toString(true)<<std::endl;
 
     // try to get non-existing user
-    if(Kitsunemimi::Hanami::getCluster(result, "fail_user", error)) {
+    if(Kitsunemimi::Hanami::getTemplate(result, "fail", error)) {
         return false;
     }
 
@@ -90,14 +85,14 @@ ClusterTests::show_test()
 }
 
 bool
-ClusterTests::list_test()
+TemplateTest::list_test()
 {
-    std::cout<<"cluster list"<<std::endl;
+    std::cout<<"template list"<<std::endl;
 
     Kitsunemimi::ErrorContainer error;
 
     std::string result;
-    if(Kitsunemimi::Hanami::listCluster(result, error) == false)
+    if(Kitsunemimi::Hanami::listTemplate(result, error) == false)
     {
         LOG_ERROR(error);
         return false;
@@ -116,14 +111,14 @@ ClusterTests::list_test()
 }
 
 bool
-ClusterTests::delete_test()
+TemplateTest::delete_test()
 {
-    std::cout<<"cluster delete"<<std::endl;
+    std::cout<<"template delete"<<std::endl;
 
     Kitsunemimi::ErrorContainer error;
 
     std::string result;
-    if(Kitsunemimi::Hanami::deleteCluster(result, m_clusterName, error) == false)
+    if(Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error) == false)
     {
         LOG_ERROR(error);
         return false;
@@ -139,7 +134,7 @@ ClusterTests::delete_test()
     std::cout<<jsonItem.toString(true)<<std::endl;
 
     // try the delete a non-existing user
-    if(Kitsunemimi::Hanami::deleteCluster(result, m_clusterName, error)) {
+    if(Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error)) {
         return false;
     }
 

@@ -30,7 +30,6 @@ class UserTests
 {
 public:
     UserTests();
-    void runTest();
 
 private:
     bool create_test();
