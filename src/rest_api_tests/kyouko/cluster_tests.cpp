@@ -18,6 +18,9 @@ ClusterTests::ClusterTests()
     cleanup();
 }
 
+/**
+ * @brief prepare
+ */
 void
 ClusterTests::prepare()
 {
@@ -33,10 +36,9 @@ ClusterTests::prepare()
         return;
     }
 
+    // parse output
     Kitsunemimi::Json::JsonItem jsonItem;
-    ret = jsonItem.parse(result, error);
-    TEST_EQUAL(ret, true);
-    if(ret == false)
+    if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
         return;
@@ -46,6 +48,9 @@ ClusterTests::prepare()
     assert(m_templateUuid != "");
 }
 
+/**
+ * @brief create_test
+ */
 void
 ClusterTests::create_test()
 {
@@ -61,6 +66,7 @@ ClusterTests::create_test()
         return;
     }
 
+    // parse output
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
@@ -73,6 +79,9 @@ ClusterTests::create_test()
     TEST_EQUAL(ret, false);
 }
 
+/**
+ * @brief show_test
+ */
 void
 ClusterTests::show_test()
 {
@@ -88,6 +97,7 @@ ClusterTests::show_test()
         return;
     }
 
+    // parse output
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
@@ -100,6 +110,9 @@ ClusterTests::show_test()
     TEST_EQUAL(ret, false);
 }
 
+/**
+ * @brief list_test
+ */
 void
 ClusterTests::list_test()
 {
@@ -115,6 +128,7 @@ ClusterTests::list_test()
         return;
     }
 
+    // parse output
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
@@ -123,6 +137,9 @@ ClusterTests::list_test()
     }
 }
 
+/**
+ * @brief delete_test
+ */
 void
 ClusterTests::delete_test()
 {
@@ -138,6 +155,7 @@ ClusterTests::delete_test()
         return;
     }
 
+    // parse output
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
@@ -150,6 +168,9 @@ ClusterTests::delete_test()
     TEST_EQUAL(ret, false);
 }
 
+/**
+ * @brief cleanup
+ */
 void
 ClusterTests::cleanup()
 {

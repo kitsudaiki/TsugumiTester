@@ -13,12 +13,16 @@ TemplateTest::TemplateTest()
     delete_test();
 }
 
+/**
+ * @brief create_test
+ */
 void
 TemplateTest::create_test()
 {
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
+    // create new template
     std::string result;
     ret = Kitsunemimi::Hanami::createTemplate(result, m_templateName, 784, 10, error);
     TEST_EQUAL(ret, true);
@@ -28,6 +32,7 @@ TemplateTest::create_test()
         return;
     }
 
+    // parse output
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
@@ -35,17 +40,21 @@ TemplateTest::create_test()
         return;
     }
 
-    // try to create user a second time with same name
+    // try to create template a second time with same name
     ret = Kitsunemimi::Hanami::createTemplate(result, m_templateName, 784, 10, error);
     TEST_EQUAL(ret, false);
 }
 
+/**
+ * @brief show_test
+ */
 void
 TemplateTest::show_test()
 {
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
+    // get template by name
     std::string result;
     ret = Kitsunemimi::Hanami::getTemplate(result, m_templateName, error);
     TEST_EQUAL(ret, true);
@@ -55,6 +64,7 @@ TemplateTest::show_test()
         return;
     }
 
+    // parse output
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
@@ -67,12 +77,16 @@ TemplateTest::show_test()
     TEST_EQUAL(ret, false);
 }
 
+/**
+ * @brief list_test
+ */
 void
 TemplateTest::list_test()
 {
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
+    // list templates
     std::string result;
     ret = Kitsunemimi::Hanami::listTemplate(result, error);
     TEST_EQUAL(ret, true);
@@ -82,6 +96,7 @@ TemplateTest::list_test()
         return;
     }
 
+    // parse output
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
@@ -90,12 +105,16 @@ TemplateTest::list_test()
     }
 }
 
+/**
+ * @brief delete_test
+ */
 void
 TemplateTest::delete_test()
 {
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
+    // delete template by name
     std::string result;
     ret = Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error);
     TEST_EQUAL(ret, true);
@@ -105,6 +124,7 @@ TemplateTest::delete_test()
         return;
     }
 
+    // parse output
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {

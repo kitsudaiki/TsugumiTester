@@ -36,8 +36,7 @@ UserTests::UserTests()
 }
 
 /**
- * @brief UserTests::create_test
- * @return
+ * @brief create_test
  */
 void
 UserTests::create_test()
@@ -45,6 +44,7 @@ UserTests::create_test()
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
+    // create new user
     std::string result;
     ret = Kitsunemimi::Hanami::createUser(result,
                                           m_userName,
@@ -60,6 +60,7 @@ UserTests::create_test()
         return;
     }
 
+    // parse output
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
@@ -79,8 +80,7 @@ UserTests::create_test()
 }
 
 /**
- * @brief UserTests::show_test
- * @return
+ * @brief show_test
  */
 void
 UserTests::show_test()
@@ -88,6 +88,7 @@ UserTests::show_test()
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
+    // get user by name
     std::string result;
     ret = Kitsunemimi::Hanami::getUser(result, m_userName, error);
     TEST_EQUAL(ret, true);
@@ -97,6 +98,7 @@ UserTests::show_test()
         return;
     }
 
+    // parse output
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
@@ -110,8 +112,7 @@ UserTests::show_test()
 }
 
 /**
- * @brief UserTests::list_test
- * @return
+ * @brief list_test
  */
 void
 UserTests::list_test()
@@ -119,6 +120,7 @@ UserTests::list_test()
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
+    // list all users
     std::string result;
     ret = Kitsunemimi::Hanami::listUser(result, error);
     TEST_EQUAL(ret, true);
@@ -128,6 +130,7 @@ UserTests::list_test()
         return;
     }
 
+    // parse output
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
@@ -137,8 +140,7 @@ UserTests::list_test()
 }
 
 /**
- * @brief UserTests::delete_test
- * @return
+ * @brief delete_test
  */
 void
 UserTests::delete_test()
@@ -146,6 +148,7 @@ UserTests::delete_test()
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
+    // delete user by name
     std::string result;
     ret = Kitsunemimi::Hanami::deleteUser(result, m_userName, error);
     TEST_EQUAL(ret, true);
@@ -155,6 +158,7 @@ UserTests::delete_test()
         return;
     }
 
+    // parse output
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {

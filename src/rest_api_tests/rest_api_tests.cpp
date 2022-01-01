@@ -51,20 +51,25 @@ initClient()
 void
 testKyouko()
 {
+    std::cout<<"======================================================================="<<std::endl;
     std::cout<<"test kyouko"<<std::endl;
-    std::cout<<"========================="<<std::endl;
+    std::cout<<"======================================================================="<<std::endl;
 
-    TemplateTest templateTest;
-    ClusterTests clusterTests;
+    TemplateTest* templateTest = new TemplateTest();
+    delete templateTest;
+    ClusterTests* clusterTests = new ClusterTests();
+    delete clusterTests;
 }
 
 void
 testMisaka()
 {
+    std::cout<<"======================================================================="<<std::endl;
     std::cout<<"test misaka"<<std::endl;
-    std::cout<<"========================="<<std::endl;
+    std::cout<<"======================================================================="<<std::endl;
 
-    UserTests userTests;
+    UserTests* userTests = new UserTests();
+    delete userTests;
 }
 
 bool
