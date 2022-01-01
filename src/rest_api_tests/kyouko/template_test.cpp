@@ -7,128 +7,112 @@
 TemplateTest::TemplateTest()
     : Kitsunemimi::CompareTestHelper("TemplateTest")
 {
-    TEST_EQUAL(create_test(), true);
-    TEST_EQUAL(show_test(), true);
-    TEST_EQUAL(list_test(), true);
-    TEST_EQUAL(delete_test(), true);
+    create_test();
+    show_test();
+    list_test();
+    delete_test();
 }
 
-bool
+void
 TemplateTest::create_test()
 {
-    std::cout<<"template create"<<std::endl;
-
     Kitsunemimi::ErrorContainer error;
+    bool ret = false;
 
     std::string result;
-    if(Kitsunemimi::Hanami::createTemplate(result,
-                                           m_templateName,
-                                           784,
-                                           10,
-                                           error) == false)
+    ret = Kitsunemimi::Hanami::createTemplate(result, m_templateName, 784, 10, error);
+    TEST_EQUAL(ret, true);
+    if(ret == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     // try to create user a second time with same name
-    if(Kitsunemimi::Hanami::createTemplate(result,
-                                           m_templateName,
-                                           784,
-                                           10,
-                                           error))
-    {
-        return false;
-    }
-
-    return true;
+    ret = Kitsunemimi::Hanami::createTemplate(result, m_templateName, 784, 10, error);
+    TEST_EQUAL(ret, false);
 }
 
-bool
+void
 TemplateTest::show_test()
 {
-    std::cout<<"template show"<<std::endl;
-
     Kitsunemimi::ErrorContainer error;
+    bool ret = false;
 
     std::string result;
-    if(Kitsunemimi::Hanami::getTemplate(result, m_templateName, error) == false)
+    ret = Kitsunemimi::Hanami::getTemplate(result, m_templateName, error);
+    TEST_EQUAL(ret, true);
+    if(ret == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     // try to get non-existing user
-    if(Kitsunemimi::Hanami::getTemplate(result, "fail", error)) {
-        return false;
-    }
-
-    return true;
+    ret = Kitsunemimi::Hanami::getTemplate(result, "fail", error);
+    TEST_EQUAL(ret, false);
 }
 
-bool
+void
 TemplateTest::list_test()
 {
-    std::cout<<"template list"<<std::endl;
-
     Kitsunemimi::ErrorContainer error;
+    bool ret = false;
 
     std::string result;
-    if(Kitsunemimi::Hanami::listTemplate(result, error) == false)
+    ret = Kitsunemimi::Hanami::listTemplate(result, error);
+    TEST_EQUAL(ret, true);
+    if(ret == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
-
-    return true;
 }
 
-bool
+void
 TemplateTest::delete_test()
 {
-    std::cout<<"template delete"<<std::endl;
-
     Kitsunemimi::ErrorContainer error;
+    bool ret = false;
 
     std::string result;
-    if(Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error) == false)
+    ret = Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error);
+    TEST_EQUAL(ret, true);
+    if(ret == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     // try the delete a non-existing user
-    if(Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error)) {
-        return false;
-    }
-
-    return true;
+    ret = Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error);
+    TEST_EQUAL(ret, false);
 }

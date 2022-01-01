@@ -46,11 +46,9 @@ ClusterTests::prepare()
     assert(m_templateUuid != "");
 }
 
-bool
+void
 ClusterTests::create_test()
 {
-    std::cout<<"cluster create"<<std::endl;
-
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
@@ -60,31 +58,24 @@ ClusterTests::create_test()
     if(ret == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     // try to create user a second time with same name
     ret = Kitsunemimi::Hanami::createCluster(result, m_clusterName, m_templateUuid, error);
     TEST_EQUAL(ret, false);
-    if(ret) {
-        return false;
-    }
-
-    return true;
 }
 
-bool
+void
 ClusterTests::show_test()
 {
-    std::cout<<"cluster show"<<std::endl;
-
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
@@ -94,31 +85,24 @@ ClusterTests::show_test()
     if(ret == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     // try to get non-existing user
     ret = Kitsunemimi::Hanami::getCluster(result, "fail", error);
     TEST_EQUAL(ret, false);
-    if(ret) {
-        return false;
-    }
-
-    return true;
 }
 
-bool
+void
 ClusterTests::list_test()
 {
-    std::cout<<"cluster list"<<std::endl;
-
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
@@ -128,24 +112,20 @@ ClusterTests::list_test()
     if(ret == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
-
-    return true;
 }
 
-bool
+void
 ClusterTests::delete_test()
 {
-    std::cout<<"cluster delete"<<std::endl;
-
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
@@ -155,24 +135,19 @@ ClusterTests::delete_test()
     if(ret == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     // try the delete a non-existing user
     ret = Kitsunemimi::Hanami::deleteCluster(result, m_clusterName, error);
     TEST_EQUAL(ret, false);
-    if(ret) {
-        return false;
-    }
-
-    return true;
 }
 
 void
@@ -184,9 +159,4 @@ ClusterTests::cleanup()
     std::string result;
     ret = Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error);
     TEST_EQUAL(ret, true);
-    if(ret == false)
-    {
-        LOG_ERROR(error);
-        return;
-    }
 }

@@ -29,149 +29,140 @@
 UserTests::UserTests()
     : Kitsunemimi::CompareTestHelper("UserTests")
 {
-    TEST_EQUAL(create_test(), true);
-    TEST_EQUAL(show_test(), true);
-    TEST_EQUAL(list_test(), true);
-    TEST_EQUAL(delete_test(), true);
+    create_test();
+    show_test();
+    list_test();
+    delete_test();
 }
 
 /**
  * @brief UserTests::create_test
  * @return
  */
-bool
+void
 UserTests::create_test()
 {
-    std::cout<<"user create"<<std::endl;
-
     Kitsunemimi::ErrorContainer error;
+    bool ret = false;
 
     std::string result;
-    if(Kitsunemimi::Hanami::createUser(result,
-                                       m_userName,
-                                       m_password,
-                                       m_isAdmin,
-                                       m_roles,
-                                       m_projects,
-                                       error) == false)
+    ret = Kitsunemimi::Hanami::createUser(result,
+                                          m_userName,
+                                          m_password,
+                                          m_isAdmin,
+                                          m_roles,
+                                          m_projects,
+                                          error);
+    TEST_EQUAL(ret, true);
+    if(ret == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     // try to create user a second time with same name
-    if(Kitsunemimi::Hanami::createUser(result,
-                                       m_userName,
-                                       m_password,
-                                       m_isAdmin,
-                                       m_roles,
-                                       m_projects,
-                                       error))
-    {
-        return false;
-    }
-
-    return true;
+    ret = Kitsunemimi::Hanami::createUser(result,
+                                          m_userName,
+                                          m_password,
+                                          m_isAdmin,
+                                          m_roles,
+                                          m_projects,
+                                          error);
+    TEST_EQUAL(ret, false);
 }
 
 /**
  * @brief UserTests::show_test
  * @return
  */
-bool
+void
 UserTests::show_test()
 {
-    std::cout<<"user show"<<std::endl;
-
     Kitsunemimi::ErrorContainer error;
+    bool ret = false;
 
     std::string result;
-    if(Kitsunemimi::Hanami::getUser(result, m_userName, error) == false)
+    ret = Kitsunemimi::Hanami::getUser(result, m_userName, error);
+    TEST_EQUAL(ret, true);
+    if(ret == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     // try to get non-existing user
-    if(Kitsunemimi::Hanami::getUser(result, "fail_user", error))
-    {
-        return false;
-    }
-
-    return true;
+    ret = Kitsunemimi::Hanami::getUser(result, "fail_user", error);
+    TEST_EQUAL(ret, false);
 }
 
 /**
  * @brief UserTests::list_test
  * @return
  */
-bool
+void
 UserTests::list_test()
 {
-    std::cout<<"user list"<<std::endl;
-
     Kitsunemimi::ErrorContainer error;
+    bool ret = false;
 
     std::string result;
-    if(Kitsunemimi::Hanami::listUser(result, error) == false)
+    ret = Kitsunemimi::Hanami::listUser(result, error);
+    TEST_EQUAL(ret, true);
+    if(ret == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
-
-    return true;
 }
 
 /**
  * @brief UserTests::delete_test
  * @return
  */
-bool
+void
 UserTests::delete_test()
 {
-    std::cout<<"user delete"<<std::endl;
-
     Kitsunemimi::ErrorContainer error;
+    bool ret = false;
 
     std::string result;
-    if(Kitsunemimi::Hanami::deleteUser(result, m_userName, error) == false)
+    ret = Kitsunemimi::Hanami::deleteUser(result, m_userName, error);
+    TEST_EQUAL(ret, true);
+    if(ret == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
-        return false;
+        return;
     }
 
     // try the delete a non-existing user
-    if(Kitsunemimi::Hanami::deleteUser(result, m_userName, error)) {
-        return false;
-    }
-
-    return true;
+    ret = Kitsunemimi::Hanami::deleteUser(result, m_userName, error);
+    TEST_EQUAL(ret, false);
 }

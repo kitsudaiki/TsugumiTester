@@ -52,6 +52,8 @@ void
 testKyouko()
 {
     std::cout<<"test kyouko"<<std::endl;
+    std::cout<<"========================="<<std::endl;
+
     TemplateTest templateTest;
     ClusterTests clusterTests;
 }
@@ -60,6 +62,8 @@ void
 testMisaka()
 {
     std::cout<<"test misaka"<<std::endl;
+    std::cout<<"========================="<<std::endl;
+
     UserTests userTests;
 }
 

@@ -10,10 +10,10 @@ public:
     TemplateTest();
 
 private:
-    bool create_test();
-    bool show_test();
-    bool list_test();
-    bool delete_test();
+    void create_test();
+    void show_test();
+    void list_test();
+    void delete_test();
 
     std::string m_templateName = "test_template";
 };
