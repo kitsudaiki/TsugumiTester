@@ -14,6 +14,9 @@ TrainDataTests::TrainDataTests()
     delete_test();
 }
 
+/**
+ * @brief create_test
+ */
 void
 TrainDataTests::create_test()
 {
@@ -48,6 +51,9 @@ TrainDataTests::create_test()
     m_trainDataUuid = jsonItem.get("uuid").getString();
 }
 
+/**
+ * @brief show_test
+ */
 void
 TrainDataTests::show_test()
 {
@@ -77,6 +83,9 @@ TrainDataTests::show_test()
     TEST_EQUAL(ret, false);
 }
 
+/**
+ * @brief list_test
+ */
 void
 TrainDataTests::list_test()
 {
@@ -102,6 +111,9 @@ TrainDataTests::list_test()
     }
 }
 
+/**
+ * @brief delete_test
+ */
 void
 TrainDataTests::delete_test()
 {

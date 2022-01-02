@@ -12,8 +12,9 @@ public:
 private:
     void prepare();
 
-    void create_test();
-    void show_test();
+    void learn_test();
+    void request_test();
+
     void list_test();
     void delete_test();
 
@@ -21,15 +22,16 @@ private:
 
     std::string m_clusterName = "test_cluster";
     std::string m_clusterUuid = "";
+    std::string m_taskUuid = "";
 
     std::string m_templateName = "test_template";
     std::string m_templateUuid = "";
 
-    std::string m_testType = "";
-    std::string m_learnInputsB64 = "";
-    std::string m_learnLabelsB64 = "";
-    std::string m_requestInputsB64 = "";
-    std::string m_requestLabelsB64 = "";
+    std::string m_learnInputUuid = "";
+    std::string m_learnLabelUuid = "";
+
+    std::string m_requestInputUuid = "";
+    std::string m_requestLabelUuid = "";
 };
 
 #endif // TASKTESTS_H

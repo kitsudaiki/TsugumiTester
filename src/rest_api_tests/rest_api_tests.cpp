@@ -62,8 +62,8 @@ testKyouko()
     //delete templateTest;
     //ClusterTests* clusterTests = new ClusterTests();
     //delete clusterTests;
-    //TaskTests* taskTests = new TaskTests();
-    //delete taskTests;
+    TaskTests* taskTests = new TaskTests();
+    delete taskTests;
 }
 
 void
@@ -84,8 +84,8 @@ testSagiri()
     std::cout<<"test sagiri"<<std::endl;
     std::cout<<"======================================================================="<<std::endl;
 
-    TrainDataTests* trainDataTests = new TrainDataTests();
-    delete trainDataTests;
+    //TrainDataTests* trainDataTests = new TrainDataTests();
+    //delete trainDataTests;
 }
 
 bool

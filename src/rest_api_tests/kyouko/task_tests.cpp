@@ -2,11 +2,11 @@
 
 #include <libKitsunemimiConfig/config_handler.h>
 #include <libKitsunemimiCrypto/common.h>
-#include <libKitsunemimiCommon/files/binary_file.h>
 
 #include <libKitsunemimiHanamiSdk/actions/cluster.h>
 #include <libKitsunemimiHanamiSdk/actions/template.h>
 #include <libKitsunemimiHanamiSdk/actions/task.h>
+#include <libKitsunemimiHanamiSdk/actions/train_data.h>
 
 #include <libKitsunemimiJson/json_item.h>
 
@@ -15,8 +15,8 @@ TaskTests::TaskTests()
 {
     prepare();
 
-    create_test();
-    show_test();
+    learn_test();
+    request_test();
     list_test();
     delete_test();
 
@@ -31,8 +31,12 @@ TaskTests::prepare()
 {
     Kitsunemimi::ErrorContainer error;
     Kitsunemimi::Json::JsonItem jsonItem;
-
+    bool success = false;
     std::string result;
+
+    Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error);
+    Kitsunemimi::Hanami::deleteCluster(result, m_clusterName, error);
+
     assert(Kitsunemimi::Hanami::createTemplate(result, m_templateName, 784, 10, error));
     assert(jsonItem.parse(result, error));
 
@@ -44,56 +48,85 @@ TaskTests::prepare()
 
     m_clusterUuid = jsonItem.get("uuid").getString();
 
-    bool success = false;
-    std::string tempPath = "";
-    Kitsunemimi::DataBuffer fileContent;
 
-    m_testType = GET_STRING_CONFIG("test_data", "type", success);
 
-    tempPath = GET_STRING_CONFIG("test_data", "learn_inputs", success);
-    Kitsunemimi::BinaryFile learnInputFile(tempPath);
-    learnInputFile.readCompleteFile(fileContent);
-    Kitsunemimi::Crypto::encodeBase64(m_learnInputsB64, fileContent.data, fileContent.usedBufferSize);
-    learnInputFile.closeFile();
-    fileContent.clear();
+    const std::string dataType = GET_STRING_CONFIG("test_data", "type", success);
 
-    tempPath = GET_STRING_CONFIG("test_data", "learn_labels", success);
-    Kitsunemimi::BinaryFile learnLabelFile(tempPath);
-    learnLabelFile.readCompleteFile(fileContent);
-    Kitsunemimi::Crypto::encodeBase64(m_learnLabelsB64, fileContent.data, fileContent.usedBufferSize);
-    learnLabelFile.closeFile();
-    fileContent.clear();
+    Kitsunemimi::Hanami::uploadTrainData(result,
+                                         "learn_inputs",
+                                         dataType,
+                                         GET_STRING_CONFIG("test_data", "learn_inputs", success),
+                                         error);
 
-    tempPath = GET_STRING_CONFIG("test_data", "request_inputs", success);
-    Kitsunemimi::BinaryFile requestInputFile(tempPath);
-    requestInputFile.readCompleteFile(fileContent);
-    Kitsunemimi::Crypto::encodeBase64(m_requestInputsB64, fileContent.data, fileContent.usedBufferSize);
-    requestInputFile.closeFile();
-    fileContent.clear();
+    if(jsonItem.parse(result, error) == false)
+    {
+        LOG_ERROR(error);
+        return;
+    }
+    m_learnInputUuid = jsonItem.get("uuid").getString();
 
-    tempPath = GET_STRING_CONFIG("test_data", "request_labels", success);
-    Kitsunemimi::BinaryFile requestLabelFile(tempPath);
-    requestLabelFile.readCompleteFile(fileContent);
-    Kitsunemimi::Crypto::encodeBase64(m_requestLabelsB64, fileContent.data, fileContent.usedBufferSize);
-    requestLabelFile.closeFile();
-    fileContent.clear();
+
+    Kitsunemimi::Hanami::uploadTrainData(result,
+                                         "learn_labels",
+                                         dataType,
+                                         GET_STRING_CONFIG("test_data", "learn_labels", success),
+                                         error);
+
+    if(jsonItem.parse(result, error) == false)
+    {
+        LOG_ERROR(error);
+        return;
+    }
+    m_learnLabelUuid = jsonItem.get("uuid").getString();
+
+
+    Kitsunemimi::Hanami::uploadTrainData(result,
+                                         "request_inputs",
+                                         dataType,
+                                         GET_STRING_CONFIG("test_data", "request_inputs", success),
+                                         error);
+
+    if(jsonItem.parse(result, error) == false)
+    {
+        LOG_ERROR(error);
+        return;
+    }
+    m_requestInputUuid = jsonItem.get("uuid").getString();
+
+
+    Kitsunemimi::Hanami::uploadTrainData(result,
+                                         "request_labels",
+                                         dataType,
+                                         GET_STRING_CONFIG("test_data", "request_labels", success),
+                                         error);
+
+    if(jsonItem.parse(result, error) == false)
+    {
+        LOG_ERROR(error);
+        return;
+    }
+    m_requestLabelUuid = jsonItem.get("uuid").getString();
 }
 
 /**
  * @brief create_test
  */
 void
-TaskTests::create_test()
+TaskTests::learn_test()
 {
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
-
+    bool success = false;
     std::string result;
+    Kitsunemimi::Json::JsonItem jsonItem;
+
+    const std::string dataType = GET_STRING_CONFIG("test_data", "type", success);
+
     ret = Kitsunemimi::Hanami::createLearnTask(result,
                                                m_clusterUuid,
-                                               m_learnInputsB64,
-                                               m_learnLabelsB64,
-                                               m_testType,
+                                               m_learnInputUuid,
+                                               m_learnLabelUuid,
+                                               dataType,
                                                error);
     TEST_EQUAL(ret, true);
     if(ret == false)
@@ -101,17 +134,108 @@ TaskTests::create_test()
         LOG_ERROR(error);
         return;
     }
+
+    if(jsonItem.parse(result, error) == false)
+    {
+        LOG_ERROR(error);
+        return;
+    }
+
+    m_taskUuid = jsonItem.get("uuid").getString();
+
+    sleep(1);
+
+    ret = Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, false, error);
+    TEST_EQUAL(ret, true);
+    if(ret == false)
+    {
+        LOG_ERROR(error);
+        return;
+    }
+
+    while(jsonItem.get("state").getString() != "finished")
+    {
+        Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, false, error);
+
+        // parse output
+        if(jsonItem.parse(result, error) == false)
+        {
+            LOG_ERROR(error);
+            return;
+        }
+        std::cout<<jsonItem.toString(true)<<std::endl;
+
+        sleep(1);
+    }
 }
 
-/**
- * @brief show_test
- */
 void
-TaskTests::show_test()
+TaskTests::request_test()
 {
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
+    bool success = false;
+    std::string result;
+    Kitsunemimi::Json::JsonItem jsonItem;
 
+    const std::string dataType = GET_STRING_CONFIG("test_data", "type", success);
+
+    ret = Kitsunemimi::Hanami::createRequestTask(result,
+                                                 m_clusterUuid,
+                                                 m_requestInputUuid,
+                                                 dataType,
+                                                 error);
+    TEST_EQUAL(ret, true);
+    if(ret == false)
+    {
+        LOG_ERROR(error);
+        return;
+    }
+
+    if(jsonItem.parse(result, error) == false)
+    {
+        LOG_ERROR(error);
+        return;
+    }
+
+    m_taskUuid = jsonItem.get("uuid").getString();
+    std::cout<<"uuid: "<<m_taskUuid<<std::endl;
+
+
+    sleep(1);
+
+    ret = Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, false, error);
+    TEST_EQUAL(ret, true);
+    if(ret == false)
+    {
+        LOG_ERROR(error);
+        return;
+    }
+
+    while(jsonItem.get("state").getString() != "finished")
+    {
+        Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, false, error);
+
+        // parse output
+        if(jsonItem.parse(result, error) == false)
+        {
+            LOG_ERROR(error);
+            return;
+        }
+        std::cout<<jsonItem.toString(true)<<std::endl;
+
+        sleep(1);
+    }
+
+    Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, true, error);
+
+    // parse output
+    if(jsonItem.parse(result, error) == false)
+    {
+        LOG_ERROR(error);
+        return;
+    }
+    std::cout<<jsonItem.toString(true)<<std::endl;
 }
 
 /**
@@ -148,4 +272,9 @@ TaskTests::cleanup()
 
     assert(Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error));
     assert(Kitsunemimi::Hanami::deleteCluster(result, m_clusterName, error));
+
+    assert(Kitsunemimi::Hanami::deleteTrainData(result, m_learnInputUuid, error));
+    assert(Kitsunemimi::Hanami::deleteTrainData(result, m_learnLabelUuid, error));
+    assert(Kitsunemimi::Hanami::deleteTrainData(result, m_requestInputUuid, error));
+    assert(Kitsunemimi::Hanami::deleteTrainData(result, m_requestLabelUuid, error));
 }
