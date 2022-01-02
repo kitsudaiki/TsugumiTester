@@ -28,8 +28,11 @@
 
 #include <rest_api_tests/misaka/user_tests.h>
 
+#include <rest_api_tests/sagiri/train_data_tests.h>
+
 #include <rest_api_tests/kyouko/cluster_tests.h>
 #include <rest_api_tests/kyouko/template_test.h>
+#include <rest_api_tests/kyouko/task_tests.h>
 
 bool
 initClient()
@@ -55,10 +58,12 @@ testKyouko()
     std::cout<<"test kyouko"<<std::endl;
     std::cout<<"======================================================================="<<std::endl;
 
-    TemplateTest* templateTest = new TemplateTest();
-    delete templateTest;
-    ClusterTests* clusterTests = new ClusterTests();
-    delete clusterTests;
+    //TemplateTest* templateTest = new TemplateTest();
+    //delete templateTest;
+    //ClusterTests* clusterTests = new ClusterTests();
+    //delete clusterTests;
+    //TaskTests* taskTests = new TaskTests();
+    //delete taskTests;
 }
 
 void
@@ -68,8 +73,19 @@ testMisaka()
     std::cout<<"test misaka"<<std::endl;
     std::cout<<"======================================================================="<<std::endl;
 
-    UserTests* userTests = new UserTests();
-    delete userTests;
+    //UserTests* userTests = new UserTests();
+    //delete userTests;
+}
+
+void
+testSagiri()
+{
+    std::cout<<"======================================================================="<<std::endl;
+    std::cout<<"test sagiri"<<std::endl;
+    std::cout<<"======================================================================="<<std::endl;
+
+    TrainDataTests* trainDataTests = new TrainDataTests();
+    delete trainDataTests;
 }
 
 bool
@@ -80,6 +96,7 @@ runRestApiTests()
     }
 
     testMisaka();
+    testSagiri();
     testKyouko();
 
     return true;

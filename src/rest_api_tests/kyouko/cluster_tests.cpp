@@ -58,7 +58,7 @@ ClusterTests::create_test()
     bool ret = false;
 
     std::string result;
-    ret = Kitsunemimi::Hanami::createCluster(result, m_clusterName,  m_templateUuid, error);
+    ret = Kitsunemimi::Hanami::createCluster(result, m_clusterName, m_templateUuid, error);
     TEST_EQUAL(ret, true);
     if(ret == false)
     {

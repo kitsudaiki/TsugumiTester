@@ -39,6 +39,12 @@ registerConfigs(Kitsunemimi::ErrorContainer &error)
     REGISTER_INT_CONFIG(    "connection", "port",      error, 0,  true);
     REGISTER_STRING_CONFIG( "connection", "test_user", error, "", true);
     REGISTER_STRING_CONFIG( "connection", "test_pw",   error, "", true);
+
+    REGISTER_STRING_CONFIG( "test_data", "type",           error, "", true);
+    REGISTER_STRING_CONFIG( "test_data", "learn_inputs",   error, "", true);
+    REGISTER_STRING_CONFIG( "test_data", "learn_labels",   error, "", true);
+    REGISTER_STRING_CONFIG( "test_data", "request_inputs", error, "", true);
+    REGISTER_STRING_CONFIG( "test_data", "request_labels", error, "", true);
 }
 
 #endif // CONFIG_H
