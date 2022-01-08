@@ -20,8 +20,8 @@
  *      limitations under the License.
  */
 
-#ifndef USERTESTS_H
-#define USERTESTS_H
+#ifndef TSURUGITESTER_USERTESTS_H
+#define TSURUGITESTER_USERTESTS_H
 
 #include <libKitsunemimiCommon/test_helper/compare_test_helper.h>
 
@@ -44,4 +44,4 @@ private:
     std::string m_projects = "tester";
 };
 
-#endif // USERTESTS_H
+#endif // TSURUGITESTER_USERTESTS_H

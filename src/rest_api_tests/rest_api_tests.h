@@ -20,9 +20,9 @@
  *      limitations under the License.
  */
 
-#ifndef REST_API_TESTS_H
-#define REST_API_TESTS_H
+#ifndef TSURUGITESTER_REST_API_TESTS_H
+#define TSURUGITESTER_REST_API_TESTS_H
 
 bool runRestApiTests();
 
-#endif // REST_API_TESTS_H
+#endif // TSURUGITESTER_REST_API_TESTS_H

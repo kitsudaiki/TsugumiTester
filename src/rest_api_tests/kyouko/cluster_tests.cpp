@@ -1,3 +1,25 @@
+/**
+ * @file        cluster_tests.cpp
+ *
+ * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
+ *
+ * @copyright   Apache License Version 2.0
+ *
+ *      Copyright 2021 Tobias Anker
+ *
+ *      Licensed under the Apache License, Version 2.0 (the "License");
+ *      you may not use this file except in compliance with the License.
+ *      You may obtain a copy of the License at
+ *
+ *          http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *      Unless required by applicable law or agreed to in writing, software
+ *      distributed under the License is distributed on an "AS IS" BASIS,
+ *      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *      See the License for the specific language governing permissions and
+ *      limitations under the License.
+ */
+
 #include "cluster_tests.h"
 
 #include <libKitsunemimiHanamiSdk/actions/cluster.h>
@@ -27,6 +49,7 @@ ClusterTests::prepare()
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
+    // create new template for tests
     std::string result;
     ret = Kitsunemimi::Hanami::createTemplate(result, m_templateName, 784, 10, error);
     TEST_EQUAL(ret, true);
@@ -57,6 +80,7 @@ ClusterTests::create_test()
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
+    // create new cluster
     std::string result;
     ret = Kitsunemimi::Hanami::createCluster(result, m_clusterName, m_templateUuid, error);
     TEST_EQUAL(ret, true);
@@ -88,6 +112,7 @@ ClusterTests::show_test()
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
+    // get cluster-infos
     std::string result;
     ret = Kitsunemimi::Hanami::getCluster(result, m_clusterName, error);
     TEST_EQUAL(ret, true);
@@ -119,6 +144,7 @@ ClusterTests::list_test()
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
+    // list clusters
     std::string result;
     ret = Kitsunemimi::Hanami::listCluster(result, error);
     TEST_EQUAL(ret, true);
@@ -146,6 +172,7 @@ ClusterTests::delete_test()
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
 
+    // delete cluster
     std::string result;
     ret = Kitsunemimi::Hanami::deleteCluster(result, m_clusterName, error);
     TEST_EQUAL(ret, true);

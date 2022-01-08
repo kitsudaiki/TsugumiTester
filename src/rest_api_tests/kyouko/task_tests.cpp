@@ -1,3 +1,25 @@
+/**
+ * @file        task_tests.cpp
+ *
+ * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
+ *
+ * @copyright   Apache License Version 2.0
+ *
+ *      Copyright 2021 Tobias Anker
+ *
+ *      Licensed under the Apache License, Version 2.0 (the "License");
+ *      you may not use this file except in compliance with the License.
+ *      You may obtain a copy of the License at
+ *
+ *          http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *      Unless required by applicable law or agreed to in writing, software
+ *      distributed under the License is distributed on an "AS IS" BASIS,
+ *      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *      See the License for the specific language governing permissions and
+ *      limitations under the License.
+ */
+
 #include "task_tests.h"
 
 #include <libKitsunemimiConfig/config_handler.h>
@@ -37,10 +59,17 @@ TaskTests::prepare()
     Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error);
     Kitsunemimi::Hanami::deleteCluster(result, m_clusterName, error);
 
+    //----------------------------------------------------------------------------------------------
+    // create template
+
     assert(Kitsunemimi::Hanami::createTemplate(result, m_templateName, 784, 10, error));
     assert(jsonItem.parse(result, error));
 
     m_templateUuid = jsonItem.get("uuid").getString();
+
+    //----------------------------------------------------------------------------------------------
+    // create cluster from template
+
     result.clear();
 
     assert(Kitsunemimi::Hanami::createCluster(result, m_clusterName, m_templateUuid, error));
@@ -48,10 +77,12 @@ TaskTests::prepare()
 
     m_clusterUuid = jsonItem.get("uuid").getString();
 
-
+    //----------------------------------------------------------------------------------------------
+    // get data-type
 
     const std::string dataType = GET_STRING_CONFIG("test_data", "type", success);
 
+    //----------------------------------------------------------------------------------------------
     Kitsunemimi::Hanami::uploadTrainData(result,
                                          "learn_inputs",
                                          dataType,
@@ -65,7 +96,7 @@ TaskTests::prepare()
     }
     m_learnInputUuid = jsonItem.get("uuid").getString();
 
-
+    //----------------------------------------------------------------------------------------------
     Kitsunemimi::Hanami::uploadTrainData(result,
                                          "learn_labels",
                                          dataType,
@@ -79,7 +110,7 @@ TaskTests::prepare()
     }
     m_learnLabelUuid = jsonItem.get("uuid").getString();
 
-
+    //----------------------------------------------------------------------------------------------
     Kitsunemimi::Hanami::uploadTrainData(result,
                                          "request_inputs",
                                          dataType,
@@ -93,19 +124,19 @@ TaskTests::prepare()
     }
     m_requestInputUuid = jsonItem.get("uuid").getString();
 
-
+    //----------------------------------------------------------------------------------------------
     Kitsunemimi::Hanami::uploadTrainData(result,
                                          "request_labels",
                                          dataType,
                                          GET_STRING_CONFIG("test_data", "request_labels", success),
                                          error);
-
     if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
         return;
     }
     m_requestLabelUuid = jsonItem.get("uuid").getString();
+    //----------------------------------------------------------------------------------------------
 }
 
 /**
@@ -122,6 +153,7 @@ TaskTests::learn_test()
 
     const std::string dataType = GET_STRING_CONFIG("test_data", "type", success);
 
+    // create new learn-task
     ret = Kitsunemimi::Hanami::createLearnTask(result,
                                                m_clusterUuid,
                                                m_learnInputUuid,
@@ -135,26 +167,22 @@ TaskTests::learn_test()
         return;
     }
 
+    // parse result
     if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
         return;
     }
 
+    // get uuid of the new task
     m_taskUuid = jsonItem.get("uuid").getString();
+    //std::cout<<"uuid: "<<m_taskUuid<<std::endl;
 
-    sleep(1);
-
-    ret = Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, false, error);
-    TEST_EQUAL(ret, true);
-    if(ret == false)
+    // wait until task is finished
+    do
     {
-        LOG_ERROR(error);
-        return;
-    }
+        sleep(1);
 
-    while(jsonItem.get("state").getString() != "finished")
-    {
         Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, false, error);
 
         // parse output
@@ -163,10 +191,9 @@ TaskTests::learn_test()
             LOG_ERROR(error);
             return;
         }
-        std::cout<<jsonItem.toString(true)<<std::endl;
-
-        sleep(1);
+        //std::cout<<jsonItem.toString(true)<<std::endl;
     }
+    while(jsonItem.get("state").getString() != "finished");
 }
 
 void
@@ -180,6 +207,7 @@ TaskTests::request_test()
 
     const std::string dataType = GET_STRING_CONFIG("test_data", "type", success);
 
+    // create new request-task
     ret = Kitsunemimi::Hanami::createRequestTask(result,
                                                  m_clusterUuid,
                                                  m_requestInputUuid,
@@ -192,28 +220,21 @@ TaskTests::request_test()
         return;
     }
 
+    // parse result
     if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
         return;
     }
 
+    // get uuid of the new task
     m_taskUuid = jsonItem.get("uuid").getString();
-    std::cout<<"uuid: "<<m_taskUuid<<std::endl;
+    //std::cout<<"uuid: "<<m_taskUuid<<std::endl;
 
-
-    sleep(1);
-
-    ret = Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, false, error);
-    TEST_EQUAL(ret, true);
-    if(ret == false)
+    // wait until task is finished
+    do
     {
-        LOG_ERROR(error);
-        return;
-    }
-
-    while(jsonItem.get("state").getString() != "finished")
-    {
+        sleep(1);
         Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, false, error);
 
         // parse output
@@ -222,11 +243,11 @@ TaskTests::request_test()
             LOG_ERROR(error);
             return;
         }
-        std::cout<<jsonItem.toString(true)<<std::endl;
-
-        sleep(1);
+        //std::cout<<jsonItem.toString(true)<<std::endl;
     }
+    while(jsonItem.get("state").getString() != "finished");
 
+    // get task-result
     Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, true, error);
 
     // parse output
@@ -235,7 +256,7 @@ TaskTests::request_test()
         LOG_ERROR(error);
         return;
     }
-    std::cout<<jsonItem.toString(true)<<std::endl;
+    //std::cout<<jsonItem.toString(true)<<std::endl;
 }
 
 /**
@@ -244,9 +265,7 @@ TaskTests::request_test()
 void
 TaskTests::list_test()
 {
-    Kitsunemimi::ErrorContainer error;
-    bool ret = false;
-
+    // TODO
 }
 
 /**
@@ -255,10 +274,7 @@ TaskTests::list_test()
 void
 TaskTests::delete_test()
 {
-    Kitsunemimi::ErrorContainer error;
-    bool ret = false;
-
-
+    // TODO
 }
 
 /**
