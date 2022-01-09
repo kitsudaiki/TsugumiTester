@@ -1,5 +1,5 @@
 /**
- * @file        main.cpp
+ * @file        rest_api_tests.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,29 +20,9 @@
  *      limitations under the License.
  */
 
-#include <iostream>
+#ifndef TSURUGITESTER_REST_API_TESTS_H
+#define TSURUGITESTER_REST_API_TESTS_H
 
-#include <config.h>
-#include <args.h>
-#include <thread>
+bool runRestApiTests();
 
-#include <rest_api_tests/rest_api_tests.h>
-
-#include <libKitsunemimiHanamiCommon/generic_main.h>
-
-using Kitsunemimi::Hanami::initMain;
-
-int main(int argc, char *argv[])
-{
-    Kitsunemimi::ErrorContainer error;
-    Kitsunemimi::initConsoleLogger(false);
-    if(initMain(argc, argv, "tsurugi", &registerArguments, &registerConfigs, error) == false)
-    {
-        LOG_ERROR(error);
-        return 1;
-    }
-
-    runRestApiTests();
-
-    return 0;
-}
+#endif // TSURUGITESTER_REST_API_TESTS_H

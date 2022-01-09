@@ -1,5 +1,5 @@
 /**
- * @file        main.cpp
+ * @file        train_data_tests.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,29 +20,25 @@
  *      limitations under the License.
  */
 
-#include <iostream>
+#ifndef TSURUGITESTER_TRAINDATA_H
+#define TSURUGITESTER_TRAINDATA_H
 
-#include <config.h>
-#include <args.h>
-#include <thread>
+#include <libKitsunemimiCommon/test_helper/compare_test_helper.h>
 
-#include <rest_api_tests/rest_api_tests.h>
-
-#include <libKitsunemimiHanamiCommon/generic_main.h>
-
-using Kitsunemimi::Hanami::initMain;
-
-int main(int argc, char *argv[])
+class TrainDataTests
+        : public Kitsunemimi::CompareTestHelper
 {
-    Kitsunemimi::ErrorContainer error;
-    Kitsunemimi::initConsoleLogger(false);
-    if(initMain(argc, argv, "tsurugi", &registerArguments, &registerConfigs, error) == false)
-    {
-        LOG_ERROR(error);
-        return 1;
-    }
+public:
+    TrainDataTests();
 
-    runRestApiTests();
+private:
+    void create_test();
+    void show_test();
+    void list_test();
+    void delete_test();
 
-    return 0;
-}
+    std::string m_trainDataName = "test_data";
+    std::string m_trainDataUuid = "";
+};
+
+#endif // TSURUGITESTER_TRAINDATA_H

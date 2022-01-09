@@ -20,18 +20,31 @@
  *      limitations under the License.
  */
 
-#ifndef CONFIG_H
-#define CONFIG_H
+#ifndef TSURUGITESTER_CONFIG_H
+#define TSURUGITESTER_CONFIG_H
 
 #include <libKitsunemimiConfig/config_handler.h>
+#include <libKitsunemimiHanamiCommon/config.h>
+#include <libKitsunemimiCommon/logger.h>
 
 /**
  * @brief register configs
  */
 void
-registerConfigs()
+registerConfigs(Kitsunemimi::ErrorContainer &error)
 {
- 
+    Kitsunemimi::Hanami::registerBasicConfigs(error);
+
+    REGISTER_STRING_CONFIG( "connection", "host",      error, "", true);
+    REGISTER_INT_CONFIG(    "connection", "port",      error, 0,  true);
+    REGISTER_STRING_CONFIG( "connection", "test_user", error, "", true);
+    REGISTER_STRING_CONFIG( "connection", "test_pw",   error, "", true);
+
+    REGISTER_STRING_CONFIG( "test_data", "type",           error, "", true);
+    REGISTER_STRING_CONFIG( "test_data", "learn_inputs",   error, "", true);
+    REGISTER_STRING_CONFIG( "test_data", "learn_labels",   error, "", true);
+    REGISTER_STRING_CONFIG( "test_data", "request_inputs", error, "", true);
+    REGISTER_STRING_CONFIG( "test_data", "request_labels", error, "", true);
 }
 
-#endif // CONFIG_H
+#endif // TSURUGITESTER_CONFIG_H

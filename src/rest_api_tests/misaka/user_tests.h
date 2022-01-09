@@ -1,5 +1,5 @@
 /**
- * @file        main.cpp
+ * @file        user_tests.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,29 +20,28 @@
  *      limitations under the License.
  */
 
-#include <iostream>
+#ifndef TSURUGITESTER_USERTESTS_H
+#define TSURUGITESTER_USERTESTS_H
 
-#include <config.h>
-#include <args.h>
-#include <thread>
+#include <libKitsunemimiCommon/test_helper/compare_test_helper.h>
 
-#include <rest_api_tests/rest_api_tests.h>
-
-#include <libKitsunemimiHanamiCommon/generic_main.h>
-
-using Kitsunemimi::Hanami::initMain;
-
-int main(int argc, char *argv[])
+class UserTests
+        : public Kitsunemimi::CompareTestHelper
 {
-    Kitsunemimi::ErrorContainer error;
-    Kitsunemimi::initConsoleLogger(false);
-    if(initMain(argc, argv, "tsurugi", &registerArguments, &registerConfigs, error) == false)
-    {
-        LOG_ERROR(error);
-        return 1;
-    }
+public:
+    UserTests();
 
-    runRestApiTests();
+private:
+    void create_test();
+    void show_test();
+    void list_test();
+    void delete_test();
 
-    return 0;
-}
+    std::string m_userName = "tsurugi";
+    std::string m_password = "new password";
+    bool m_isAdmin = true;
+    std::string m_roles = "tester";
+    std::string m_projects = "tester";
+};
+
+#endif // TSURUGITESTER_USERTESTS_H
