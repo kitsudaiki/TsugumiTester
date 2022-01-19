@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 {
     Kitsunemimi::ErrorContainer error;
     Kitsunemimi::initConsoleLogger(false);
-    if(initMain(argc, argv, "tsurugi", &registerArguments, &registerConfigs, error) == false)
+    if(initMain(argc, argv, "tsugumi", &registerArguments, &registerConfigs, error) == false)
     {
         LOG_ERROR(error);
         return 1;

@@ -14,12 +14,13 @@ build:
 
     - apt-get update
     - apt-get install -y libssl-dev libcrypto++-dev libboost1.71-dev uuid-dev
-
-    - cd /builds/kitsudaiki/TsurugiTester
+    
+    - ls /builds/
+    - cd /builds/hanami/TsugumiTester
     - ./build.sh
 
     - mkdir upload
-    - cp ../result/TsurugiTester upload/
+    - cp ../result/TsugumiTester upload/
 
   artifacts:
     paths:

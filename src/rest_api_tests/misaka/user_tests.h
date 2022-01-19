@@ -37,7 +37,7 @@ private:
     void list_test();
     void delete_test();
 
-    std::string m_userName = "tsurugi";
+    std::string m_userName = "tsugumi";
     std::string m_password = "new password";
     bool m_isAdmin = true;
     std::string m_roles = "tester";

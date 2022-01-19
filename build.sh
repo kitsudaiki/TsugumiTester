@@ -108,16 +108,16 @@ echo ""
 #-----------------------------------------------------------------------------------------------------------------
 
 # create build directory for KyoukoMind and go into this directory
-LIB_KITSUNE_SAKURA_TREE_DIR="$BUILD_DIR/TsurugiTester"
+LIB_KITSUNE_SAKURA_TREE_DIR="$BUILD_DIR/TsugumiTester"
 mkdir -p $LIB_KITSUNE_SAKURA_TREE_DIR
 cd $LIB_KITSUNE_SAKURA_TREE_DIR
 
-# build TsurugiTester with qmake
-/usr/lib/x86_64-linux-gnu/qt5/bin/qmake "$PARENT_DIR/TsurugiTester/TsurugiTester.pro" -spec linux-g++ "CONFIG += optimize_full"
+# build TsugumiTester with qmake
+/usr/lib/x86_64-linux-gnu/qt5/bin/qmake "$PARENT_DIR/TsugumiTester/TsugumiTester.pro" -spec linux-g++ "CONFIG += optimize_full"
 /usr/bin/make -j8
 
 # copy build-result and include-files into the result-directory
-cp "$LIB_KITSUNE_SAKURA_TREE_DIR/TsurugiTester" "$RESULT_DIR/"
+cp "$LIB_KITSUNE_SAKURA_TREE_DIR/TsugumiTester" "$RESULT_DIR/"
 
 #-----------------------------------------------------------------------------------------------------------------
 
