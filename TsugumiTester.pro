@@ -14,6 +14,16 @@ LIBS += -L../libKitsunemimiHanamiCommon/src/debug -lKitsunemimiHanamiCommon
 LIBS += -L../libKitsunemimiHanamiCommon/src/release -lKitsunemimiHanamiCommon
 INCLUDEPATH += ../libKitsunemimiHanamiCommon/include
 
+LIBS += -L../libKitsunemimiSakuraNetwork/src -lKitsunemimiSakuraNetwork
+LIBS += -L../libKitsunemimiSakuraNetwork/src/debug -lKitsunemimiSakuraNetwork
+LIBS += -L../libKitsunemimiSakuraNetwork/src/release -lKitsunemimiSakuraNetwork
+INCLUDEPATH += ../libKitsunemimiSakuraNetwork/include
+
+LIBS += -L../libKitsunemimiNetwork/src -lKitsunemimiNetwork
+LIBS += -L../libKitsunemimiNetwork/src/debug -lKitsunemimiNetwork
+LIBS += -L../libKitsunemimiNetwork/src/release -lKitsunemimiNetwork
+INCLUDEPATH += ../libKitsunemimiNetwork/include
+
 LIBS += -L../libKitsunemimiConfig/src -lKitsunemimiConfig
 LIBS += -L../libKitsunemimiConfig/src/debug -lKitsunemimiConfig
 LIBS += -L../libKitsunemimiConfig/src/release -lKitsunemimiConfig

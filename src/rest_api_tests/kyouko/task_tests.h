@@ -50,10 +50,8 @@ private:
     std::string m_templateUuid = "";
 
     std::string m_learnInputUuid = "";
-    std::string m_learnLabelUuid = "";
 
     std::string m_requestInputUuid = "";
-    std::string m_requestLabelUuid = "";
 };
 
 #endif // TSURUGITESTER_TASKTESTS_H

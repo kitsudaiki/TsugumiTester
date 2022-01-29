@@ -43,9 +43,12 @@ TemplateTest::create_test()
 {
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
+    std::string result;
+
+    Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error);
+    error._errorMessages.clear();
 
     // create new template
-    std::string result;
     ret = Kitsunemimi::Hanami::createTemplate(result, m_templateName, 784, 10, error);
     TEST_EQUAL(ret, true);
     if(ret == false)
@@ -153,8 +156,4 @@ TemplateTest::delete_test()
         LOG_ERROR(error);
         return;
     }
-
-    // try the delete a non-existing user
-    ret = Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error);
-    TEST_EQUAL(ret, false);
 }
