@@ -22,7 +22,7 @@
 
 #include "train_data_tests.h"
 
-#include <libKitsunemimiHanamiSdk/actions/train_data.h>
+#include <libKitsunemimiHanamiSdk/actions/data_set.h>
 
 #include <libKitsunemimiJson/json_item.h>
 #include <libKitsunemimiConfig/config_handler.h>
@@ -52,10 +52,10 @@ TrainDataTests::create_test()
 
     // test data-upload
     std::string result;
-    ret = Kitsunemimi::Hanami::uploadTrainData(result,
+    ret = Kitsunemimi::Hanami::uploadMnistData(result,
                                                m_trainDataName,
-                                               dataType,
-                                               dataPath,
+                                               GET_STRING_CONFIG("test_data", "learn_inputs", success),
+                                               GET_STRING_CONFIG("test_data", "learn_labels", success),
                                                error);
     TEST_EQUAL(ret, true);
     if(ret == false)
@@ -87,7 +87,7 @@ TrainDataTests::show_test()
 
     // get data
     std::string result;
-    ret = Kitsunemimi::Hanami::getTrainData(result, m_trainDataUuid, error);
+    ret = Kitsunemimi::Hanami::getDataset(result, m_trainDataUuid, error);
     TEST_EQUAL(ret, true);
     if(ret == false)
     {
@@ -104,7 +104,7 @@ TrainDataTests::show_test()
     }
 
     // try to get non-existing data
-    ret = Kitsunemimi::Hanami::getTrainData(result, "fail", error);
+    ret = Kitsunemimi::Hanami::getDataset(result, "fail", error);
     TEST_EQUAL(ret, false);
 }
 
@@ -119,7 +119,7 @@ TrainDataTests::list_test()
 
     // list all data
     std::string result;
-    ret = Kitsunemimi::Hanami::listTrainData(result, error);
+    ret = Kitsunemimi::Hanami::listDatasets(result, error);
     TEST_EQUAL(ret, true);
     if(ret == false)
     {
@@ -147,7 +147,7 @@ TrainDataTests::delete_test()
 
     // delete data
     std::string result;
-    ret = Kitsunemimi::Hanami::deleteTrainData(result, m_trainDataUuid, error);
+    ret = Kitsunemimi::Hanami::deleteDataset(result, m_trainDataUuid, error);
     TEST_EQUAL(ret, true);
     if(ret == false)
     {
@@ -164,7 +164,7 @@ TrainDataTests::delete_test()
     }
 
     // try the delete a non-existing data
-    ret = Kitsunemimi::Hanami::deleteTrainData(result, m_trainDataUuid, error);
+    ret = Kitsunemimi::Hanami::deleteDataset(result, m_trainDataUuid, error);
     TEST_EQUAL(ret, false);
 }
 

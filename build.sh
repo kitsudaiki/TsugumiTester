@@ -36,7 +36,12 @@ function build_kitsune_lib_repo () {
     echo "----------------------------------------------------------------------"
     echo $RESULT_DIR
     cp $REPO_DIR/src/$REPO_NAME.a $RESULT_DIR/
-    cp -r $PARENT_DIR/$REPO_NAME/include $RESULT_DIR/
+    if [[ $REPO_NAME == "libKitsunemimiHanamiSdk" ]]
+    then
+        cp -r $PARENT_DIR/$REPO_NAME/cpp/include $RESULT_DIR/
+    else
+        cp -r $PARENT_DIR/$REPO_NAME/include $RESULT_DIR/
+    fi
     ls -l $RESULT_DIR/include/
     ls -l $RESULT_DIR
 }
@@ -61,7 +66,7 @@ function get_required_private_repo_gitlab () {
     NUMBER_OF_THREADS=$4
 
     # clone repo
-    git clone http://kitsudaiki:$TOKEN@10.0.3.120/kitsudaiki/$REPO_NAME.git "$PARENT_DIR/$REPO_NAME"
+    git clone http://kitsudaiki:$TOKEN@10.0.3.120/hanami/$REPO_NAME.git "$PARENT_DIR/$REPO_NAME"
     cd "$PARENT_DIR/$REPO_NAME"
     git checkout $TAG_OR_BRANCH
 
@@ -87,20 +92,22 @@ function get_required_private_repo_github () {
 echo ""
 echo "###########################################################################################################"
 echo ""
-get_required_kitsune_lib_repo "libKitsunemimiCommon" "v0.25.1" 8
+get_required_kitsune_lib_repo "libKitsunemimiCommon" "master" 8
 get_required_kitsune_lib_repo "libKitsunemimiJson" "v0.11.3" 1
 get_required_kitsune_lib_repo "libKitsunemimiIni" "v0.5.1" 1
 get_required_kitsune_lib_repo "libKitsunemimiArgs" "v0.4.0" 8
 get_required_kitsune_lib_repo "libKitsunemimiConfig" "v0.4.0" 8
+get_required_kitsune_lib_repo "libKitsunemimiNetwork" "v0.8.2" 8
+get_required_kitsune_lib_repo "libKitsunemimiSakuraNetwork" "v0.8.2" 8
 echo ""
 echo "###########################################################################################################"
 echo ""
 get_required_private_repo_github "libKitsunemimiCrypto" "v0.2.0" 8
-get_required_private_repo_github "libKitsunemimiHanamiSdk" "v0.1.0" 8
 echo ""
 echo "###########################################################################################################"
 echo ""
 get_required_private_repo_gitlab "libKitsunemimiHanamiCommon" "v0.1.0" "2ue6RNxkCDs2A7qp1xtN" 8
+get_required_private_repo_gitlab "libKitsunemimiHanamiSdk" "master" "bfzFyQfmS2mpkWxCeuHA" 8
 echo ""
 echo "###########################################################################################################"
 echo ""

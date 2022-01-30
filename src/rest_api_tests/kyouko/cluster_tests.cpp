@@ -48,9 +48,12 @@ ClusterTests::prepare()
 {
     Kitsunemimi::ErrorContainer error;
     bool ret = false;
+    std::string result;
+
+    Kitsunemimi::Hanami::deleteCluster(result, m_clusterName, error);
+    error._errorMessages.clear();
 
     // create new template for tests
-    std::string result;
     ret = Kitsunemimi::Hanami::createTemplate(result, m_templateName, 784, 10, error);
     TEST_EQUAL(ret, true);
     if(ret == false)
@@ -189,10 +192,6 @@ ClusterTests::delete_test()
         LOG_ERROR(error);
         return;
     }
-
-    // try the delete a non-existing user
-    ret = Kitsunemimi::Hanami::deleteCluster(result, m_clusterName, error);
-    TEST_EQUAL(ret, false);
 }
 
 /**

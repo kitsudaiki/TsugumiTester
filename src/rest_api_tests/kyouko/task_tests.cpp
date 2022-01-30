@@ -28,7 +28,7 @@
 #include <libKitsunemimiHanamiSdk/actions/cluster.h>
 #include <libKitsunemimiHanamiSdk/actions/template.h>
 #include <libKitsunemimiHanamiSdk/actions/task.h>
-#include <libKitsunemimiHanamiSdk/actions/train_data.h>
+#include <libKitsunemimiHanamiSdk/actions/data_set.h>
 
 #include <libKitsunemimiJson/json_item.h>
 
@@ -58,6 +58,7 @@ TaskTests::prepare()
 
     Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error);
     Kitsunemimi::Hanami::deleteCluster(result, m_clusterName, error);
+    error._errorMessages.clear();
 
     //----------------------------------------------------------------------------------------------
     // create template
@@ -83,10 +84,10 @@ TaskTests::prepare()
     const std::string dataType = GET_STRING_CONFIG("test_data", "type", success);
 
     //----------------------------------------------------------------------------------------------
-    Kitsunemimi::Hanami::uploadTrainData(result,
-                                         "learn_inputs",
-                                         dataType,
+    Kitsunemimi::Hanami::uploadMnistData(result,
+                                         "learn_data",
                                          GET_STRING_CONFIG("test_data", "learn_inputs", success),
+                                         GET_STRING_CONFIG("test_data", "learn_labels", success),
                                          error);
 
     if(jsonItem.parse(result, error) == false)
@@ -97,24 +98,10 @@ TaskTests::prepare()
     m_learnInputUuid = jsonItem.get("uuid").getString();
 
     //----------------------------------------------------------------------------------------------
-    Kitsunemimi::Hanami::uploadTrainData(result,
-                                         "learn_labels",
-                                         dataType,
-                                         GET_STRING_CONFIG("test_data", "learn_labels", success),
-                                         error);
-
-    if(jsonItem.parse(result, error) == false)
-    {
-        LOG_ERROR(error);
-        return;
-    }
-    m_learnLabelUuid = jsonItem.get("uuid").getString();
-
-    //----------------------------------------------------------------------------------------------
-    Kitsunemimi::Hanami::uploadTrainData(result,
-                                         "request_inputs",
-                                         dataType,
+    Kitsunemimi::Hanami::uploadMnistData(result,
+                                         "request_data",
                                          GET_STRING_CONFIG("test_data", "request_inputs", success),
+                                         GET_STRING_CONFIG("test_data", "request_labels", success),
                                          error);
 
     if(jsonItem.parse(result, error) == false)
@@ -124,18 +111,6 @@ TaskTests::prepare()
     }
     m_requestInputUuid = jsonItem.get("uuid").getString();
 
-    //----------------------------------------------------------------------------------------------
-    Kitsunemimi::Hanami::uploadTrainData(result,
-                                         "request_labels",
-                                         dataType,
-                                         GET_STRING_CONFIG("test_data", "request_labels", success),
-                                         error);
-    if(jsonItem.parse(result, error) == false)
-    {
-        LOG_ERROR(error);
-        return;
-    }
-    m_requestLabelUuid = jsonItem.get("uuid").getString();
     //----------------------------------------------------------------------------------------------
 }
 
@@ -157,8 +132,6 @@ TaskTests::learn_test()
     ret = Kitsunemimi::Hanami::createLearnTask(result,
                                                m_clusterUuid,
                                                m_learnInputUuid,
-                                               m_learnLabelUuid,
-                                               dataType,
                                                error);
     TEST_EQUAL(ret, true);
     if(ret == false)
@@ -211,7 +184,6 @@ TaskTests::request_test()
     ret = Kitsunemimi::Hanami::createRequestTask(result,
                                                  m_clusterUuid,
                                                  m_requestInputUuid,
-                                                 dataType,
                                                  error);
     TEST_EQUAL(ret, true);
     if(ret == false)
@@ -289,8 +261,6 @@ TaskTests::cleanup()
     assert(Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error));
     assert(Kitsunemimi::Hanami::deleteCluster(result, m_clusterName, error));
 
-    assert(Kitsunemimi::Hanami::deleteTrainData(result, m_learnInputUuid, error));
-    assert(Kitsunemimi::Hanami::deleteTrainData(result, m_learnLabelUuid, error));
-    assert(Kitsunemimi::Hanami::deleteTrainData(result, m_requestInputUuid, error));
-    assert(Kitsunemimi::Hanami::deleteTrainData(result, m_requestLabelUuid, error));
+    assert(Kitsunemimi::Hanami::deleteDataset(result, m_learnInputUuid, error));
+    assert(Kitsunemimi::Hanami::deleteDataset(result, m_requestInputUuid, error));
 }
