@@ -32,12 +32,17 @@ public:
     TemplateTest();
 
 private:
+    void prepare();
+
     void create_test();
     void show_test();
     void list_test();
     void delete_test();
 
+    void cleanup();
+
     std::string m_templateName = "test_template";
+    std::string m_learnInputUuid = "";
 };
 
 #endif // TSURUGITESTER_TEMPLATETEST_H

@@ -61,29 +61,6 @@ TaskTests::prepare()
     error._errorMessages.clear();
 
     //----------------------------------------------------------------------------------------------
-    // create template
-
-    assert(Kitsunemimi::Hanami::createTemplate(result, m_templateName, 784, 10, error));
-    assert(jsonItem.parse(result, error));
-
-    m_templateUuid = jsonItem.get("uuid").getString();
-
-    //----------------------------------------------------------------------------------------------
-    // create cluster from template
-
-    result.clear();
-
-    assert(Kitsunemimi::Hanami::createCluster(result, m_clusterName, m_templateUuid, error));
-    assert(jsonItem.parse(result, error));
-
-    m_clusterUuid = jsonItem.get("uuid").getString();
-
-    //----------------------------------------------------------------------------------------------
-    // get data-type
-
-    const std::string dataType = GET_STRING_CONFIG("test_data", "type", success);
-
-    //----------------------------------------------------------------------------------------------
     Kitsunemimi::Hanami::uploadMnistData(result,
                                          "learn_data",
                                          GET_STRING_CONFIG("test_data", "learn_inputs", success),
@@ -110,6 +87,29 @@ TaskTests::prepare()
         return;
     }
     m_requestInputUuid = jsonItem.get("uuid").getString();
+
+    //----------------------------------------------------------------------------------------------
+    // create template
+
+    assert(Kitsunemimi::Hanami::createTemplate(result, m_templateName, m_learnInputUuid, error));
+    assert(jsonItem.parse(result, error));
+
+    m_templateUuid = jsonItem.get("uuid").getString();
+
+    //----------------------------------------------------------------------------------------------
+    // create cluster from template
+
+    result.clear();
+
+    assert(Kitsunemimi::Hanami::createCluster(result, m_clusterName, m_templateUuid, error));
+    assert(jsonItem.parse(result, error));
+
+    m_clusterUuid = jsonItem.get("uuid").getString();
+
+    //----------------------------------------------------------------------------------------------
+    // get data-type
+
+    const std::string dataType = GET_STRING_CONFIG("test_data", "type", success);
 
     //----------------------------------------------------------------------------------------------
 }
@@ -164,7 +164,7 @@ TaskTests::learn_test()
             LOG_ERROR(error);
             return;
         }
-        //std::cout<<jsonItem.toString(true)<<std::endl;
+        std::cout<<jsonItem.toString(true)<<std::endl;
     }
     while(jsonItem.get("state").getString() != "finished");
 }
@@ -201,7 +201,7 @@ TaskTests::request_test()
 
     // get uuid of the new task
     m_taskUuid = jsonItem.get("uuid").getString();
-    //std::cout<<"uuid: "<<m_taskUuid<<std::endl;
+    std::cout<<"uuid: "<<m_taskUuid<<std::endl;
 
     // wait until task is finished
     do
@@ -215,7 +215,7 @@ TaskTests::request_test()
             LOG_ERROR(error);
             return;
         }
-        //std::cout<<jsonItem.toString(true)<<std::endl;
+        std::cout<<jsonItem.toString(true)<<std::endl;
     }
     while(jsonItem.get("state").getString() != "finished");
 
@@ -228,7 +228,7 @@ TaskTests::request_test()
         LOG_ERROR(error);
         return;
     }
-    //std::cout<<jsonItem.toString(true)<<std::endl;
+    std::cout<<jsonItem.toString(true)<<std::endl;
 }
 
 /**

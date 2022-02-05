@@ -22,17 +22,56 @@
 
 #include "template_test.h"
 
+#include <libKitsunemimiConfig/config_handler.h>
+#include <libKitsunemimiCrypto/common.h>
+
 #include <libKitsunemimiHanamiSdk/actions/template.h>
+#include <libKitsunemimiHanamiSdk/actions/data_set.h>
 
 #include <libKitsunemimiJson/json_item.h>
 
 TemplateTest::TemplateTest()
     : Kitsunemimi::CompareTestHelper("TemplateTest")
 {
+    prepare();
+
     create_test();
     show_test();
     list_test();
     delete_test();
+
+    cleanup();
+}
+
+/**
+ * @brief prepare
+ */
+void
+TemplateTest::prepare()
+{
+    Kitsunemimi::ErrorContainer error;
+    Kitsunemimi::Json::JsonItem jsonItem;
+    bool success = false;
+    std::string result;
+
+    Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error);
+    error._errorMessages.clear();
+
+    //----------------------------------------------------------------------------------------------
+    Kitsunemimi::Hanami::uploadMnistData(result,
+                                         "learn_data",
+                                         GET_STRING_CONFIG("test_data", "learn_inputs", success),
+                                         GET_STRING_CONFIG("test_data", "learn_labels", success),
+                                         error);
+
+    if(jsonItem.parse(result, error) == false)
+    {
+        LOG_ERROR(error);
+        return;
+    }
+    m_learnInputUuid = jsonItem.get("uuid").getString();
+
+    //----------------------------------------------------------------------------------------------
 }
 
 /**
@@ -49,7 +88,7 @@ TemplateTest::create_test()
     error._errorMessages.clear();
 
     // create new template
-    ret = Kitsunemimi::Hanami::createTemplate(result, m_templateName, 784, 10, error);
+    ret = Kitsunemimi::Hanami::createTemplate(result, m_templateName, m_learnInputUuid, error);
     TEST_EQUAL(ret, true);
     if(ret == false)
     {
@@ -66,7 +105,7 @@ TemplateTest::create_test()
     }
 
     // try to create template a second time with same name
-    ret = Kitsunemimi::Hanami::createTemplate(result, m_templateName, 784, 10, error);
+    ret = Kitsunemimi::Hanami::createTemplate(result, m_templateName, m_learnInputUuid, error);
     TEST_EQUAL(ret, false);
 }
 
@@ -156,4 +195,17 @@ TemplateTest::delete_test()
         LOG_ERROR(error);
         return;
     }
+}
+
+/**
+ * @brief cleanup
+ */
+void
+TemplateTest::cleanup()
+{
+    Kitsunemimi::ErrorContainer error;
+    std::string result;
+
+    assert(Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error));
+    assert(Kitsunemimi::Hanami::deleteDataset(result, m_learnInputUuid, error));
 }

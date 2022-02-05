@@ -44,6 +44,7 @@ private:
     std::string m_clusterName = "test_cluster";
     std::string m_templateName = "test_template";
     std::string m_templateUuid = "";
+    std::string m_learnInputUuid = "";
 };
 
 #endif // TSURUGITESTER_CLUSTERTESTS_H
