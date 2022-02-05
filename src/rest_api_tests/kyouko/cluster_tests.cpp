@@ -22,8 +22,12 @@
 
 #include "cluster_tests.h"
 
+#include <libKitsunemimiConfig/config_handler.h>
+#include <libKitsunemimiCrypto/common.h>
+
 #include <libKitsunemimiHanamiSdk/actions/cluster.h>
 #include <libKitsunemimiHanamiSdk/actions/template.h>
+#include <libKitsunemimiHanamiSdk/actions/data_set.h>
 
 #include <libKitsunemimiJson/json_item.h>
 
@@ -47,14 +51,32 @@ void
 ClusterTests::prepare()
 {
     Kitsunemimi::ErrorContainer error;
+    Kitsunemimi::Json::JsonItem jsonItem;
     bool ret = false;
+    bool success = false;
     std::string result;
 
     Kitsunemimi::Hanami::deleteCluster(result, m_clusterName, error);
     error._errorMessages.clear();
 
+    //----------------------------------------------------------------------------------------------
+    Kitsunemimi::Hanami::uploadMnistData(result,
+                                         "learn_data",
+                                         GET_STRING_CONFIG("test_data", "learn_inputs", success),
+                                         GET_STRING_CONFIG("test_data", "learn_labels", success),
+                                         error);
+
+    if(jsonItem.parse(result, error) == false)
+    {
+        LOG_ERROR(error);
+        return;
+    }
+    m_learnInputUuid = jsonItem.get("uuid").getString();
+
+    //----------------------------------------------------------------------------------------------
+
     // create new template for tests
-    ret = Kitsunemimi::Hanami::createTemplate(result, m_templateName, 784, 10, error);
+    ret = Kitsunemimi::Hanami::createTemplate(result, m_templateName, m_learnInputUuid, error);
     TEST_EQUAL(ret, true);
     if(ret == false)
     {
@@ -63,7 +85,6 @@ ClusterTests::prepare()
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false)
     {
         LOG_ERROR(error);
@@ -206,4 +227,6 @@ ClusterTests::cleanup()
     std::string result;
     ret = Kitsunemimi::Hanami::deleteTemplate(result, m_templateName, error);
     TEST_EQUAL(ret, true);
+
+    assert(Kitsunemimi::Hanami::deleteDataset(result, m_learnInputUuid, error));
 }
