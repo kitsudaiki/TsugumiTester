@@ -24,6 +24,7 @@
 
 #include <libKitsunemimiConfig/config_handler.h>
 #include <libKitsunemimiCrypto/common.h>
+#include <libKitsunemimiCommon/common_items/data_items.h>
 
 #include <libKitsunemimiHanamiSdk/actions/cluster.h>
 #include <libKitsunemimiHanamiSdk/actions/template.h>
@@ -156,7 +157,7 @@ TaskTests::learn_test()
     {
         sleep(1);
 
-        Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, false, error);
+        Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, error);
 
         // parse output
         if(jsonItem.parse(result, error) == false)
@@ -207,7 +208,7 @@ TaskTests::request_test()
     do
     {
         sleep(1);
-        Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, false, error);
+        Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, error);
 
         // parse output
         if(jsonItem.parse(result, error) == false)
@@ -220,7 +221,18 @@ TaskTests::request_test()
     while(jsonItem.get("state").getString() != "finished");
 
     // get task-result
-    Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, true, error);
+    Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, error);
+
+    // parse output
+    if(jsonItem.parse(result, error) == false)
+    {
+        LOG_ERROR(error);
+        return;
+    }
+    //std::cout<<jsonItem.toString(true)<<std::endl;
+
+    // get task-result
+    Kitsunemimi::Hanami::checkDataset(result, m_taskUuid, m_requestInputUuid, error);
 
     // parse output
     if(jsonItem.parse(result, error) == false)
@@ -229,6 +241,7 @@ TaskTests::request_test()
         return;
     }
     std::cout<<jsonItem.toString(true)<<std::endl;
+
 }
 
 /**
