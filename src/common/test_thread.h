@@ -1,5 +1,5 @@
 /**
- * @file        rest_api_tests.h
+ * @file        test_thread.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,9 +20,37 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMITESTER_REST_API_TESTS_H
-#define TSUGUMITESTER_REST_API_TESTS_H
+#ifndef TSUGUMI_TESTTHREAD_H
+#define TSUGUMI_TESTTHREAD_H
 
-bool runRestApiTests();
+#include <deque>
+#include <mutex>
 
-#endif // TSUGUMITESTER_REST_API_TESTS_H
+#include <libKitsunemimiCommon/threading/thread.h>
+#include <libKitsunemimiJson/json_item.h>
+
+class TestStep;
+
+class TestThread
+        : public Kitsunemimi::Thread
+{
+public:
+    TestThread(const std::string &name,
+               Kitsunemimi::Json::JsonItem &inputData);
+
+    void addTest(TestStep* newStep);
+
+    bool isFinished = false;
+
+protected:
+    void run();
+
+private:
+    std::deque<TestStep*> m_taskQueue;
+    std::mutex m_queueLock;
+    Kitsunemimi::Json::JsonItem m_inputData;
+
+    TestStep* getTest();
+};
+
+#endif // TSUGUMI_TESTTHREAD_H

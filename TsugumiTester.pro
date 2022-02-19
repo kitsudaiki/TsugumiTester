@@ -60,19 +60,51 @@ INCLUDEPATH += $$PWD \
                src
 
 SOURCES += src/main.cpp \
-    src/rest_api_tests/kyouko/cluster_tests.cpp \
-    src/rest_api_tests/kyouko/task_tests.cpp \
-    src/rest_api_tests/kyouko/template_test.cpp \
-    src/rest_api_tests/misaka/user_tests.cpp \
+    src/common/test_step.cpp \
+    src/common/test_thread.cpp \
+    src/rest_api_tests/kyouko/cluster/cluster_create_test.cpp \
+    src/rest_api_tests/kyouko/cluster/cluster_delete_test.cpp \
+    src/rest_api_tests/kyouko/cluster/cluster_get_test.cpp \
+    src/rest_api_tests/kyouko/cluster/cluster_list_test.cpp \
+    src/rest_api_tests/kyouko/task/learn_task_test.cpp \
+    src/rest_api_tests/kyouko/task/request_task_test.cpp \
+    src/rest_api_tests/kyouko/template/template_create_test.cpp \
+    src/rest_api_tests/kyouko/template/template_delete_test.cpp \
+    src/rest_api_tests/kyouko/template/template_get_test.cpp \
+    src/rest_api_tests/kyouko/template/template_list_test.cpp \
+    src/rest_api_tests/misaka/user_create_test.cpp \
+    src/rest_api_tests/misaka/user_delete_test.cpp \
+    src/rest_api_tests/misaka/user_get_test.cpp \
+    src/rest_api_tests/misaka/user_list_test.cpp \
     src/rest_api_tests/rest_api_tests.cpp \
-    src/rest_api_tests/sagiri/train_data_tests.cpp
+    src/rest_api_tests/sagiri/dataset_check_test.cpp \
+    src/rest_api_tests/sagiri/dataset_create_test.cpp \
+    src/rest_api_tests/sagiri/dataset_delete_test.cpp \
+    src/rest_api_tests/sagiri/dataset_get_test.cpp \
+    src/rest_api_tests/sagiri/dataset_list_test.cpp
 
 HEADERS += \
     src/args.h \
+    src/common/test_step.h \
+    src/common/test_thread.h \
     src/config.h \
-    src/rest_api_tests/kyouko/cluster_tests.h \
-    src/rest_api_tests/kyouko/task_tests.h \
-    src/rest_api_tests/kyouko/template_test.h \
+    src/rest_api_tests/kyouko/cluster/cluster_create_test.h \
+    src/rest_api_tests/kyouko/cluster/cluster_delete_test.h \
+    src/rest_api_tests/kyouko/cluster/cluster_get_test.h \
+    src/rest_api_tests/kyouko/cluster/cluster_list_test.h \
+    src/rest_api_tests/kyouko/task/learn_task_test.h \
+    src/rest_api_tests/kyouko/task/request_task_test.h \
+    src/rest_api_tests/kyouko/template/template_create_test.h \
+    src/rest_api_tests/kyouko/template/template_delete_test.h \
+    src/rest_api_tests/kyouko/template/template_get_test.h \
+    src/rest_api_tests/kyouko/template/template_list_test.h \
+    src/rest_api_tests/misaka/user_create_test.h \
+    src/rest_api_tests/misaka/user_delete_test.h \
+    src/rest_api_tests/misaka/user_get_test.h \
+    src/rest_api_tests/misaka/user_list_test.h \
     src/rest_api_tests/rest_api_tests.h \
-    src/rest_api_tests/misaka/user_tests.h \
-    src/rest_api_tests/sagiri/train_data_tests.h
+    src/rest_api_tests/sagiri/dataset_check_test.h \
+    src/rest_api_tests/sagiri/dataset_create_test.h \
+    src/rest_api_tests/sagiri/dataset_delete_test.h \
+    src/rest_api_tests/sagiri/dataset_get_test.h \
+    src/rest_api_tests/sagiri/dataset_list_test.h

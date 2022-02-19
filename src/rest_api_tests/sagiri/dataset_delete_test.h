@@ -1,5 +1,5 @@
 /**
- * @file        rest_api_tests.h
+ * @file        dataset_delete_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,9 +20,23 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMITESTER_REST_API_TESTS_H
-#define TSUGUMITESTER_REST_API_TESTS_H
+#ifndef TSUGUMITESTER_DATASETDELETETEST_H
+#define TSUGUMITESTER_DATASETDELETETEST_H
 
-bool runRestApiTests();
+#include <common/test_step.h>
 
-#endif // TSUGUMITESTER_REST_API_TESTS_H
+class DataSetDeleteTest
+        : public TestStep
+{
+public:
+    DataSetDeleteTest(const bool expectSuccess,
+                      const std::string &type);
+
+    bool runTest(Kitsunemimi::Json::JsonItem &inputData,
+                 Kitsunemimi::ErrorContainer &error);
+
+private:
+    std::string m_type = "";
+};
+
+#endif // TSUGUMITESTER_DATASETDELETETEST_H

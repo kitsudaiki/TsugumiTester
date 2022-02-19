@@ -23,16 +23,35 @@
 #include "rest_api_tests.h"
 
 #include <libKitsunemimiConfig/config_handler.h>
+#include <libKitsunemimiJson/json_item.h>
 
 #include <libKitsunemimiHanamiSdk/common/hanami_request.h>
 
-#include <rest_api_tests/misaka/user_tests.h>
+#include <common/test_thread.h>
 
-#include <rest_api_tests/sagiri/train_data_tests.h>
+#include <rest_api_tests/misaka/user_create_test.h>
+#include <rest_api_tests/misaka/user_delete_test.h>
+#include <rest_api_tests/misaka/user_get_test.h>
+#include <rest_api_tests/misaka/user_list_test.h>
 
-#include <rest_api_tests/kyouko/cluster_tests.h>
-#include <rest_api_tests/kyouko/template_test.h>
-#include <rest_api_tests/kyouko/task_tests.h>
+#include <rest_api_tests/sagiri/dataset_create_test.h>
+#include <rest_api_tests/sagiri/dataset_delete_test.h>
+#include <rest_api_tests/sagiri/dataset_get_test.h>
+#include <rest_api_tests/sagiri/dataset_list_test.h>
+#include <rest_api_tests/sagiri/dataset_check_test.h>
+
+#include <rest_api_tests/kyouko/cluster/cluster_create_test.h>
+#include <rest_api_tests/kyouko/cluster/cluster_delete_test.h>
+#include <rest_api_tests/kyouko/cluster/cluster_get_test.h>
+#include <rest_api_tests/kyouko/cluster/cluster_list_test.h>
+
+#include <rest_api_tests/kyouko/template/template_create_test.h>
+#include <rest_api_tests/kyouko/template/template_delete_test.h>
+#include <rest_api_tests/kyouko/template/template_get_test.h>
+#include <rest_api_tests/kyouko/template/template_list_test.h>
+
+#include <rest_api_tests/kyouko/task/learn_task_test.h>
+#include <rest_api_tests/kyouko/task/request_task_test.h>
 
 /**
  * @brief initialize client by requesting a token, which is used for all tests
@@ -55,64 +74,79 @@ initClient()
 }
 
 /**
- * @brief testKyouko
- */
-void
-testKyouko()
-{
-    std::cout<<"======================================================================="<<std::endl;
-    std::cout<<"test kyouko"<<std::endl;
-    std::cout<<"======================================================================="<<std::endl;
-
-    TemplateTest* templateTest = new TemplateTest();
-    delete templateTest;
-    ClusterTests* clusterTests = new ClusterTests();
-    delete clusterTests;
-    TaskTests* taskTests = new TaskTests();
-    delete taskTests;
-}
-
-/**
- * @brief testMisaka
- */
-void
-testMisaka()
-{
-    std::cout<<"======================================================================="<<std::endl;
-    std::cout<<"test misaka"<<std::endl;
-    std::cout<<"======================================================================="<<std::endl;
-
-    UserTests* userTests = new UserTests();
-    delete userTests;
-}
-
-/**
- * @brief testSagiri
- */
-void
-testSagiri()
-{
-    std::cout<<"======================================================================="<<std::endl;
-    std::cout<<"test sagiri"<<std::endl;
-    std::cout<<"======================================================================="<<std::endl;
-
-    TrainDataTests* trainDataTests = new TrainDataTests();
-    delete trainDataTests;
-}
-
-/**
  * @brief runRestApiTests
  */
 bool
 runRestApiTests()
 {
+    bool success = false;
+
     if(initClient() == false) {
         return false;
     }
 
-    testMisaka();
-    testSagiri();
-    testKyouko();
+    Kitsunemimi::Json::JsonItem inputData;
+    inputData.insert("password", "new password");
+    inputData.insert("admin", true);
+    inputData.insert("roles", "tester");
+    inputData.insert("projects", "tester");
+
+    inputData.insert("learn_inputs", GET_STRING_CONFIG("test_data", "learn_inputs", success)),
+    inputData.insert("learn_labels", GET_STRING_CONFIG("test_data", "learn_labels", success)),
+    inputData.insert("request_inputs", GET_STRING_CONFIG("test_data", "request_inputs", success)),
+    inputData.insert("request_labels", GET_STRING_CONFIG("test_data", "request_labels", success)),
+
+    inputData.insert("user_name", "tsugumi");
+    inputData.insert("cluster_name", "test_cluster");
+    inputData.insert("template_name", "test_template");
+    inputData.insert("request_dataset_name", "request_test_dataset");
+    inputData.insert("learn_dataset_name", "learn_test_dataset");
+
+
+    TestThread testThread("test_thread", inputData);
+
+    Kitsunemimi::Json::JsonItem overrideData;
+    testThread.addTest(new UserCreateTest(true));
+    testThread.addTest(new UserCreateTest(false));
+    testThread.addTest(new UserListTest(true));
+    testThread.addTest(new UserGetTest(true));
+    testThread.addTest(new UserGetTest(false, "fail_user"));
+    testThread.addTest(new UserDeleteTest(true));
+    testThread.addTest(new UserDeleteTest(false));
+
+    testThread.addTest(new DataSetCreateTest(true, "request"));
+
+    testThread.addTest(new DataSetCreateTest(true, "learn"));
+    testThread.addTest(new DataSetListTest(true));
+    testThread.addTest(new DataSetGetTest(true, "learn" ));
+    testThread.addTest(new DataSetGetTest(false, "learn", "fail_user"));
+
+    testThread.addTest(new TemplateCreateTest( true));
+    testThread.addTest(new TemplateGetTest(true));
+    testThread.addTest(new TemplateListTest(true));
+
+
+    testThread.addTest(new ClusterCreateTest(true));
+    testThread.addTest(new ClusterGetTest(true));
+    testThread.addTest(new ClusterListTest(true));
+
+    testThread.addTest(new LearnTaskTest(true));
+    testThread.addTest(new RequestTaskTest(true));
+    testThread.addTest(new DataSetCheckTest(true));
+
+    testThread.addTest(new ClusterDeleteTest(true));
+    testThread.addTest(new ClusterDeleteTest(false));
+    testThread.addTest(new TemplateDeleteTest(true));
+    testThread.addTest(new TemplateDeleteTest(false));
+    testThread.addTest(new DataSetDeleteTest(true, "request"));
+    testThread.addTest(new DataSetDeleteTest(true, "learn"));
+    testThread.addTest(new DataSetDeleteTest(false, "learn"));
+
+    testThread.startThread();
+
+    while(testThread.isFinished == false) {
+        usleep(100000);
+    }
 
     return true;
 }

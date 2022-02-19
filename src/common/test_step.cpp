@@ -1,5 +1,5 @@
 /**
- * @file        train_data_tests.h
+ * @file        test_step.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,25 +20,28 @@
  *      limitations under the License.
  */
 
-#ifndef TSURUGITESTER_TRAINDATA_H
-#define TSURUGITESTER_TRAINDATA_H
+#include "test_step.h"
 
-#include <libKitsunemimiCommon/test_helper/compare_test_helper.h>
+/**
+ * @brief constructor
+ *
+ * @param expectSuccess sould success or fail
+ */
+TestStep::TestStep(const bool expectSuccess)
+    : m_expectSuccess(expectSuccess) {}
 
-class TrainDataTests
-        : public Kitsunemimi::CompareTestHelper
+/**
+ * @brief destructor
+ */
+TestStep::~TestStep() {}
+
+/**
+ * @brief get test-name
+ *
+ * @return name of the test
+ */
+const std::string
+TestStep::getTestName() const
 {
-public:
-    TrainDataTests();
-
-private:
-    void create_test();
-    void show_test();
-    void list_test();
-    void delete_test();
-
-    std::string m_trainDataName = "test_data";
-    std::string m_trainDataUuid = "";
-};
-
-#endif // TSURUGITESTER_TRAINDATA_H
+    return m_testName;
+}

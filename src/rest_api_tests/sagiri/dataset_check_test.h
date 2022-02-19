@@ -1,5 +1,5 @@
 /**
- * @file        cluster_tests.h
+ * @file        dataset_check_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,31 +20,19 @@
  *      limitations under the License.
  */
 
-#ifndef TSURUGITESTER_CLUSTERTESTS_H
-#define TSURUGITESTER_CLUSTERTESTS_H
+#ifndef TSUGUMITESTER_DATASETCHECKTEST_H
+#define TSUGUMITESTER_DATASETCHECKTEST_H
 
-#include <libKitsunemimiCommon/test_helper/compare_test_helper.h>
+#include <common/test_step.h>
 
-class ClusterTests
-        : public Kitsunemimi::CompareTestHelper
+class DataSetCheckTest
+        : public TestStep
 {
 public:
-    ClusterTests();
+    DataSetCheckTest(const bool expectSuccess);
 
-private:
-    void prepare();
-
-    void create_test();
-    void show_test();
-    void list_test();
-    void delete_test();
-
-    void cleanup();
-
-    std::string m_clusterName = "test_cluster";
-    std::string m_templateName = "test_template";
-    std::string m_templateUuid = "";
-    std::string m_learnInputUuid = "";
+    bool runTest(Kitsunemimi::Json::JsonItem &inputData,
+                 Kitsunemimi::ErrorContainer &error);
 };
 
-#endif // TSURUGITESTER_CLUSTERTESTS_H
+#endif // TSUGUMITESTER_DATASETCHECKTEST_H

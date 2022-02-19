@@ -1,5 +1,5 @@
 /**
- * @file        template_test.h
+ * @file        template_get_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,29 +20,23 @@
  *      limitations under the License.
  */
 
-#ifndef TSURUGITESTER_TEMPLATETEST_H
-#define TSURUGITESTER_TEMPLATETEST_H
+#ifndef TSUGUMITESTER_TEMPLATEGETTEST_H
+#define TSUGUMITESTER_TEMPLATEGETTEST_H
 
-#include <libKitsunemimiCommon/test_helper/compare_test_helper.h>
+#include <common/test_step.h>
 
-class TemplateTest
-        : public Kitsunemimi::CompareTestHelper
+class TemplateGetTest
+        : public TestStep
 {
 public:
-    TemplateTest();
+    TemplateGetTest(const bool expectSuccess,
+                    const std::string &nameOverride = "");
+
+    bool runTest(Kitsunemimi::Json::JsonItem &inputData,
+                 Kitsunemimi::ErrorContainer &error);
 
 private:
-    void prepare();
-
-    void create_test();
-    void show_test();
-    void list_test();
-    void delete_test();
-
-    void cleanup();
-
-    std::string m_templateName = "test_template";
-    std::string m_learnInputUuid = "";
+    std::string m_name = "";
 };
 
-#endif // TSURUGITESTER_TEMPLATETEST_H
+#endif // TSUGUMITESTER_TEMPLATEGETTEST_H

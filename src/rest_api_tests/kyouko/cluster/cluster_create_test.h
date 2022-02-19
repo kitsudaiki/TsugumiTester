@@ -1,5 +1,5 @@
 /**
- * @file        rest_api_tests.h
+ * @file        cluster_create_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,9 +20,19 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMITESTER_REST_API_TESTS_H
-#define TSUGUMITESTER_REST_API_TESTS_H
+#ifndef TSUGUMITESTER_CLUSTERCREATETEST_H
+#define TSUGUMITESTER_CLUSTERCREATETEST_H
 
-bool runRestApiTests();
+#include <common/test_step.h>
 
-#endif // TSUGUMITESTER_REST_API_TESTS_H
+class ClusterCreateTest
+        : public TestStep
+{
+public:
+    ClusterCreateTest(const bool expectSuccess);
+
+    bool runTest(Kitsunemimi::Json::JsonItem &inputData,
+                 Kitsunemimi::ErrorContainer &error);
+};
+
+#endif // TSUGUMITESTER_CLUSTERCREATETEST_H

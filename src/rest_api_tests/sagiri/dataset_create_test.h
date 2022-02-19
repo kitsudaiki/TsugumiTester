@@ -1,5 +1,5 @@
 /**
- * @file        rest_api_tests.h
+ * @file        dataset_create_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,9 +20,23 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMITESTER_REST_API_TESTS_H
-#define TSUGUMITESTER_REST_API_TESTS_H
+#ifndef TSUGUMITESTER_DATASETCREATETEST_H
+#define TSUGUMITESTER_DATASETCREATETEST_H
 
-bool runRestApiTests();
+#include <common/test_step.h>
 
-#endif // TSUGUMITESTER_REST_API_TESTS_H
+class DataSetCreateTest
+        : public TestStep
+{
+public:
+    DataSetCreateTest(const bool expectSuccess,
+                      const std::string &type);
+
+    bool runTest(Kitsunemimi::Json::JsonItem &inputData,
+                 Kitsunemimi::ErrorContainer &error);
+
+private:
+    std::string m_type = "";
+};
+
+#endif // TSUGUMITESTER_DATASETCREATETEST_H

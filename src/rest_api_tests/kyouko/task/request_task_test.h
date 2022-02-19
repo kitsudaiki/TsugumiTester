@@ -1,5 +1,5 @@
 /**
- * @file        rest_api_tests.h
+ * @file        request_task_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,9 +20,19 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMITESTER_REST_API_TESTS_H
-#define TSUGUMITESTER_REST_API_TESTS_H
+#ifndef TSUGUMITESTER_REQUESTTASKTEST_H
+#define TSUGUMITESTER_REQUESTTASKTEST_H
 
-bool runRestApiTests();
+#include <common/test_step.h>
 
-#endif // TSUGUMITESTER_REST_API_TESTS_H
+class RequestTaskTest
+        : public TestStep
+{
+public:
+    RequestTaskTest(const bool expectSuccess);
+
+    bool runTest(Kitsunemimi::Json::JsonItem &inputData,
+                 Kitsunemimi::ErrorContainer &error);
+};
+
+#endif // TSUGUMITESTER_REQUESTTASKTEST_H
