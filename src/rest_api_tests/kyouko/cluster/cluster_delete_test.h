@@ -1,5 +1,5 @@
 /**
- * @file        user_tests.h
+ * @file        cluster_delete_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,28 +20,19 @@
  *      limitations under the License.
  */
 
-#ifndef TSURUGITESTER_USERTESTS_H
-#define TSURUGITESTER_USERTESTS_H
+#ifndef TSUGUMITESTER_CLUSTERDELETETEST_H
+#define TSUGUMITESTER_CLUSTERDELETETEST_H
 
-#include <libKitsunemimiCommon/test_helper/compare_test_helper.h>
+#include <common/test_step.h>
 
-class UserTests
-        : public Kitsunemimi::CompareTestHelper
+class ClusterDeleteTest
+        : public TestStep
 {
 public:
-    UserTests();
+    ClusterDeleteTest(const bool expectSuccess);
 
-private:
-    void create_test();
-    void show_test();
-    void list_test();
-    void delete_test();
-
-    std::string m_userName = "tsugumi";
-    std::string m_password = "new password";
-    bool m_isAdmin = true;
-    std::string m_roles = "tester";
-    std::string m_projects = "tester";
+    bool runTest(Kitsunemimi::Json::JsonItem &inputData,
+                 Kitsunemimi::ErrorContainer &error);
 };
 
-#endif // TSURUGITESTER_USERTESTS_H
+#endif // TSUGUMITESTER_CLUSTERDELETETEST_H

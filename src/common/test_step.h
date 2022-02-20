@@ -1,5 +1,5 @@
 /**
- * @file        rest_api_tests.h
+ * @file        test_step.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,9 +20,27 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMITESTER_REST_API_TESTS_H
-#define TSUGUMITESTER_REST_API_TESTS_H
+#ifndef TSUGUMI_TESTSTEP_H
+#define TSUGUMI_TESTSTEP_H
 
-bool runRestApiTests();
+#include <vector>
+#include <libKitsunemimiJson/json_item.h>
+#include <libKitsunemimiCommon/logger.h>
 
-#endif // TSUGUMITESTER_REST_API_TESTS_H
+class TestStep
+{
+public:
+    TestStep(const bool expectSuccess);
+    virtual ~TestStep();
+
+    const std::string getTestName() const;
+
+    virtual bool runTest(Kitsunemimi::Json::JsonItem &inputData,
+                         Kitsunemimi::ErrorContainer &error) = 0;
+
+protected:
+    const bool m_expectSuccess;
+    std::string m_testName;
+};
+
+#endif // TSUGUMI_TESTSTEP_H

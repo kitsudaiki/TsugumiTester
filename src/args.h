@@ -20,8 +20,8 @@
  *      limitations under the License.
  */
 
-#ifndef TSURUGITESTER_ARGS_H
-#define TSURUGITESTER_ARGS_H
+#ifndef TSUGUMITESTER_ARGS_H
+#define TSUGUMITESTER_ARGS_H
 
 #include <libKitsunemimiArgs/arg_parser.h>
 #include <libKitsunemimiHanamiCommon/args.h>
@@ -45,4 +45,4 @@ registerArguments(Kitsunemimi::Args::ArgParser* argparser,
     return true;
 }
 
-#endif // TSURUGITESTER_ARGS_H
+#endif // TSUGUMITESTER_ARGS_H

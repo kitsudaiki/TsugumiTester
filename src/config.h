@@ -20,8 +20,8 @@
  *      limitations under the License.
  */
 
-#ifndef TSURUGITESTER_CONFIG_H
-#define TSURUGITESTER_CONFIG_H
+#ifndef TSUGUMITESTER_CONFIG_H
+#define TSUGUMITESTER_CONFIG_H
 
 #include <libKitsunemimiConfig/config_handler.h>
 #include <libKitsunemimiHanamiCommon/config.h>
@@ -47,4 +47,4 @@ registerConfigs(Kitsunemimi::ErrorContainer &error)
     REGISTER_STRING_CONFIG( "test_data", "request_labels", error, "", true);
 }
 
-#endif // TSURUGITESTER_CONFIG_H
+#endif // TSUGUMITESTER_CONFIG_H

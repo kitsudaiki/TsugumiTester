@@ -1,5 +1,5 @@
 /**
- * @file        rest_api_tests.h
+ * @file        dataset_list_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,9 +20,19 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMITESTER_REST_API_TESTS_H
-#define TSUGUMITESTER_REST_API_TESTS_H
+#ifndef TSUGUMITESTER_DATASETLISTTEST_H
+#define TSUGUMITESTER_DATASETLISTTEST_H
 
-bool runRestApiTests();
+#include <common/test_step.h>
 
-#endif // TSUGUMITESTER_REST_API_TESTS_H
+class DataSetListTest
+        : public TestStep
+{
+public:
+    DataSetListTest(const bool expectSuccess);
+
+    bool runTest(Kitsunemimi::Json::JsonItem &inputData,
+                 Kitsunemimi::ErrorContainer &error);
+};
+
+#endif // TSUGUMITESTER_DATASETLISTTEST_H
