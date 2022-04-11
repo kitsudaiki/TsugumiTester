@@ -25,7 +25,7 @@
 #include <libKitsunemimiConfig/config_handler.h>
 #include <libKitsunemimiJson/json_item.h>
 
-#include <libKitsunemimiHanamiSdk/common/hanami_request.h>
+#include <libKitsunemimiHanamiSdk/common/http_client.h>
 
 #include <common/test_thread.h>
 
@@ -106,20 +106,20 @@ runRestApiTests()
     TestThread testThread("test_thread", inputData);
 
     Kitsunemimi::Json::JsonItem overrideData;
-    testThread.addTest(new UserCreateTest(true));
+    /*testThread.addTest(new UserCreateTest(true));
     testThread.addTest(new UserCreateTest(false));
     testThread.addTest(new UserListTest(true));
     testThread.addTest(new UserGetTest(true));
     testThread.addTest(new UserGetTest(false, "fail_user"));
     testThread.addTest(new UserDeleteTest(true));
-    testThread.addTest(new UserDeleteTest(false));
+    testThread.addTest(new UserDeleteTest(false));*/
 
     testThread.addTest(new DataSetCreateTest(true, "request"));
 
     testThread.addTest(new DataSetCreateTest(true, "learn"));
     testThread.addTest(new DataSetListTest(true));
     testThread.addTest(new DataSetGetTest(true, "learn" ));
-    testThread.addTest(new DataSetGetTest(false, "learn", "fail_user"));
+    //testThread.addTest(new DataSetGetTest(false, "learn", "fail_user"));
 
     testThread.addTest(new TemplateCreateTest( true));
     testThread.addTest(new TemplateGetTest(true));
@@ -130,7 +130,9 @@ runRestApiTests()
     testThread.addTest(new ClusterGetTest(true));
     testThread.addTest(new ClusterListTest(true));
 
-    testThread.addTest(new LearnTaskTest(true));
+    for(int i = 0; i < 2; i++) {
+        testThread.addTest(new LearnTaskTest(true));
+    }
     testThread.addTest(new RequestTaskTest(true));
     testThread.addTest(new DataSetCheckTest(true));
 
