@@ -78,7 +78,7 @@ SOURCES += src/main.cpp \
     src/rest_api_tests/misaka/user_list_test.cpp \
     src/rest_api_tests/rest_api_tests.cpp \
     src/rest_api_tests/sagiri/dataset_check_test.cpp \
-    src/rest_api_tests/sagiri/dataset_create_test.cpp \
+    src/rest_api_tests/sagiri/dataset_create_mnist_test.cpp \
     src/rest_api_tests/sagiri/dataset_delete_test.cpp \
     src/rest_api_tests/sagiri/dataset_get_test.cpp \
     src/rest_api_tests/sagiri/dataset_list_test.cpp
@@ -104,7 +104,7 @@ HEADERS += \
     src/rest_api_tests/misaka/user_list_test.h \
     src/rest_api_tests/rest_api_tests.h \
     src/rest_api_tests/sagiri/dataset_check_test.h \
-    src/rest_api_tests/sagiri/dataset_create_test.h \
+    src/rest_api_tests/sagiri/dataset_create_mnist_test.h \
     src/rest_api_tests/sagiri/dataset_delete_test.h \
     src/rest_api_tests/sagiri/dataset_get_test.h \
     src/rest_api_tests/sagiri/dataset_list_test.h

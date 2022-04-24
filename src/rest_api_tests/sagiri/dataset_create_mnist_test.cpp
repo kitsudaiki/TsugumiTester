@@ -1,5 +1,5 @@
 /**
- * @file        dataset_create_test.cpp
+ * @file        dataset_create_mnist_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,16 +20,16 @@
  *      limitations under the License.
  */
 
-#include "dataset_create_test.h"
+#include "dataset_create_mnist_test.h"
 
 #include <libKitsunemimiConfig/config_handler.h>
 #include <libKitsunemimiHanamiSdk/actions/data_set.h>
 
-DataSetCreateTest::DataSetCreateTest(const bool expectSuccess,
-                                     const std::string &type)
+DataSetCreateMnistTest::DataSetCreateMnistTest(const bool expectSuccess,
+                                               const std::string &type)
           : TestStep(expectSuccess)
 {
-    m_testName = "create data-set";
+    m_testName = "create mnist data-set";
     if(expectSuccess) {
         m_testName += " (success)";
     } else {
@@ -39,12 +39,10 @@ DataSetCreateTest::DataSetCreateTest(const bool expectSuccess,
 }
 
 bool
-DataSetCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
-                           Kitsunemimi::ErrorContainer &error)
+DataSetCreateMnistTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+                                Kitsunemimi::ErrorContainer &error)
 {
-    // create new user
     std::string result;
-
     if(m_type == "learn")
     {
         if(Kitsunemimi::Hanami::uploadMnistData(result,

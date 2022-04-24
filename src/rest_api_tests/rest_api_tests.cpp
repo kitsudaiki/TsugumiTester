@@ -34,7 +34,7 @@
 #include <rest_api_tests/misaka/user_get_test.h>
 #include <rest_api_tests/misaka/user_list_test.h>
 
-#include <rest_api_tests/sagiri/dataset_create_test.h>
+#include <rest_api_tests/sagiri/dataset_create_mnist_test.h>
 #include <rest_api_tests/sagiri/dataset_delete_test.h>
 #include <rest_api_tests/sagiri/dataset_get_test.h>
 #include <rest_api_tests/sagiri/dataset_list_test.h>
@@ -114,9 +114,9 @@ runRestApiTests()
     testThread.addTest(new UserDeleteTest(true));
     testThread.addTest(new UserDeleteTest(false));*/
 
-    testThread.addTest(new DataSetCreateTest(true, "request"));
+    testThread.addTest(new DataSetCreateMnistTest(true, "request"));
 
-    testThread.addTest(new DataSetCreateTest(true, "learn"));
+    testThread.addTest(new DataSetCreateMnistTest(true, "learn"));
     testThread.addTest(new DataSetListTest(true));
     testThread.addTest(new DataSetGetTest(true, "learn" ));
     //testThread.addTest(new DataSetGetTest(false, "learn", "fail_user"));
