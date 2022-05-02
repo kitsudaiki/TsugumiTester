@@ -25,11 +25,11 @@
 
 #include <common/test_step.h>
 
-class LearnTaskTest
+class ImageLearnTaskTest
         : public TestStep
 {
 public:
-    LearnTaskTest(const bool expectSuccess);
+    ImageLearnTaskTest(const bool expectSuccess);
 
     bool runTest(Kitsunemimi::Json::JsonItem &inputData,
                  Kitsunemimi::ErrorContainer &error);

@@ -45,6 +45,7 @@ registerConfigs(Kitsunemimi::ErrorContainer &error)
     REGISTER_STRING_CONFIG( "test_data", "learn_labels",   error, "", true);
     REGISTER_STRING_CONFIG( "test_data", "request_inputs", error, "", true);
     REGISTER_STRING_CONFIG( "test_data", "request_labels", error, "", true);
+    REGISTER_STRING_CONFIG( "test_data", "base_inputs",    error, "", true);
 }
 
 #endif // TSUGUMITESTER_CONFIG_H

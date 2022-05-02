@@ -1,5 +1,5 @@
 /**
- * @file        template_create_test.h
+ * @file        dataset_create_csv_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,23 +20,19 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMITESTER_TEMPLATECREATETEST_H
-#define TSUGUMITESTER_TEMPLATECREATETEST_H
+#ifndef TSUGUMITESTER_DATASETCREATE_CSV_TEST_H
+#define TSUGUMITESTER_DATASETCREATE_CSV_TEST_H
 
 #include <common/test_step.h>
 
-class TemplateCreateTest
+class DataSetCreateCsvTest
         : public TestStep
 {
 public:
-    TemplateCreateTest(const bool expectSuccess,
-                       const std::string &type);
+    DataSetCreateCsvTest(const bool expectSuccess);
 
     bool runTest(Kitsunemimi::Json::JsonItem &inputData,
                  Kitsunemimi::ErrorContainer &error);
-
-private:
-    std::string m_type = "";
 };
 
-#endif // TSUGUMITESTER_TEMPLATECREATETEST_H
+#endif // TSUGUMITESTER_DATASETCREATE_CSV_TEST_H

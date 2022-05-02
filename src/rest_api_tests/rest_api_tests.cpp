@@ -35,6 +35,7 @@
 #include <rest_api_tests/misaka/user_list_test.h>
 
 #include <rest_api_tests/sagiri/dataset_create_mnist_test.h>
+#include <rest_api_tests/sagiri/dataset_create_csv_test.h>
 #include <rest_api_tests/sagiri/dataset_delete_test.h>
 #include <rest_api_tests/sagiri/dataset_get_test.h>
 #include <rest_api_tests/sagiri/dataset_list_test.h>
@@ -50,8 +51,10 @@
 #include <rest_api_tests/kyouko/template/template_get_test.h>
 #include <rest_api_tests/kyouko/template/template_list_test.h>
 
-#include <rest_api_tests/kyouko/task/learn_task_test.h>
-#include <rest_api_tests/kyouko/task/request_task_test.h>
+#include <rest_api_tests/kyouko/task/image_learn_task_test.h>
+#include <rest_api_tests/kyouko/task/image_request_task_test.h>
+#include <rest_api_tests/kyouko/task/graph_learn_task_test.h>
+#include <rest_api_tests/kyouko/task/graph_request_task_test.h>
 
 /**
  * @brief initialize client by requesting a token, which is used for all tests
@@ -71,6 +74,100 @@ initClient()
     }
 
     return true;
+}
+
+void
+runGraphTest(Kitsunemimi::Json::JsonItem &inputData)
+{
+    TestThread testThread("test_thread", inputData);
+
+    Kitsunemimi::Json::JsonItem overrideData;
+    /*testThread.addTest(new UserCreateTest(true));
+    testThread.addTest(new UserCreateTest(false));
+    testThread.addTest(new UserListTest(true));
+    testThread.addTest(new UserGetTest(true));
+    testThread.addTest(new UserGetTest(false, "fail_user"));
+    testThread.addTest(new UserDeleteTest(true));
+    testThread.addTest(new UserDeleteTest(false));*/
+
+    testThread.addTest(new DataSetCreateCsvTest(true));
+    //testThread.addTest(new DataSetGetTest(false, "learn", "fail_user"));
+
+    testThread.addTest(new TemplateCreateTest(true, "graph"));
+    testThread.addTest(new TemplateGetTest(true));
+    testThread.addTest(new TemplateListTest(true));
+
+
+    testThread.addTest(new ClusterCreateTest(true));
+    testThread.addTest(new ClusterGetTest(true));
+    testThread.addTest(new ClusterListTest(true));
+
+    for(int i = 0; i < 10; i++) {
+        testThread.addTest(new GraphLearnTaskTest(true));
+    }
+    testThread.addTest(new GraphRequestTaskTest(true));
+
+    testThread.addTest(new ClusterDeleteTest(true));
+    testThread.addTest(new ClusterDeleteTest(false));
+    testThread.addTest(new TemplateDeleteTest(true));
+    testThread.addTest(new TemplateDeleteTest(false));
+    testThread.addTest(new DataSetDeleteTest(true, "base"));
+
+    testThread.startThread();
+
+    while(testThread.isFinished == false) {
+        usleep(100000);
+    }
+}
+
+void
+runImageTest(Kitsunemimi::Json::JsonItem &inputData)
+{
+    TestThread testThread("test_thread", inputData);
+
+    Kitsunemimi::Json::JsonItem overrideData;
+    /*testThread.addTest(new UserCreateTest(true));
+    testThread.addTest(new UserCreateTest(false));
+    testThread.addTest(new UserListTest(true));
+    testThread.addTest(new UserGetTest(true));
+    testThread.addTest(new UserGetTest(false, "fail_user"));
+    testThread.addTest(new UserDeleteTest(true));
+    testThread.addTest(new UserDeleteTest(false));*/
+
+    testThread.addTest(new DataSetCreateMnistTest(true, "request"));
+    testThread.addTest(new DataSetCreateMnistTest(true, "learn"));
+    testThread.addTest(new DataSetListTest(true));
+    testThread.addTest(new DataSetGetTest(true, "learn"));
+    //testThread.addTest(new DataSetGetTest(false, "learn", "fail_user"));
+
+    testThread.addTest(new TemplateCreateTest(true, "image"));
+    testThread.addTest(new TemplateGetTest(true));
+    testThread.addTest(new TemplateListTest(true));
+
+
+    testThread.addTest(new ClusterCreateTest(true));
+    testThread.addTest(new ClusterGetTest(true));
+    testThread.addTest(new ClusterListTest(true));
+
+    for(int i = 0; i < 3; i++) {
+        testThread.addTest(new ImageLearnTaskTest(true));
+    }
+    testThread.addTest(new ImageRequestTaskTest(true));
+    testThread.addTest(new DataSetCheckTest(true));
+
+    testThread.addTest(new ClusterDeleteTest(true));
+    testThread.addTest(new ClusterDeleteTest(false));
+    testThread.addTest(new TemplateDeleteTest(true));
+    testThread.addTest(new TemplateDeleteTest(false));
+    testThread.addTest(new DataSetDeleteTest(true, "request"));
+    testThread.addTest(new DataSetDeleteTest(true, "learn"));
+    testThread.addTest(new DataSetDeleteTest(false, "learn"));
+
+    testThread.startThread();
+
+    while(testThread.isFinished == false) {
+        usleep(100000);
+    }
 }
 
 /**
@@ -95,60 +192,19 @@ runRestApiTests()
     inputData.insert("learn_labels", GET_STRING_CONFIG("test_data", "learn_labels", success)),
     inputData.insert("request_inputs", GET_STRING_CONFIG("test_data", "request_inputs", success)),
     inputData.insert("request_labels", GET_STRING_CONFIG("test_data", "request_labels", success)),
+    inputData.insert("base_inputs", GET_STRING_CONFIG("test_data", "base_inputs", success)),
 
     inputData.insert("user_name", "tsugumi");
     inputData.insert("cluster_name", "test_cluster");
     inputData.insert("template_name", "test_template");
     inputData.insert("request_dataset_name", "request_test_dataset");
     inputData.insert("learn_dataset_name", "learn_test_dataset");
+    inputData.insert("base_dataset_name", "base_test_dataset");
 
+    //runImageTest(inputData);
+    runGraphTest(inputData);
 
-    TestThread testThread("test_thread", inputData);
-
-    Kitsunemimi::Json::JsonItem overrideData;
-    /*testThread.addTest(new UserCreateTest(true));
-    testThread.addTest(new UserCreateTest(false));
-    testThread.addTest(new UserListTest(true));
-    testThread.addTest(new UserGetTest(true));
-    testThread.addTest(new UserGetTest(false, "fail_user"));
-    testThread.addTest(new UserDeleteTest(true));
-    testThread.addTest(new UserDeleteTest(false));*/
-
-    testThread.addTest(new DataSetCreateMnistTest(true, "request"));
-
-    testThread.addTest(new DataSetCreateMnistTest(true, "learn"));
-    testThread.addTest(new DataSetListTest(true));
-    testThread.addTest(new DataSetGetTest(true, "learn" ));
-    //testThread.addTest(new DataSetGetTest(false, "learn", "fail_user"));
-
-    testThread.addTest(new TemplateCreateTest( true));
-    testThread.addTest(new TemplateGetTest(true));
-    testThread.addTest(new TemplateListTest(true));
-
-
-    testThread.addTest(new ClusterCreateTest(true));
-    testThread.addTest(new ClusterGetTest(true));
-    testThread.addTest(new ClusterListTest(true));
-
-    for(int i = 0; i < 2; i++) {
-        testThread.addTest(new LearnTaskTest(true));
-    }
-    testThread.addTest(new RequestTaskTest(true));
-    testThread.addTest(new DataSetCheckTest(true));
-
-    testThread.addTest(new ClusterDeleteTest(true));
-    testThread.addTest(new ClusterDeleteTest(false));
-    testThread.addTest(new TemplateDeleteTest(true));
-    testThread.addTest(new TemplateDeleteTest(false));
-    testThread.addTest(new DataSetDeleteTest(true, "request"));
-    testThread.addTest(new DataSetDeleteTest(true, "learn"));
-    testThread.addTest(new DataSetDeleteTest(false, "learn"));
-
-    testThread.startThread();
-
-    while(testThread.isFinished == false) {
-        usleep(100000);
-    }
 
     return true;
 }
+
