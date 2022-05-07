@@ -1,5 +1,5 @@
 /**
- * @file        dataset_create_test.h
+ * @file        dataset_create_mnist_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,17 +20,17 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMITESTER_DATASETCREATETEST_H
-#define TSUGUMITESTER_DATASETCREATETEST_H
+#ifndef TSUGUMITESTER_DATASETCREATE_MNIST_TEST_H
+#define TSUGUMITESTER_DATASETCREATE_MNIST_TEST_H
 
 #include <common/test_step.h>
 
-class DataSetCreateTest
+class DataSetCreateMnistTest
         : public TestStep
 {
 public:
-    DataSetCreateTest(const bool expectSuccess,
-                      const std::string &type);
+    DataSetCreateMnistTest(const bool expectSuccess,
+                           const std::string &type);
 
     bool runTest(Kitsunemimi::Json::JsonItem &inputData,
                  Kitsunemimi::ErrorContainer &error);
@@ -39,4 +39,4 @@ private:
     std::string m_type = "";
 };
 
-#endif // TSUGUMITESTER_DATASETCREATETEST_H
+#endif // TSUGUMITESTER_DATASETCREATE_MNIST_TEST_H

@@ -1,5 +1,5 @@
 /**
- * @file        request_task_test.h
+ * @file        graph_request_task_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,19 +20,19 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMITESTER_REQUESTTASKTEST_H
-#define TSUGUMITESTER_REQUESTTASKTEST_H
+#ifndef TSUGUMITESTER_GRAPH_REQUESTTASKTEST_H
+#define TSUGUMITESTER_GRAPH_REQUESTTASKTEST_H
 
 #include <common/test_step.h>
 
-class RequestTaskTest
+class GraphRequestTaskTest
         : public TestStep
 {
 public:
-    RequestTaskTest(const bool expectSuccess);
+    GraphRequestTaskTest(const bool expectSuccess);
 
     bool runTest(Kitsunemimi::Json::JsonItem &inputData,
                  Kitsunemimi::ErrorContainer &error);
 };
 
-#endif // TSUGUMITESTER_REQUESTTASKTEST_H
+#endif // TSUGUMITESTER_GRAPH_REQUESTTASKTEST_H

@@ -1,5 +1,5 @@
 /**
- * @file        dataset_delete_test.cpp
+ * @file        dataset_create_csv_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,39 +20,31 @@
  *      limitations under the License.
  */
 
-#include "dataset_delete_test.h"
+#include "dataset_create_csv_test.h"
 
+#include <libKitsunemimiConfig/config_handler.h>
 #include <libKitsunemimiHanamiSdk/actions/data_set.h>
 
-DataSetDeleteTest::DataSetDeleteTest(const bool expectSuccess,
-                                     const std::string &type)
+DataSetCreateCsvTest::DataSetCreateCsvTest(const bool expectSuccess)
           : TestStep(expectSuccess)
 {
-    m_testName = "delete data-set";
+    m_testName = "create csv data-set";
     if(expectSuccess) {
         m_testName += " (success)";
     } else {
         m_testName += " (fail)";
     }
-    m_type = type;
 }
 
 bool
-DataSetDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
-                           Kitsunemimi::ErrorContainer &error)
+DataSetCreateCsvTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+                              Kitsunemimi::ErrorContainer &error)
 {
-    std::string uuid = "";
-    if(m_type == "learn") {
-        uuid = inputData.get("learn_dataset_uuid").getString();
-    } else if(m_type == "request") {
-        uuid = inputData.get("request_dataset_uuid").getString();
-    } else {
-        uuid = inputData.get("base_dataset_uuid").getString();
-    }
-
-    // delete user by name
     std::string result;
-    if(Kitsunemimi::Hanami::deleteDataset(result, uuid, error) != m_expectSuccess)
+    if(Kitsunemimi::Hanami::uploadCsvData(result,
+                                          inputData.get("base_dataset_name").getString(),
+                                          inputData.get("base_inputs").getString(),
+                                          error) != m_expectSuccess)
     {
         return false;
     }
@@ -67,6 +59,7 @@ DataSetDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
         return false;
     }
 
+    inputData.insert("base_dataset_uuid", jsonItem.get("uuid").getString(), true);
+
     return true;
 }
-

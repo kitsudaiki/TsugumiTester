@@ -1,5 +1,5 @@
 /**
- * @file        request_task_test.cpp
+ * @file        graph_request_task_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,14 +20,14 @@
  *      limitations under the License.
  */
 
-#include "request_task_test.h"
+#include "graph_request_task_test.h"
 
 #include <libKitsunemimiHanamiSdk/actions/task.h>
 
-RequestTaskTest::RequestTaskTest(const bool expectSuccess)
+GraphRequestTaskTest::GraphRequestTaskTest(const bool expectSuccess)
       : TestStep(expectSuccess)
 {
-    m_testName = "request-task";
+    m_testName = "graph-request-task";
     if(expectSuccess) {
         m_testName += " (success)";
     } else {
@@ -36,15 +36,16 @@ RequestTaskTest::RequestTaskTest(const bool expectSuccess)
 }
 
 bool
-RequestTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
-                         Kitsunemimi::ErrorContainer &error)
+GraphRequestTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+                              Kitsunemimi::ErrorContainer &error)
 {
     // create new user
     std::string result;
-    if(Kitsunemimi::Hanami::createRequestTask(result,
-                                              inputData.get("cluster_uuid").getString(),
-                                              inputData.get("request_dataset_uuid").getString(),
-                                              error) != m_expectSuccess)
+    if(Kitsunemimi::Hanami::createGraphRequestTask(result,
+                                                   inputData.get("cluster_uuid").getString(),
+                                                   inputData.get("base_dataset_uuid").getString(),
+                                                   "open",
+                                                   error) != m_expectSuccess)
     {
         return false;
     }
@@ -82,9 +83,9 @@ RequestTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     //Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, true, error);
 
     // parse output
-    if(jsonItem.parse(result, error) == false) {
-        return false;
-    }
+    //if(jsonItem.parse(result, error) == false) {
+    //    return false;
+    //}
     // std::cout<<jsonItem.toString(true)<<std::endl;
 
     return true;

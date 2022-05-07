@@ -24,10 +24,12 @@
 
 #include <libKitsunemimiHanamiSdk/actions/template.h>
 
-TemplateCreateTest::TemplateCreateTest(const bool expectSuccess)
+TemplateCreateTest::TemplateCreateTest(const bool expectSuccess,
+                                       const std::string &type)
             : TestStep(expectSuccess)
 {
     m_testName = "create template";
+    m_type = type;
     if(expectSuccess) {
         m_testName += " (success)";
     } else {
@@ -41,10 +43,29 @@ TemplateCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // create new template
     std::string result;
-    if(Kitsunemimi::Hanami::createTemplate(result,
-                                           inputData.get("template_name").getString(),
-                                           inputData.get("learn_dataset_uuid").getString(),
-                                           error) != m_expectSuccess)
+    if(m_type == "image")
+    {
+        if(Kitsunemimi::Hanami::createTemplate(result,
+                                               inputData.get("template_name").getString(),
+                                               inputData.get("learn_dataset_uuid").getString(),
+                                               m_type,
+                                               error) != m_expectSuccess)
+        {
+            return false;
+        }
+    }
+    else if(m_type == "graph")
+    {
+        if(Kitsunemimi::Hanami::createTemplate(result,
+                                               inputData.get("template_name").getString(),
+                                               inputData.get("base_dataset_uuid").getString(),
+                                               m_type,
+                                               error) != m_expectSuccess)
+        {
+            return false;
+        }
+    }
+    else
     {
         return false;
     }

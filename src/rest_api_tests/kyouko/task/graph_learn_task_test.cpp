@@ -1,5 +1,5 @@
 /**
- * @file        learn_task_test.cpp
+ * @file        graph_learn_task_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,14 +20,14 @@
  *      limitations under the License.
  */
 
-#include "learn_task_test.h"
+#include "graph_learn_task_test.h"
 
 #include <libKitsunemimiHanamiSdk/actions/task.h>
 
-LearnTaskTest::LearnTaskTest(const bool expectSuccess)
+GraphLearnTaskTest::GraphLearnTaskTest(const bool expectSuccess)
   : TestStep(expectSuccess)
 {
-    m_testName = "learn-task";
+    m_testName = "graph-learn-task";
     if(expectSuccess) {
         m_testName += " (success)";
     } else {
@@ -36,15 +36,16 @@ LearnTaskTest::LearnTaskTest(const bool expectSuccess)
 }
 
 bool
-LearnTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
-                       Kitsunemimi::ErrorContainer &error)
+GraphLearnTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+                            Kitsunemimi::ErrorContainer &error)
 {
     // create new user
     std::string result;
-    if(Kitsunemimi::Hanami::createLearnTask(result,
-                                            inputData.get("cluster_uuid").getString(),
-                                            inputData.get("learn_dataset_uuid").getString(),
-                                            error) != m_expectSuccess)
+    if(Kitsunemimi::Hanami::createGraphLearnTask(result,
+                                                 inputData.get("cluster_uuid").getString(),
+                                                 inputData.get("base_dataset_uuid").getString(),
+                                                 "open",
+                                                 error) != m_expectSuccess)
     {
         return false;
     }

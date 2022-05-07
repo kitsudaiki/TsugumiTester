@@ -14,16 +14,6 @@ LIBS += -L../libKitsunemimiHanamiCommon/src/debug -lKitsunemimiHanamiCommon
 LIBS += -L../libKitsunemimiHanamiCommon/src/release -lKitsunemimiHanamiCommon
 INCLUDEPATH += ../libKitsunemimiHanamiCommon/include
 
-LIBS += -L../libKitsunemimiSakuraNetwork/src -lKitsunemimiSakuraNetwork
-LIBS += -L../libKitsunemimiSakuraNetwork/src/debug -lKitsunemimiSakuraNetwork
-LIBS += -L../libKitsunemimiSakuraNetwork/src/release -lKitsunemimiSakuraNetwork
-INCLUDEPATH += ../libKitsunemimiSakuraNetwork/include
-
-LIBS += -L../libKitsunemimiNetwork/src -lKitsunemimiNetwork
-LIBS += -L../libKitsunemimiNetwork/src/debug -lKitsunemimiNetwork
-LIBS += -L../libKitsunemimiNetwork/src/release -lKitsunemimiNetwork
-INCLUDEPATH += ../libKitsunemimiNetwork/include
-
 LIBS += -L../libKitsunemimiConfig/src -lKitsunemimiConfig
 LIBS += -L../libKitsunemimiConfig/src/debug -lKitsunemimiConfig
 LIBS += -L../libKitsunemimiConfig/src/release -lKitsunemimiConfig
@@ -66,8 +56,10 @@ SOURCES += src/main.cpp \
     src/rest_api_tests/kyouko/cluster/cluster_delete_test.cpp \
     src/rest_api_tests/kyouko/cluster/cluster_get_test.cpp \
     src/rest_api_tests/kyouko/cluster/cluster_list_test.cpp \
-    src/rest_api_tests/kyouko/task/learn_task_test.cpp \
-    src/rest_api_tests/kyouko/task/request_task_test.cpp \
+    src/rest_api_tests/kyouko/task/graph_learn_task_test.cpp \
+    src/rest_api_tests/kyouko/task/graph_request_task_test.cpp \
+    src/rest_api_tests/kyouko/task/image_learn_task_test.cpp \
+    src/rest_api_tests/kyouko/task/image_request_task_test.cpp \
     src/rest_api_tests/kyouko/template/template_create_test.cpp \
     src/rest_api_tests/kyouko/template/template_delete_test.cpp \
     src/rest_api_tests/kyouko/template/template_get_test.cpp \
@@ -78,7 +70,8 @@ SOURCES += src/main.cpp \
     src/rest_api_tests/misaka/user_list_test.cpp \
     src/rest_api_tests/rest_api_tests.cpp \
     src/rest_api_tests/sagiri/dataset_check_test.cpp \
-    src/rest_api_tests/sagiri/dataset_create_test.cpp \
+    src/rest_api_tests/sagiri/dataset_create_csv_test.cpp \
+    src/rest_api_tests/sagiri/dataset_create_mnist_test.cpp \
     src/rest_api_tests/sagiri/dataset_delete_test.cpp \
     src/rest_api_tests/sagiri/dataset_get_test.cpp \
     src/rest_api_tests/sagiri/dataset_list_test.cpp
@@ -92,8 +85,10 @@ HEADERS += \
     src/rest_api_tests/kyouko/cluster/cluster_delete_test.h \
     src/rest_api_tests/kyouko/cluster/cluster_get_test.h \
     src/rest_api_tests/kyouko/cluster/cluster_list_test.h \
-    src/rest_api_tests/kyouko/task/learn_task_test.h \
-    src/rest_api_tests/kyouko/task/request_task_test.h \
+    src/rest_api_tests/kyouko/task/graph_learn_task_test.h \
+    src/rest_api_tests/kyouko/task/graph_request_task_test.h \
+    src/rest_api_tests/kyouko/task/image_learn_task_test.h \
+    src/rest_api_tests/kyouko/task/image_request_task_test.h \
     src/rest_api_tests/kyouko/template/template_create_test.h \
     src/rest_api_tests/kyouko/template/template_delete_test.h \
     src/rest_api_tests/kyouko/template/template_get_test.h \
@@ -104,7 +99,8 @@ HEADERS += \
     src/rest_api_tests/misaka/user_list_test.h \
     src/rest_api_tests/rest_api_tests.h \
     src/rest_api_tests/sagiri/dataset_check_test.h \
-    src/rest_api_tests/sagiri/dataset_create_test.h \
+    src/rest_api_tests/sagiri/dataset_create_csv_test.h \
+    src/rest_api_tests/sagiri/dataset_create_mnist_test.h \
     src/rest_api_tests/sagiri/dataset_delete_test.h \
     src/rest_api_tests/sagiri/dataset_get_test.h \
     src/rest_api_tests/sagiri/dataset_list_test.h

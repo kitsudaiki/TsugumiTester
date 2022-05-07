@@ -1,5 +1,5 @@
 /**
- * @file        template_create_test.h
+ * @file        request_task_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,23 +20,19 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMITESTER_TEMPLATECREATETEST_H
-#define TSUGUMITESTER_TEMPLATECREATETEST_H
+#ifndef TSUGUMITESTER_REQUESTTASKTEST_H
+#define TSUGUMITESTER_REQUESTTASKTEST_H
 
 #include <common/test_step.h>
 
-class TemplateCreateTest
+class ImageRequestTaskTest
         : public TestStep
 {
 public:
-    TemplateCreateTest(const bool expectSuccess,
-                       const std::string &type);
+    ImageRequestTaskTest(const bool expectSuccess);
 
     bool runTest(Kitsunemimi::Json::JsonItem &inputData,
                  Kitsunemimi::ErrorContainer &error);
-
-private:
-    std::string m_type = "";
 };
 
-#endif // TSUGUMITESTER_TEMPLATECREATETEST_H
+#endif // TSUGUMITESTER_REQUESTTASKTEST_H
