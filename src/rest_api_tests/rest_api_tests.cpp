@@ -34,17 +34,23 @@
 #include <rest_api_tests/misaka/user_get_test.h>
 #include <rest_api_tests/misaka/user_list_test.h>
 
-#include <rest_api_tests/sagiri/dataset_create_mnist_test.h>
-#include <rest_api_tests/sagiri/dataset_create_csv_test.h>
-#include <rest_api_tests/sagiri/dataset_delete_test.h>
-#include <rest_api_tests/sagiri/dataset_get_test.h>
-#include <rest_api_tests/sagiri/dataset_list_test.h>
-#include <rest_api_tests/sagiri/dataset_check_test.h>
+#include <rest_api_tests/sagiri/datasets/dataset_create_mnist_test.h>
+#include <rest_api_tests/sagiri/datasets/dataset_create_csv_test.h>
+#include <rest_api_tests/sagiri/datasets/dataset_delete_test.h>
+#include <rest_api_tests/sagiri/datasets/dataset_get_test.h>
+#include <rest_api_tests/sagiri/datasets/dataset_list_test.h>
+#include <rest_api_tests/sagiri/datasets/dataset_check_test.h>
+
+#include <rest_api_tests/sagiri/snapshots/snapshot_delete_test.h>
+#include <rest_api_tests/sagiri/snapshots/snapshot_get_test.h>
+#include <rest_api_tests/sagiri/snapshots/snapshot_list_test.h>
 
 #include <rest_api_tests/kyouko/cluster/cluster_create_test.h>
 #include <rest_api_tests/kyouko/cluster/cluster_delete_test.h>
 #include <rest_api_tests/kyouko/cluster/cluster_get_test.h>
 #include <rest_api_tests/kyouko/cluster/cluster_list_test.h>
+#include <rest_api_tests/kyouko/cluster/cluster_save_test.h>
+#include <rest_api_tests/kyouko/cluster/cluster_load_test.h>
 
 #include <rest_api_tests/kyouko/template/template_create_test.h>
 #include <rest_api_tests/kyouko/template/template_delete_test.h>
@@ -102,7 +108,7 @@ runGraphTest(Kitsunemimi::Json::JsonItem &inputData)
     testThread.addTest(new ClusterGetTest(true));
     testThread.addTest(new ClusterListTest(true));
 
-    for(int i = 0; i < 10; i++) {
+    for(int i = 0; i < 30; i++) {
         testThread.addTest(new GraphLearnTaskTest(true));
     }
     testThread.addTest(new GraphRequestTaskTest(true));
@@ -149,11 +155,20 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     testThread.addTest(new ClusterGetTest(true));
     testThread.addTest(new ClusterListTest(true));
 
-    for(int i = 0; i < 3; i++) {
+    for(int i = 0; i < 1; i++) {
         testThread.addTest(new ImageLearnTaskTest(true));
     }
+    testThread.addTest(new ClusterSaveTest(true));
+    testThread.addTest(new ClusterDeleteTest(true));
+
+    testThread.addTest(new ClusterCreateTest(true));
+    testThread.addTest(new ClusterLoadTest(true));
     testThread.addTest(new ImageRequestTaskTest(true));
     testThread.addTest(new DataSetCheckTest(true));
+
+    testThread.addTest(new SnapshotGetTest(true));
+    testThread.addTest(new SnapshotListTest(true));
+    testThread.addTest(new SnapshotDeleteTest(true));
 
     testThread.addTest(new ClusterDeleteTest(true));
     testThread.addTest(new ClusterDeleteTest(false));
@@ -196,14 +211,14 @@ runRestApiTests()
 
     inputData.insert("user_name", "tsugumi");
     inputData.insert("cluster_name", "test_cluster");
+    inputData.insert("cluster_snapshot_name", "test_snapshot");
     inputData.insert("template_name", "test_template");
     inputData.insert("request_dataset_name", "request_test_dataset");
     inputData.insert("learn_dataset_name", "learn_test_dataset");
     inputData.insert("base_dataset_name", "base_test_dataset");
 
-    //runImageTest(inputData);
-    runGraphTest(inputData);
-
+    runImageTest(inputData);
+    //runGraphTest(inputData);
 
     return true;
 }

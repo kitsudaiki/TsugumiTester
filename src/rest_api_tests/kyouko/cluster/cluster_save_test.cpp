@@ -1,5 +1,5 @@
 /**
- * @file        graph_request_task_test.cpp
+ * @file        cluster_save_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,14 +20,15 @@
  *      limitations under the License.
  */
 
-#include "graph_request_task_test.h"
+#include "cluster_save_test.h"
 
+#include <libKitsunemimiHanamiSdk/actions/cluster.h>
 #include <libKitsunemimiHanamiSdk/actions/task.h>
 
-GraphRequestTaskTest::GraphRequestTaskTest(const bool expectSuccess)
-      : TestStep(expectSuccess)
+ClusterSaveTest::ClusterSaveTest(const bool expectSuccess)
+          : TestStep(expectSuccess)
 {
-    m_testName = "graph-request-task";
+    m_testName = "save cluster";
     if(expectSuccess) {
         m_testName += " (success)";
     } else {
@@ -36,16 +37,15 @@ GraphRequestTaskTest::GraphRequestTaskTest(const bool expectSuccess)
 }
 
 bool
-GraphRequestTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
-                              Kitsunemimi::ErrorContainer &error)
+ClusterSaveTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+                         Kitsunemimi::ErrorContainer &error)
 {
-    // create new user
+    // create new cluster
     std::string result;
-    if(Kitsunemimi::Hanami::createGraphRequestTask(result,
-                                                   inputData.get("cluster_uuid").getString(),
-                                                   inputData.get("base_dataset_uuid").getString(),
-                                                   "Open",
-                                                   error) != m_expectSuccess)
+    if(Kitsunemimi::Hanami::saveCluster(result,
+                                        inputData.get("cluster_uuid").getString(),
+                                        inputData.get("cluster_snapshot_name").getString(),
+                                        error) != m_expectSuccess)
     {
         return false;
     }
@@ -60,14 +60,15 @@ GraphRequestTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
         return false;
     }
 
-    inputData.insert("request_task_uuid", jsonItem.get("uuid").getString(), true);
+    inputData.insert("cluster_snapshot_uuid", jsonItem.get("uuid").getString(), true);
 
     // wait until task is finished
     do
     {
         sleep(1);
+
         Kitsunemimi::Hanami::getTask(result,
-                                     inputData.get("request_task_uuid").getString(),
+                                     inputData.get("cluster_snapshot_uuid").getString(),
                                      inputData.get("cluster_uuid").getString(),
                                      error);
 
@@ -78,15 +79,6 @@ GraphRequestTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
         std::cout<<jsonItem.toString(true)<<std::endl;
     }
     while(jsonItem.get("state").getString() != "finished");
-
-    // get task-result
-    //Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, true, error);
-
-    // parse output
-    //if(jsonItem.parse(result, error) == false) {
-    //    return false;
-    //}
-    // std::cout<<jsonItem.toString(true)<<std::endl;
 
     return true;
 }
