@@ -44,7 +44,7 @@ GraphLearnTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     if(Kitsunemimi::Hanami::createGraphLearnTask(result,
                                                  inputData.get("cluster_uuid").getString(),
                                                  inputData.get("base_dataset_uuid").getString(),
-                                                 "open",
+                                                 "Open",
                                                  error) != m_expectSuccess)
     {
         return false;
