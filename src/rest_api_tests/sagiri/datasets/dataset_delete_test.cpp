@@ -22,7 +22,7 @@
 
 #include "dataset_delete_test.h"
 
-#include <libKitsunemimiHanamiSdk/actions/data_set.h>
+#include <libKitsunemimiHanamiSdk/data_set.h>
 
 DataSetDeleteTest::DataSetDeleteTest(const bool expectSuccess,
                                      const std::string &type)

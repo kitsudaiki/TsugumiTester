@@ -22,7 +22,7 @@
 
 #include "graph_request_task_test.h"
 
-#include <libKitsunemimiHanamiSdk/actions/task.h>
+#include <libKitsunemimiHanamiSdk/task.h>
 
 GraphRequestTaskTest::GraphRequestTaskTest(const bool expectSuccess)
       : TestStep(expectSuccess)

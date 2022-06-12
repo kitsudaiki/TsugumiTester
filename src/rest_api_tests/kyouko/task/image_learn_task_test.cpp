@@ -23,7 +23,7 @@
 #include "image_learn_task_test.h"
 #include <chrono>
 
-#include <libKitsunemimiHanamiSdk/actions/task.h>
+#include <libKitsunemimiHanamiSdk/task.h>
 
 typedef std::chrono::milliseconds chronoMilliSec;
 typedef std::chrono::microseconds chronoMicroSec;

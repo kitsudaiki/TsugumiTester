@@ -22,7 +22,7 @@
 
 #include "user_list_test.h"
 
-#include <libKitsunemimiHanamiSdk/actions/user.h>
+#include <libKitsunemimiHanamiSdk/user.h>
 
 UserListTest::UserListTest(const bool expectSuccess)
     : TestStep(expectSuccess)

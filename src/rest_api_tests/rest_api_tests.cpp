@@ -24,8 +24,7 @@
 
 #include <libKitsunemimiConfig/config_handler.h>
 #include <libKitsunemimiJson/json_item.h>
-
-#include <libKitsunemimiHanamiSdk/common/http_client.h>
+#include <libKitsunemimiHanamiSdk/init.h>
 
 #include <common/test_thread.h>
 
@@ -74,8 +73,7 @@ initClient()
     const std::string user = GET_STRING_CONFIG("connection", "test_user", success);
     const std::string pw = GET_STRING_CONFIG("connection", "test_pw", success);
 
-    Kitsunemimi::Hanami::HanamiRequest* request = Kitsunemimi::Hanami::HanamiRequest::getInstance();
-    if(request->init(host, port, user, pw) == false) {
+    if(Kitsunemimi::Hanami::initClient(host, port, user, pw) == false) {
         return false;
     }
 
