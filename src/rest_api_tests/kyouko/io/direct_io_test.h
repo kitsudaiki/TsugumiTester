@@ -14,6 +14,10 @@ public:
 
 private:
     void fillInputValues(float* inputValues);
+    void fillShouldValues(float* shouldValues);
+
+    bool learnTest();
+    bool requestTest();
 };
 
 #endif // DIRECTIOTEST_H

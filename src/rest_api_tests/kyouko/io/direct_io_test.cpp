@@ -18,23 +18,113 @@ bool
 DirectIoTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
                       Kitsunemimi::ErrorContainer &error)
 {
-    Kitsunemimi::Hanami::ClusterIO_Message msg;
+    if(learnTest() == false) {
+        return false;
+    }
 
-    float values[784];
-    fillInputValues(&values[0]);
+    if(requestTest() == false) {
+        return false;
+    }
+
+    return true;
+}
+
+bool
+DirectIoTest::learnTest()
+{
+    Kitsunemimi::Hanami::ClusterIO_Message inputMsg;
+    Kitsunemimi::Hanami::ClusterIO_Message shouldMsg;
+    Kitsunemimi::Hanami::LearnStart_Message learnStartMsg;
+    Kitsunemimi::DataBuffer buffer;
+
+    // create input
+    float inputValues[784];
+    fillInputValues(&inputValues[0]);
+    inputMsg.segmentType = Kitsunemimi::Hanami::ClusterIO_Message::INPUT_SEGMENT;
+    inputMsg.segmentId = 0;
+    inputMsg.values = inputValues;
+    inputMsg.numberOfValues = 784;
+
+    // create should
+    float shouldValues[10];
+    fillShouldValues(shouldValues);
+    shouldMsg.segmentType = Kitsunemimi::Hanami::ClusterIO_Message::OUTPUT_SEGMENT;
+    shouldMsg.segmentId = 0;
+    shouldMsg.values = shouldValues;
+    shouldMsg.numberOfValues = 10;
+
+    for(uint64_t i = 0; i < 100; i++)
+    {
+        if(i % 50 == 0) {
+            std::cout<<"run: "<<i<<std::endl;
+        }
+        // send input
+        inputMsg.createBlob(buffer);
+        if(TestThread::m_wsClient->sendMessage(buffer.data, buffer.usedBufferSize) == false) {
+            return false;
+        }
+
+        // send input
+        shouldMsg.createBlob(buffer);
+        if(TestThread::m_wsClient->sendMessage(buffer.data, buffer.usedBufferSize) == false) {
+            return false;
+        }
+
+        // send start of learn
+        learnStartMsg.createBlob(buffer);
+        if(TestThread::m_wsClient->sendMessage(buffer.data, buffer.usedBufferSize) == false) {
+            return false;
+        }
+
+        // receive response
+        uint64_t numberOfBytes = 0;
+        void* recvData = TestThread::m_wsClient->readMessage(numberOfBytes);
+        if(recvData == nullptr
+                || numberOfBytes == 0)
+        {
+            return false;
+        }
+
+        const uint8_t* u8Data = static_cast<const uint8_t*>(recvData);
+
+        Kitsunemimi::Hanami::LearnEnd_Message recvMsg;
+        if(recvMsg.read(recvData, numberOfBytes) == false) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool
+DirectIoTest::requestTest()
+{
+    Kitsunemimi::Hanami::ClusterIO_Message msg;
+    Kitsunemimi::Hanami::RequestStart_Message reqStartMsg;
+    Kitsunemimi::DataBuffer buffer;
+
+    // send request
+    float inputValues[784];
+    fillInputValues(&inputValues[0]);
 
     msg.segmentType = Kitsunemimi::Hanami::ClusterIO_Message::INPUT_SEGMENT;
     msg.segmentId = 0;
-    msg.values = values;
+    msg.values = inputValues;
     msg.numberOfValues = 784;
 
-    Kitsunemimi::DataBuffer buffer;
+    // send input
     msg.createBlob(buffer);
-
     if(TestThread::m_wsClient->sendMessage(buffer.data, buffer.usedBufferSize) == false) {
         return false;
     }
 
+    // send start of request
+    reqStartMsg.createBlob(buffer);
+    if(TestThread::m_wsClient->sendMessage(buffer.data, buffer.usedBufferSize) == false) {
+        return false;
+    }
+
+    // receive response
     uint64_t numberOfBytes = 0;
     void* recvData = TestThread::m_wsClient->readMessage(numberOfBytes);
     if(recvData == nullptr
@@ -54,6 +144,21 @@ DirectIoTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     return true;
+}
+
+void
+DirectIoTest::fillShouldValues(float* shouldValues)
+{
+    shouldValues[0] = 0;
+    shouldValues[1] = 0;
+    shouldValues[2] = 0;
+    shouldValues[3] = 0;
+    shouldValues[4] = 0;
+    shouldValues[5] = 1;
+    shouldValues[6] = 0;
+    shouldValues[7] = 0;
+    shouldValues[8] = 0;
+    shouldValues[9] = 0;
 }
 
 void
