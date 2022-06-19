@@ -50,6 +50,10 @@
 #include <rest_api_tests/kyouko/cluster/cluster_list_test.h>
 #include <rest_api_tests/kyouko/cluster/cluster_save_test.h>
 #include <rest_api_tests/kyouko/cluster/cluster_load_test.h>
+#include <rest_api_tests/kyouko/cluster/cluster_switch_to_direct_test.h>
+#include <rest_api_tests/kyouko/cluster/cluster_switch_to_task_test.h>
+
+#include <rest_api_tests/kyouko/io/direct_io_test.h>
 
 #include <rest_api_tests/kyouko/template/template_create_test.h>
 #include <rest_api_tests/kyouko/template/template_delete_test.h>
@@ -164,10 +168,17 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     testThread.addTest(new ImageRequestTaskTest(true));
     testThread.addTest(new DataSetCheckTest(true));
 
+    // snapshots
     testThread.addTest(new SnapshotGetTest(true));
     testThread.addTest(new SnapshotListTest(true));
     testThread.addTest(new SnapshotDeleteTest(true));
 
+    // direct-io
+    testThread.addTest(new ClusterSwitchToDirectTest(true));
+    testThread.addTest(new DirectIoTest(true));
+    //testThread.addTest(new ClusterSwitchToTaskTest(true));
+
+    // clrear all
     testThread.addTest(new ClusterDeleteTest(true));
     testThread.addTest(new ClusterDeleteTest(false));
     testThread.addTest(new TemplateDeleteTest(true));

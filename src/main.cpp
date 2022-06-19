@@ -29,6 +29,7 @@
 #include <rest_api_tests/rest_api_tests.h>
 
 #include <libKitsunemimiHanamiCommon/generic_main.h>
+#include <libKitsunemimiHanamiSdk/common/websocket_client.h>
 
 using Kitsunemimi::Hanami::initMain;
 

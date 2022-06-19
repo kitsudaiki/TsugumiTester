@@ -58,6 +58,9 @@ SOURCES += src/main.cpp \
     src/rest_api_tests/kyouko/cluster/cluster_list_test.cpp \
     src/rest_api_tests/kyouko/cluster/cluster_load_test.cpp \
     src/rest_api_tests/kyouko/cluster/cluster_save_test.cpp \
+    src/rest_api_tests/kyouko/cluster/cluster_switch_to_direct_test.cpp \
+    src/rest_api_tests/kyouko/cluster/cluster_switch_to_task_test.cpp \
+    src/rest_api_tests/kyouko/io/direct_io_test.cpp \
     src/rest_api_tests/kyouko/task/graph_learn_task_test.cpp \
     src/rest_api_tests/kyouko/task/graph_request_task_test.cpp \
     src/rest_api_tests/kyouko/task/image_learn_task_test.cpp \
@@ -92,6 +95,9 @@ HEADERS += \
     src/rest_api_tests/kyouko/cluster/cluster_list_test.h \
     src/rest_api_tests/kyouko/cluster/cluster_load_test.h \
     src/rest_api_tests/kyouko/cluster/cluster_save_test.h \
+    src/rest_api_tests/kyouko/cluster/cluster_switch_to_direct_test.h \
+    src/rest_api_tests/kyouko/cluster/cluster_switch_to_task_test.h \
+    src/rest_api_tests/kyouko/io/direct_io_test.h \
     src/rest_api_tests/kyouko/task/graph_learn_task_test.h \
     src/rest_api_tests/kyouko/task/graph_request_task_test.h \
     src/rest_api_tests/kyouko/task/image_learn_task_test.h \

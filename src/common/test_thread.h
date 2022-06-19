@@ -26,6 +26,8 @@
 #include <deque>
 #include <mutex>
 
+#include <libKitsunemimiHanamiSdk/common/websocket_client.h>
+
 #include <libKitsunemimiCommon/threading/thread.h>
 #include <libKitsunemimiJson/json_item.h>
 
@@ -41,6 +43,7 @@ public:
     void addTest(TestStep* newStep);
 
     bool isFinished = false;
+    static Kitsunemimi::Hanami::WebsocketClient* m_wsClient;
 
 protected:
     void run();
