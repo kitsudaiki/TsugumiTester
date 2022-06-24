@@ -22,7 +22,7 @@
 
 #include "snapshot_delete_test.h"
 
-#include <libKitsunemimiHanamiSdk/actions/snapshot.h>
+#include <libKitsunemimiHanamiSdk/snapshot.h>
 
 SnapshotDeleteTest::SnapshotDeleteTest(const bool expectSuccess)
           : TestStep(expectSuccess)

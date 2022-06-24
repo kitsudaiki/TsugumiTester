@@ -22,7 +22,7 @@
 
 #include "template_get_test.h"
 
-#include <libKitsunemimiHanamiSdk/actions/template.h>
+#include <libKitsunemimiHanamiSdk/template.h>
 
 TemplateGetTest::TemplateGetTest(const bool expectSuccess,
                                  const std::string &nameOverride)

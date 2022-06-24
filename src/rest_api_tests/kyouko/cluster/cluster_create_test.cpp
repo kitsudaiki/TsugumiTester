@@ -22,7 +22,7 @@
 
 #include "cluster_create_test.h"
 
-#include <libKitsunemimiHanamiSdk/actions/cluster.h>
+#include <libKitsunemimiHanamiSdk/cluster.h>
 
 ClusterCreateTest::ClusterCreateTest(const bool expectSuccess)
           : TestStep(expectSuccess)

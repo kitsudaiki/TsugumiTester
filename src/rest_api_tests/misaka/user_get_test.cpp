@@ -22,7 +22,7 @@
 
 #include "user_get_test.h"
 
-#include <libKitsunemimiHanamiSdk/actions/user.h>
+#include <libKitsunemimiHanamiSdk/user.h>
 
 UserGetTest::UserGetTest(const bool expectSuccess,
                          const std::string &nameOverride)

@@ -22,7 +22,7 @@
 
 #include "snapshot_list_test.h"
 
-#include <libKitsunemimiHanamiSdk/actions/snapshot.h>
+#include <libKitsunemimiHanamiSdk/snapshot.h>
 
 SnapshotListTest::SnapshotListTest(const bool expectSuccess)
       : TestStep(expectSuccess)

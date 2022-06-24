@@ -22,7 +22,7 @@
 
 #include "user_delete_test.h"
 
-#include <libKitsunemimiHanamiSdk/actions/user.h>
+#include <libKitsunemimiHanamiSdk/user.h>
 
 UserDeleteTest::UserDeleteTest(const bool expectSuccess)
     : TestStep(expectSuccess)

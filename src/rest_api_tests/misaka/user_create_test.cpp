@@ -22,7 +22,7 @@
 
 #include "user_create_test.h"
 
-#include <libKitsunemimiHanamiSdk/actions/user.h>
+#include <libKitsunemimiHanamiSdk/user.h>
 
 UserCreateTest::UserCreateTest(const bool expectSuccess)
     : TestStep(expectSuccess)

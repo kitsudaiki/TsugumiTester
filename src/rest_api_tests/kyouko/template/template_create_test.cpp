@@ -22,7 +22,7 @@
 
 #include "template_create_test.h"
 
-#include <libKitsunemimiHanamiSdk/actions/template.h>
+#include <libKitsunemimiHanamiSdk/template.h>
 
 TemplateCreateTest::TemplateCreateTest(const bool expectSuccess,
                                        const std::string &type)
