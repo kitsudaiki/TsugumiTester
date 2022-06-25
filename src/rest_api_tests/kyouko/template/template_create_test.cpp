@@ -45,7 +45,7 @@ TemplateCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     std::string result;
     if(m_type == "image")
     {
-        if(Kitsunemimi::Hanami::createTemplate(result,
+        if(Kitsunemimi::Hanami::generateTemplate(result,
                                                inputData.get("template_name").getString(),
                                                inputData.get("learn_dataset_uuid").getString(),
                                                m_type,
@@ -56,7 +56,7 @@ TemplateCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
     else if(m_type == "graph")
     {
-        if(Kitsunemimi::Hanami::createTemplate(result,
+        if(Kitsunemimi::Hanami::generateTemplate(result,
                                                inputData.get("template_name").getString(),
                                                inputData.get("base_dataset_uuid").getString(),
                                                m_type,

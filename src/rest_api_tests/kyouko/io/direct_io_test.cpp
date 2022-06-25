@@ -1,6 +1,7 @@
 #include "direct_io_test.h"
 
 #include <libKitsunemimiHanamiSdk/messages/hanami_messages.h>
+#include <libKitsunemimiHanamiSdk/io.h>
 #include <common/test_thread.h>
 
 DirectIoTest::DirectIoTest(const bool expectSuccess)
@@ -32,63 +33,29 @@ DirectIoTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 bool
 DirectIoTest::learnTest()
 {
-    Kitsunemimi::Hanami::ClusterIO_Message inputMsg;
-    Kitsunemimi::Hanami::ClusterIO_Message shouldMsg;
-    Kitsunemimi::Hanami::LearnStart_Message learnStartMsg;
-    Kitsunemimi::DataBuffer buffer;
+    Kitsunemimi::ErrorContainer error;
 
     // create input
     float inputValues[784];
     fillInputValues(&inputValues[0]);
-    inputMsg.segmentType = Kitsunemimi::Hanami::ClusterIO_Message::INPUT_SEGMENT;
-    inputMsg.segmentId = 0;
-    inputMsg.values = inputValues;
-    inputMsg.numberOfValues = 784;
 
     // create should
     float shouldValues[10];
     fillShouldValues(shouldValues);
-    shouldMsg.segmentType = Kitsunemimi::Hanami::ClusterIO_Message::OUTPUT_SEGMENT;
-    shouldMsg.segmentId = 0;
-    shouldMsg.values = shouldValues;
-    shouldMsg.numberOfValues = 10;
 
     for(uint64_t i = 0; i < 100; i++)
     {
         if(i % 50 == 0) {
             std::cout<<"run: "<<i<<std::endl;
         }
-        // send input
-        inputMsg.createBlob(buffer);
-        if(TestThread::m_wsClient->sendMessage(buffer.data, buffer.usedBufferSize) == false) {
-            return false;
-        }
 
-        // send input
-        shouldMsg.createBlob(buffer);
-        if(TestThread::m_wsClient->sendMessage(buffer.data, buffer.usedBufferSize) == false) {
-            return false;
-        }
-
-        // send start of learn
-        learnStartMsg.createBlob(buffer);
-        if(TestThread::m_wsClient->sendMessage(buffer.data, buffer.usedBufferSize) == false) {
-            return false;
-        }
-
-        // receive response
-        uint64_t numberOfBytes = 0;
-        void* recvData = TestThread::m_wsClient->readMessage(numberOfBytes);
-        if(recvData == nullptr
-                || numberOfBytes == 0)
+        if(Kitsunemimi::Hanami::learn(TestThread::m_wsClient,
+                                      inputValues,
+                                      784,
+                                      shouldValues,
+                                      10,
+                                      error) == false)
         {
-            return false;
-        }
-
-        const uint8_t* u8Data = static_cast<const uint8_t*>(recvData);
-
-        Kitsunemimi::Hanami::LearnEnd_Message recvMsg;
-        if(recvMsg.read(recvData, numberOfBytes) == false) {
             return false;
         }
     }
@@ -99,49 +66,28 @@ DirectIoTest::learnTest()
 bool
 DirectIoTest::requestTest()
 {
-    Kitsunemimi::Hanami::ClusterIO_Message msg;
-    Kitsunemimi::Hanami::RequestStart_Message reqStartMsg;
-    Kitsunemimi::DataBuffer buffer;
+    Kitsunemimi::ErrorContainer error;
 
     // send request
     float inputValues[784];
     fillInputValues(&inputValues[0]);
 
-    msg.segmentType = Kitsunemimi::Hanami::ClusterIO_Message::INPUT_SEGMENT;
-    msg.segmentId = 0;
-    msg.values = inputValues;
-    msg.numberOfValues = 784;
-
-    // send input
-    msg.createBlob(buffer);
-    if(TestThread::m_wsClient->sendMessage(buffer.data, buffer.usedBufferSize) == false) {
+    uint64_t numberOfValues = 0;
+    float* values = Kitsunemimi::Hanami::request(TestThread::m_wsClient,
+                                                 inputValues,
+                                                 784,
+                                                 numberOfValues,
+                                                 error);
+    if(values == nullptr) {
         return false;
     }
 
-    // send start of request
-    reqStartMsg.createBlob(buffer);
-    if(TestThread::m_wsClient->sendMessage(buffer.data, buffer.usedBufferSize) == false) {
-        return false;
+    std::cout<<"numberOfValues: "<<numberOfValues<<std::endl;
+    for(uint32_t i = 0; i < numberOfValues; i++) {
+        std::cout<<i<<": "<<values[i]<<std::endl;
     }
 
-    // receive response
-    uint64_t numberOfBytes = 0;
-    void* recvData = TestThread::m_wsClient->readMessage(numberOfBytes);
-    if(recvData == nullptr
-            || numberOfBytes == 0)
-    {
-        return false;
-    }
-
-    Kitsunemimi::Hanami::ClusterIO_Message recvMsg;
-    if(recvMsg.read(recvData, numberOfBytes) == false) {
-        return false;
-    }
-
-    std::cout<<"numberOfValues: "<<recvMsg.numberOfValues<<std::endl;
-    for(uint32_t i = 0; i < recvMsg.numberOfValues; i++) {
-        std::cout<<i<<": "<<recvMsg.values[i]<<std::endl;
-    }
+    delete[] values;
 
     return true;
 }

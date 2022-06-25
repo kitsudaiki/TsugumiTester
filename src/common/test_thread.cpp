@@ -37,6 +37,16 @@ TestThread::TestThread(const std::string &name,
 }
 
 /**
+ * @brief destructor
+ */
+TestThread::~TestThread()
+{
+    if(m_wsClient != nullptr) {
+        delete m_wsClient;
+    }
+}
+
+/**
  * @brief add new test to queue
  *
  * @param newStep new test-step to process

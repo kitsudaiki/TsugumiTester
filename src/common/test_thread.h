@@ -39,6 +39,7 @@ class TestThread
 public:
     TestThread(const std::string &name,
                Kitsunemimi::Json::JsonItem &inputData);
+    ~TestThread();
 
     void addTest(TestStep* newStep);
 
