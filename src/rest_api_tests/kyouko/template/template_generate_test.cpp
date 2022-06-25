@@ -1,5 +1,5 @@
 /**
- * @file        template_create_test.cpp
+ * @file        template_generate_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,15 +20,15 @@
  *      limitations under the License.
  */
 
-#include "template_create_test.h"
+#include "template_generate_test.h"
 
 #include <libKitsunemimiHanamiSdk/template.h>
 
-TemplateCreateTest::TemplateCreateTest(const bool expectSuccess,
+TemplateGenerateTest::TemplateGenerateTest(const bool expectSuccess,
                                        const std::string &type)
             : TestStep(expectSuccess)
 {
-    m_testName = "create template";
+    m_testName = "generate template";
     m_type = type;
     if(expectSuccess) {
         m_testName += " (success)";
@@ -38,7 +38,7 @@ TemplateCreateTest::TemplateCreateTest(const bool expectSuccess,
 }
 
 bool
-TemplateCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+TemplateGenerateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
                             Kitsunemimi::ErrorContainer &error)
 {
     // create new template
