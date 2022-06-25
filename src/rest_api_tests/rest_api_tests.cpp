@@ -27,6 +27,7 @@
 #include <libKitsunemimiHanamiSdk/init.h>
 
 #include <common/test_thread.h>
+#include <libKitsunemimiHanamiSdk/template.h>
 
 #include <rest_api_tests/misaka/user_create_test.h>
 #include <rest_api_tests/misaka/user_delete_test.h>
@@ -86,8 +87,29 @@ initClient()
 }
 
 void
+deleteTemplate()
+{
+    std::string result = "";
+    Kitsunemimi::ErrorContainer error;
+    Kitsunemimi::Hanami::listTemplate(result, error);
+
+    Kitsunemimi::Json::JsonItem parsedList;
+    parsedList.parse(result, error);
+
+    Kitsunemimi::Json::JsonItem body = parsedList.get("body");
+
+    for(uint64_t i = 0; i < body.size(); i++)
+    {
+        const std::string uuid = body.get(i).get(0).getString();
+        Kitsunemimi::Hanami::deleteTemplate(result, uuid, error);
+    }
+}
+
+void
 runImageTest(Kitsunemimi::Json::JsonItem &inputData)
 {
+    deleteTemplate();
+
     TestThread testThread("test_thread", inputData);
 
     Kitsunemimi::Json::JsonItem overrideData;
