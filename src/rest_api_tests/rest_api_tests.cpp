@@ -113,19 +113,19 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     TestThread testThread("test_thread", inputData);
 
     Kitsunemimi::Json::JsonItem overrideData;
-    /*testThread.addTest(new UserCreateTest(true));
+    testThread.addTest(new UserCreateTest(true));
     testThread.addTest(new UserCreateTest(false));
     testThread.addTest(new UserListTest(true));
     testThread.addTest(new UserGetTest(true));
     testThread.addTest(new UserGetTest(false, "fail_user"));
     testThread.addTest(new UserDeleteTest(true));
-    testThread.addTest(new UserDeleteTest(false));*/
+    testThread.addTest(new UserDeleteTest(false));
 
     testThread.addTest(new DataSetCreateMnistTest(true, "request"));
     testThread.addTest(new DataSetCreateMnistTest(true, "learn"));
     testThread.addTest(new DataSetListTest(true));
     testThread.addTest(new DataSetGetTest(true, "learn"));
-    //testThread.addTest(new DataSetGetTest(false, "learn", "fail_user"));
+    testThread.addTest(new DataSetGetTest(false, "learn", "fail_user"));
 
     testThread.addTest(new TemplateGenerateTest(true, "image"));
     testThread.addTest(new TemplateGetTest(true));
@@ -155,7 +155,7 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     // direct-io
     testThread.addTest(new ClusterSwitchToDirectTest(true));
     testThread.addTest(new DirectIoTest(true));
-    //testThread.addTest(new ClusterSwitchToTaskTest(true));
+    testThread.addTest(new ClusterSwitchToTaskTest(true));
 
     // clrear all
     testThread.addTest(new ClusterDeleteTest(true));
