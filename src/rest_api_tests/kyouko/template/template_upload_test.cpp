@@ -1,5 +1,5 @@
 /**
- * @file        template_get_test.cpp
+ * @file        template_upload_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,34 +20,32 @@
  *      limitations under the License.
  */
 
-#include "template_get_test.h"
+#include "template_upload_test.h"
 
 #include <libKitsunemimiHanamiSdk/template.h>
 
-TemplateGetTest::TemplateGetTest(const bool expectSuccess,
-                                 const std::string &nameOverride)
-      : TestStep(expectSuccess)
+TemplateUploadTest::TemplateUploadTest(const bool expectSuccess)
+            : TestStep(expectSuccess)
 {
-    m_testName = "get template";
+    m_testName = "upload template";
     if(expectSuccess) {
         m_testName += " (success)";
     } else {
         m_testName += " (fail)";
     }
-    m_name = nameOverride;
 }
 
 bool
-TemplateGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
-                         Kitsunemimi::ErrorContainer &error)
+TemplateUploadTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+                            Kitsunemimi::ErrorContainer &error)
 {
-    if(m_name == "") {
-        m_name = inputData.get("template_uuid").getString();
-    }
-
-    // get template by name
+    // create new template
     std::string result;
-    if(Kitsunemimi::Hanami::getTemplate(result, m_name, error) != m_expectSuccess) {
+    if(Kitsunemimi::Hanami::uploadTemplate(result,
+                                           inputData.get("template_name_new").getString(),
+                                           inputData.get("template").getString(),
+                                           error) != m_expectSuccess)
+    {
         return false;
     }
 
@@ -61,8 +59,7 @@ TemplateGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
         return false;
     }
 
-    std::cout<<"template:\n"<<jsonItem.get("template").toString(true)<<std::endl;
-    inputData.insert("template", jsonItem.get("template").toString(), true);
+    inputData.insert("template_uuid", jsonItem.get("uuid").getString(), true);
 
     return true;
 }

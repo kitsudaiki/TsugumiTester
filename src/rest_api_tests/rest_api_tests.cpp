@@ -55,7 +55,8 @@
 
 #include <rest_api_tests/kyouko/io/direct_io_test.h>
 
-#include <rest_api_tests/kyouko/template/template_create_test.h>
+#include <rest_api_tests/kyouko/template/template_generate_test.h>
+#include <rest_api_tests/kyouko/template/template_upload_test.h>
 #include <rest_api_tests/kyouko/template/template_delete_test.h>
 #include <rest_api_tests/kyouko/template/template_get_test.h>
 #include <rest_api_tests/kyouko/template/template_list_test.h>
@@ -85,50 +86,6 @@ initClient()
 }
 
 void
-runGraphTest(Kitsunemimi::Json::JsonItem &inputData)
-{
-    TestThread testThread("test_thread", inputData);
-
-    Kitsunemimi::Json::JsonItem overrideData;
-    /*testThread.addTest(new UserCreateTest(true));
-    testThread.addTest(new UserCreateTest(false));
-    testThread.addTest(new UserListTest(true));
-    testThread.addTest(new UserGetTest(true));
-    testThread.addTest(new UserGetTest(false, "fail_user"));
-    testThread.addTest(new UserDeleteTest(true));
-    testThread.addTest(new UserDeleteTest(false));*/
-
-    testThread.addTest(new DataSetCreateCsvTest(true));
-    //testThread.addTest(new DataSetGetTest(false, "learn", "fail_user"));
-
-    testThread.addTest(new TemplateCreateTest(true, "graph"));
-    testThread.addTest(new TemplateGetTest(true));
-    testThread.addTest(new TemplateListTest(true));
-
-
-    testThread.addTest(new ClusterCreateTest(true));
-    testThread.addTest(new ClusterGetTest(true));
-    testThread.addTest(new ClusterListTest(true));
-
-    for(int i = 0; i < 30; i++) {
-        testThread.addTest(new GraphLearnTaskTest(true));
-    }
-    testThread.addTest(new GraphRequestTaskTest(true));
-
-    testThread.addTest(new ClusterDeleteTest(true));
-    testThread.addTest(new ClusterDeleteTest(false));
-    testThread.addTest(new TemplateDeleteTest(true));
-    testThread.addTest(new TemplateDeleteTest(false));
-    testThread.addTest(new DataSetDeleteTest(true, "base"));
-
-    testThread.startThread();
-
-    while(testThread.isFinished == false) {
-        usleep(100000);
-    }
-}
-
-void
 runImageTest(Kitsunemimi::Json::JsonItem &inputData)
 {
     TestThread testThread("test_thread", inputData);
@@ -148,10 +105,10 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     testThread.addTest(new DataSetGetTest(true, "learn"));
     //testThread.addTest(new DataSetGetTest(false, "learn", "fail_user"));
 
-    testThread.addTest(new TemplateCreateTest(true, "image"));
+    testThread.addTest(new TemplateGenerateTest(true, "image"));
     testThread.addTest(new TemplateGetTest(true));
+    testThread.addTest(new TemplateUploadTest(true));
     testThread.addTest(new TemplateListTest(true));
-
 
     testThread.addTest(new ClusterCreateTest(true));
     testThread.addTest(new ClusterGetTest(true));
@@ -222,12 +179,12 @@ runRestApiTests()
     inputData.insert("cluster_name", "test_cluster");
     inputData.insert("cluster_snapshot_name", "test_snapshot");
     inputData.insert("template_name", "test_template");
+    inputData.insert("template_name_new", "test_template_new");
     inputData.insert("request_dataset_name", "request_test_dataset");
     inputData.insert("learn_dataset_name", "learn_test_dataset");
     inputData.insert("base_dataset_name", "base_test_dataset");
 
     runImageTest(inputData);
-    //runGraphTest(inputData);
 
     return true;
 }

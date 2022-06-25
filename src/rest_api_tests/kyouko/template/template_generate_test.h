@@ -1,5 +1,5 @@
 /**
- * @file        template_create_test.h
+ * @file        template_generate_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,16 +20,16 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMITESTER_TEMPLATECREATETEST_H
-#define TSUGUMITESTER_TEMPLATECREATETEST_H
+#ifndef TSUGUMITESTER_TEMPLATE_GENERATE_TEST_H
+#define TSUGUMITESTER_TEMPLATE_GENERATE_TEST_H
 
 #include <common/test_step.h>
 
-class TemplateCreateTest
+class TemplateGenerateTest
         : public TestStep
 {
 public:
-    TemplateCreateTest(const bool expectSuccess,
+    TemplateGenerateTest(const bool expectSuccess,
                        const std::string &type);
 
     bool runTest(Kitsunemimi::Json::JsonItem &inputData,
@@ -39,4 +39,4 @@ private:
     std::string m_type = "";
 };
 
-#endif // TSUGUMITESTER_TEMPLATECREATETEST_H
+#endif // TSUGUMITESTER_TEMPLATE_GENERATE_TEST_H
