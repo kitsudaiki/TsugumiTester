@@ -73,19 +73,26 @@
 bool
 initClient()
 {
+    Kitsunemimi::ErrorContainer error;
+
     bool success = false;
     const std::string host = GET_STRING_CONFIG("connection", "host", success);
     const std::string port = std::to_string(GET_INT_CONFIG("connection", "port", success));
     const std::string user = GET_STRING_CONFIG("connection", "test_user", success);
     const std::string pw = GET_STRING_CONFIG("connection", "test_pw", success);
 
-    if(Kitsunemimi::Hanami::initClient(host, port, user, pw) == false) {
+    if(Kitsunemimi::Hanami::initClient(host, port, user, pw, error) == false)
+    {
+        LOG_ERROR(error);
         return false;
     }
 
     return true;
 }
 
+/**
+ * @brief delete all templates of the test-user to avoid name-conflics
+ */
 void
 deleteTemplate()
 {
@@ -97,7 +104,6 @@ deleteTemplate()
     parsedList.parse(result, error);
 
     Kitsunemimi::Json::JsonItem body = parsedList.get("body");
-
     for(uint64_t i = 0; i < body.size(); i++)
     {
         const std::string uuid = body.get(i).get(0).getString();
@@ -105,6 +111,11 @@ deleteTemplate()
     }
 }
 
+/**
+ * @brief run tests with the usage of MNIST-images
+ *
+ * @param inputData json-item with names and other predefined values for the tests
+ */
 void
 runImageTest(Kitsunemimi::Json::JsonItem &inputData)
 {
@@ -113,51 +124,60 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     TestThread testThread("test_thread", inputData);
 
     Kitsunemimi::Json::JsonItem overrideData;
+
+    // test misaka
     testThread.addTest(new UserCreateTest(true));
     testThread.addTest(new UserCreateTest(false));
     testThread.addTest(new UserListTest(true));
     testThread.addTest(new UserGetTest(true));
     testThread.addTest(new UserGetTest(false, "fail_user"));
-    testThread.addTest(new UserDeleteTest(true));
-    testThread.addTest(new UserDeleteTest(false));
 
+    // test data-sets of sagiri
     testThread.addTest(new DataSetCreateMnistTest(true, "request"));
     testThread.addTest(new DataSetCreateMnistTest(true, "learn"));
     testThread.addTest(new DataSetListTest(true));
     testThread.addTest(new DataSetGetTest(true, "learn"));
     testThread.addTest(new DataSetGetTest(false, "learn", "fail_user"));
 
+    // test templates of kyouko
     testThread.addTest(new TemplateGenerateTest(true, "image"));
     testThread.addTest(new TemplateGetTest(true));
     testThread.addTest(new TemplateUploadTest(true));
     testThread.addTest(new TemplateListTest(true));
 
+    // test cluster of kyouko
     testThread.addTest(new ClusterCreateTest(true));
     testThread.addTest(new ClusterGetTest(true));
     testThread.addTest(new ClusterListTest(true));
 
+    // test learning-tasks of kyouko
     for(int i = 0; i < 1; i++) {
         testThread.addTest(new ImageLearnTaskTest(true));
     }
+
+    // test cluster load and restore of kyouko and sagiri
     testThread.addTest(new ClusterSaveTest(true));
     testThread.addTest(new ClusterDeleteTest(true));
-
     testThread.addTest(new ClusterCreateTest(true));
     testThread.addTest(new ClusterLoadTest(true));
+
+    // test request-tasks of kyouko
     testThread.addTest(new ImageRequestTaskTest(true));
     testThread.addTest(new DataSetCheckTest(true));
 
-    // snapshots
+    // test snapshots of sagiri
     testThread.addTest(new SnapshotGetTest(true));
     testThread.addTest(new SnapshotListTest(true));
-    testThread.addTest(new SnapshotDeleteTest(true));
 
-    // direct-io
+    // test direct-io of kyouko
     testThread.addTest(new ClusterSwitchToDirectTest(true));
     testThread.addTest(new DirectIoTest(true));
     testThread.addTest(new ClusterSwitchToTaskTest(true));
 
-    // clrear all
+    // test delete of all
+    testThread.addTest(new UserDeleteTest(true));
+    testThread.addTest(new UserDeleteTest(false));
+    testThread.addTest(new SnapshotDeleteTest(true));
     testThread.addTest(new ClusterDeleteTest(true));
     testThread.addTest(new ClusterDeleteTest(false));
     testThread.addTest(new TemplateDeleteTest(true));
@@ -186,18 +206,22 @@ runRestApiTests()
     }
 
     Kitsunemimi::Json::JsonItem inputData;
+
+    // add data for the test-user to create
+    inputData.insert("user_name", "tsugumi");
     inputData.insert("password", "new password");
     inputData.insert("admin", true);
     inputData.insert("roles", "tester");
     inputData.insert("projects", "tester");
 
+    // add data from config
     inputData.insert("learn_inputs", GET_STRING_CONFIG("test_data", "learn_inputs", success)),
     inputData.insert("learn_labels", GET_STRING_CONFIG("test_data", "learn_labels", success)),
     inputData.insert("request_inputs", GET_STRING_CONFIG("test_data", "request_inputs", success)),
     inputData.insert("request_labels", GET_STRING_CONFIG("test_data", "request_labels", success)),
     inputData.insert("base_inputs", GET_STRING_CONFIG("test_data", "base_inputs", success)),
 
-    inputData.insert("user_name", "tsugumi");
+    // add predefined names for the coming test-resources
     inputData.insert("cluster_name", "test_cluster");
     inputData.insert("cluster_snapshot_name", "test_snapshot");
     inputData.insert("template_name", "test_template");
