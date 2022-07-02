@@ -35,7 +35,7 @@ boost-library | libboost1.71-dev | >= 1.71 | provides boost beast library for HT
 
 Repository-Name | Version-Tag | Download-Path
 --- | --- | ---
-libKitsunemimiCommon | v0.26.0 |  https://github.com/kitsudaiki/libKitsunemimiCommon.git
+libKitsunemimiCommon | v0.26.1 |  https://github.com/kitsudaiki/libKitsunemimiCommon.git
 libKitsunemimiJson | v0.11.3 |  https://github.com/kitsudaiki/libKitsunemimiJson.git
 libKitsunemimiIni | v0.5.1 |  https://github.com/kitsudaiki/libKitsunemimiIni.git
 libKitsunemimiArgs | v0.4.0 |  https://github.com/kitsudaiki/libKitsunemimiArgs.git
@@ -43,7 +43,7 @@ libKitsunemimiConfig | v0.4.0 |  https://github.com/kitsudaiki/libKitsunemimiCon
 libKitsunemimiCrypto | v0.2.0 |  -
 libKitsunemimiNetwork | v0.8.2 |  https://github.com/kitsudaiki/libKitsunemimiNetwork.git
 libKitsunemimiSakuraNetwork | v0.8.4 |  https://github.com/kitsudaiki/libKitsunemimiSakuraNetwork.git
-libKitsunemimiHanamiSdk | v0.3.0 | -
+libKitsunemimiHanamiSdk | v0.3.1 | -
 libKitsunemimiHanamiCommon | v0.2.0 | -
 
 
