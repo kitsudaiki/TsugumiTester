@@ -176,7 +176,7 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
 
     // test delete of all
     testThread.addTest(new UserDeleteTest(true));
-    testThread.addTest(new UserDeleteTest(false));
+    testThread.addTest(new UserDeleteTest(false));  
     testThread.addTest(new SnapshotDeleteTest(true));
     testThread.addTest(new ClusterDeleteTest(true));
     testThread.addTest(new ClusterDeleteTest(false));
@@ -185,6 +185,11 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     testThread.addTest(new DataSetDeleteTest(true, "request"));
     testThread.addTest(new DataSetDeleteTest(true, "learn"));
     testThread.addTest(new DataSetDeleteTest(false, "learn"));
+
+    // check that the running user can not delete himself
+    bool success = false;
+    const std::string user = GET_STRING_CONFIG("connection", "test_user", success);
+    testThread.addTest(new UserDeleteTest(false, user));
 
     testThread.startThread();
 

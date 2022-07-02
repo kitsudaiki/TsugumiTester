@@ -29,10 +29,14 @@ class UserDeleteTest
         : public TestStep
 {
 public:
-    UserDeleteTest(const bool expectSuccess);
+    UserDeleteTest(const bool expectSuccess,
+                   const std::string &nameOverride = "");
 
     bool runTest(Kitsunemimi::Json::JsonItem &inputData,
                  Kitsunemimi::ErrorContainer &error);
+
+private:
+    std::string m_nameOverride = "";
 };
 
 #endif // TSUGUMITESTER_USERDELETESTEP_H

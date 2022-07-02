@@ -24,7 +24,8 @@
 
 #include <libKitsunemimiHanamiSdk/user.h>
 
-UserDeleteTest::UserDeleteTest(const bool expectSuccess)
+UserDeleteTest::UserDeleteTest(const bool expectSuccess,
+                               const std::string &nameOverride)
     : TestStep(expectSuccess)
 {
     m_testName = "delete user";
@@ -33,6 +34,7 @@ UserDeleteTest::UserDeleteTest(const bool expectSuccess)
     } else {
         m_testName += " (fail)";
     }
+    m_nameOverride = nameOverride;
 }
 
 bool
@@ -41,11 +43,23 @@ UserDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // delete user by name
     std::string result;
-    if(Kitsunemimi::Hanami::deleteUser(result,
-                                       inputData.get("user_name").getString(),
-                                       error) != m_expectSuccess)
+    if(m_nameOverride != "")
     {
-        return false;
+        if(Kitsunemimi::Hanami::deleteUser(result,
+                                           m_nameOverride,
+                                           error) != m_expectSuccess)
+        {
+            return false;
+        }
+    }
+    else
+    {
+        if(Kitsunemimi::Hanami::deleteUser(result,
+                                           inputData.get("user_name").getString(),
+                                           error) != m_expectSuccess)
+        {
+            return false;
+        }
     }
 
     if(m_expectSuccess == false) {
