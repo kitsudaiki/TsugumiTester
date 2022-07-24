@@ -29,10 +29,10 @@
 #include <common/test_thread.h>
 #include <libKitsunemimiHanamiSdk/template.h>
 
-#include <rest_api_tests/misaka/user_create_test.h>
-#include <rest_api_tests/misaka/user_delete_test.h>
-#include <rest_api_tests/misaka/user_get_test.h>
-#include <rest_api_tests/misaka/user_list_test.h>
+#include <rest_api_tests/misaki/user_create_test.h>
+#include <rest_api_tests/misaki/user_delete_test.h>
+#include <rest_api_tests/misaki/user_get_test.h>
+#include <rest_api_tests/misaki/user_list_test.h>
 
 #include <rest_api_tests/sagiri/datasets/dataset_create_mnist_test.h>
 #include <rest_api_tests/sagiri/datasets/dataset_create_csv_test.h>
@@ -125,7 +125,7 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
 
     Kitsunemimi::Json::JsonItem overrideData;
 
-    // test misaka
+    // test misaki
     testThread.addTest(new UserCreateTest(true));
     testThread.addTest(new UserCreateTest(false));
     testThread.addTest(new UserListTest(true));
@@ -151,7 +151,7 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     testThread.addTest(new ClusterListTest(true));
 
     // test learning-tasks of kyouko
-    for(int i = 0; i < 1; i++) {
+    for(int i = 0; i < 2; i++) {
         testThread.addTest(new ImageLearnTaskTest(true));
     }
 
@@ -176,7 +176,7 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
 
     // test delete of all
     testThread.addTest(new UserDeleteTest(true));
-    testThread.addTest(new UserDeleteTest(false));  
+    testThread.addTest(new UserDeleteTest(false));
     testThread.addTest(new SnapshotDeleteTest(true));
     testThread.addTest(new ClusterDeleteTest(true));
     testThread.addTest(new ClusterDeleteTest(false));

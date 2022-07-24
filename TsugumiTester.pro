@@ -70,10 +70,10 @@ SOURCES += src/main.cpp \
     src/rest_api_tests/kyouko/template/template_get_test.cpp \
     src/rest_api_tests/kyouko/template/template_list_test.cpp \
     src/rest_api_tests/kyouko/template/template_upload_test.cpp \
-    src/rest_api_tests/misaka/user_create_test.cpp \
-    src/rest_api_tests/misaka/user_delete_test.cpp \
-    src/rest_api_tests/misaka/user_get_test.cpp \
-    src/rest_api_tests/misaka/user_list_test.cpp \
+    src/rest_api_tests/misaki/user_create_test.cpp \
+    src/rest_api_tests/misaki/user_delete_test.cpp \
+    src/rest_api_tests/misaki/user_get_test.cpp \
+    src/rest_api_tests/misaki/user_list_test.cpp \
     src/rest_api_tests/rest_api_tests.cpp \
     src/rest_api_tests/sagiri/datasets/dataset_check_test.cpp \
     src/rest_api_tests/sagiri/datasets/dataset_create_csv_test.cpp \
@@ -108,10 +108,10 @@ HEADERS += \
     src/rest_api_tests/kyouko/template/template_get_test.h \
     src/rest_api_tests/kyouko/template/template_list_test.h \
     src/rest_api_tests/kyouko/template/template_upload_test.h \
-    src/rest_api_tests/misaka/user_create_test.h \
-    src/rest_api_tests/misaka/user_delete_test.h \
-    src/rest_api_tests/misaka/user_get_test.h \
-    src/rest_api_tests/misaka/user_list_test.h \
+    src/rest_api_tests/misaki/user_create_test.h \
+    src/rest_api_tests/misaki/user_delete_test.h \
+    src/rest_api_tests/misaki/user_get_test.h \
+    src/rest_api_tests/misaki/user_list_test.h \
     src/rest_api_tests/rest_api_tests.h \
     src/rest_api_tests/sagiri/datasets/dataset_check_test.h \
     src/rest_api_tests/sagiri/datasets/dataset_create_csv_test.h \
