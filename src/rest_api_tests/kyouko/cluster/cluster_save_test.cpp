@@ -22,8 +22,8 @@
 
 #include "cluster_save_test.h"
 
-#include <libKitsunemimiHanamiSdk/cluster.h>
-#include <libKitsunemimiHanamiSdk/task.h>
+#include <libKitsumiAiSdk/cluster.h>
+#include <libKitsumiAiSdk/task.h>
 
 ClusterSaveTest::ClusterSaveTest(const bool expectSuccess)
           : TestStep(expectSuccess)

@@ -22,7 +22,7 @@
 
 #include "cluster_switch_to_task_test.h"
 
-#include <libKitsunemimiHanamiSdk/cluster.h>
+#include <libKitsumiAiSdk/cluster.h>
 
 ClusterSwitchToTaskTest::ClusterSwitchToTaskTest(const bool expectSuccess)
     : TestStep(expectSuccess)

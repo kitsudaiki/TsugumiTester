@@ -24,7 +24,7 @@ function build_kitsune_lib_repo () {
     cd $REPO_DIR
 
     # build repo library with qmake
-    if [[ $REPO_NAME == "libKitsunemimiHanamiSdk" ]]
+    if [[ $REPO_NAME == "libKitsumiAiSdk" ]]
     then
         /usr/lib/x86_64-linux-gnu/qt5/bin/qmake "$PARENT_DIR/$REPO_NAME/cpp/$REPO_NAME.pro" -spec linux-g++ "CONFIG += optimize_full staticlib"
     else
@@ -36,7 +36,7 @@ function build_kitsune_lib_repo () {
     echo "----------------------------------------------------------------------"
     echo $RESULT_DIR
     cp $REPO_DIR/src/$REPO_NAME.a $RESULT_DIR/
-    if [[ $REPO_NAME == "libKitsunemimiHanamiSdk" ]]
+    if [[ $REPO_NAME == "libKitsumiAiSdk" ]]
     then
         cp -r $PARENT_DIR/$REPO_NAME/cpp/include $RESULT_DIR/
     else
@@ -59,27 +59,13 @@ function get_required_kitsune_lib_repo () {
     build_kitsune_lib_repo $REPO_NAME $NUMBER_OF_THREADS
 }
 
-function get_required_private_repo_gitlab () {
-    REPO_NAME=$1
-    TAG_OR_BRANCH=$2
-    TOKEN=$3
-    NUMBER_OF_THREADS=$4
-
-    # clone repo
-    git clone http://kitsudaiki:$TOKEN@10.0.3.120/hanami/$REPO_NAME.git "$PARENT_DIR/$REPO_NAME"
-    cd "$PARENT_DIR/$REPO_NAME"
-    git checkout $TAG_OR_BRANCH
-
-    build_kitsune_lib_repo $REPO_NAME $NUMBER_OF_THREADS
-}
-
 function get_required_private_repo_github () {
     REPO_NAME=$1
     TAG_OR_BRANCH=$2
     NUMBER_OF_THREADS=$3
 
     # clone repo
-    git clone https://kitsudaiki:986ec116cd18aa45cfb81e57916518f6ff83bf19@github.com/kitsudaiki/$REPO_NAME.git "$PARENT_DIR/$REPO_NAME"
+    git clone https://kitsudaiki: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@github.com/kitsudaiki/$REPO_NAME.git "$PARENT_DIR/$REPO_NAME"
     cd "$PARENT_DIR/$REPO_NAME"
     git checkout $TAG_OR_BRANCH
 
@@ -100,12 +86,12 @@ get_required_kitsune_lib_repo "libKitsunemimiConfig" "v0.4.0" 8
 echo ""
 echo "###########################################################################################################"
 echo ""
-get_required_private_repo_github "libKitsunemimiCrypto" "v0.2.0" 8
+get_required_private_repo_github "libKitsunemimiCrypto" "develop" 8
 echo ""
 echo "###########################################################################################################"
 echo ""
-get_required_private_repo_gitlab "libKitsunemimiHanamiCommon" "v0.2.0" "2ue6RNxkCDs2A7qp1xtN" 8
-get_required_private_repo_gitlab "libKitsunemimiHanamiSdk" "v0.3.1" "bfzFyQfmS2mpkWxCeuHA" 8
+get_required_private_repo_github "libKitsunemimiHanamiCommon" "develop" 8
+get_required_private_repo_github "libKitsumiAiSdk" "develop"  8
 echo ""
 echo "###########################################################################################################"
 echo ""

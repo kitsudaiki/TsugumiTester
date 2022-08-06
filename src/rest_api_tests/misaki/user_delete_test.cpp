@@ -22,7 +22,7 @@
 
 #include "user_delete_test.h"
 
-#include <libKitsunemimiHanamiSdk/user.h>
+#include <libKitsumiAiSdk/user.h>
 
 UserDeleteTest::UserDeleteTest(const bool expectSuccess,
                                const std::string &nameOverride)

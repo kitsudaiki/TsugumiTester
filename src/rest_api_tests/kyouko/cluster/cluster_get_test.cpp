@@ -22,7 +22,7 @@
 
 #include "cluster_get_test.h"
 
-#include <libKitsunemimiHanamiSdk/cluster.h>
+#include <libKitsumiAiSdk/cluster.h>
 
 ClusterGetTest::ClusterGetTest(const bool expectSuccess,
                                const std::string &nameOverride)

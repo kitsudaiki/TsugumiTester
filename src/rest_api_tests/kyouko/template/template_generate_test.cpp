@@ -22,7 +22,7 @@
 
 #include "template_generate_test.h"
 
-#include <libKitsunemimiHanamiSdk/template.h>
+#include <libKitsumiAiSdk/template.h>
 
 TemplateGenerateTest::TemplateGenerateTest(const bool expectSuccess,
                                        const std::string &type)

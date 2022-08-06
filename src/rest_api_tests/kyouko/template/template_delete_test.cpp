@@ -22,7 +22,7 @@
 
 #include "template_delete_test.h"
 
-#include <libKitsunemimiHanamiSdk/template.h>
+#include <libKitsumiAiSdk/template.h>
 
 TemplateDeleteTest::TemplateDeleteTest(const bool expectSuccess)
             : TestStep(expectSuccess)

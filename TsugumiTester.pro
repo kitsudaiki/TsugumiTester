@@ -4,10 +4,10 @@ TARGET = TsugumiTester
 CONFIG += console c++17
 CONFIG -= app_bundle
 
-LIBS += -L../libKitsunemimiHanamiSdk/src -lKitsunemimiHanamiSdk
-LIBS += -L../libKitsunemimiHanamiSdk/src/debug -lKitsunemimiHanamiSdk
-LIBS += -L../libKitsunemimiHanamiSdk/src/release -lKitsunemimiHanamiSdk
-INCLUDEPATH += ../libKitsunemimiHanamiSdk/cpp/include
+LIBS += -L../libKitsumiAiSdk/src -lKitsumiAiSdk
+LIBS += -L../libKitsumiAiSdk/src/debug -lKitsumiAiSdk
+LIBS += -L../libKitsumiAiSdk/src/release -lKitsumiAiSdk
+INCLUDEPATH += ../libKitsumiAiSdk/cpp/include
 
 LIBS += -L../libKitsunemimiHanamiCommon/src -lKitsunemimiHanamiCommon
 LIBS += -L../libKitsunemimiHanamiCommon/src/debug -lKitsunemimiHanamiCommon

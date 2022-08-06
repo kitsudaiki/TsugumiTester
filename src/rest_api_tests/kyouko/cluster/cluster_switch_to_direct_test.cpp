@@ -24,8 +24,8 @@
 
 #include <common/test_thread.h>
 
-#include <libKitsunemimiHanamiSdk/cluster.h>
-#include <libKitsunemimiHanamiSdk/common/websocket_client.h>
+#include <libKitsumiAiSdk/cluster.h>
+#include <libKitsumiAiSdk/common/websocket_client.h>
 
 ClusterSwitchToDirectTest::ClusterSwitchToDirectTest(const bool expectSuccess)
     : TestStep(expectSuccess)

@@ -1,6 +1,6 @@
 # TsugumiTester
 
-![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/kitsudaiki/TsugumiTester?label=build%20and%20test&style=flat-square)
+![Github workfloat status](https://img.shields.io/github/workflow/status/kitsudaiki/TsugumiTester/build-and-test/develop?label=build%20and%20test&style=flat-square)
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/kitsudaiki/TsugumiTester?label=version&style=flat-square)
 ![GitHub](https://img.shields.io/github/license/kitsudaiki/TsugumiTester?style=flat-square)
 ![C++Version](https://img.shields.io/badge/c%2B%2B-17-blue?style=flat-square)

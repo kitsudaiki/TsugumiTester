@@ -22,7 +22,7 @@
 
 #include "template_upload_test.h"
 
-#include <libKitsunemimiHanamiSdk/template.h>
+#include <libKitsumiAiSdk/template.h>
 
 TemplateUploadTest::TemplateUploadTest(const bool expectSuccess)
             : TestStep(expectSuccess)

@@ -23,7 +23,7 @@
 #include "dataset_create_mnist_test.h"
 
 #include <libKitsunemimiConfig/config_handler.h>
-#include <libKitsunemimiHanamiSdk/data_set.h>
+#include <libKitsumiAiSdk/data_set.h>
 
 DataSetCreateMnistTest::DataSetCreateMnistTest(const bool expectSuccess,
                                                const std::string &type)

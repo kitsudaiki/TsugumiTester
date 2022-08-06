@@ -22,7 +22,7 @@
 
 #include "cluster_delete_test.h"
 
-#include <libKitsunemimiHanamiSdk/cluster.h>
+#include <libKitsumiAiSdk/cluster.h>
 
 ClusterDeleteTest::ClusterDeleteTest(const bool expectSuccess)
           : TestStep(expectSuccess)

@@ -22,7 +22,7 @@
 
 #include "snapshot_get_test.h"
 
-#include <libKitsunemimiHanamiSdk/snapshot.h>
+#include <libKitsumiAiSdk/snapshot.h>
 
 SnapshotGetTest::SnapshotGetTest(const bool expectSuccess,
                                  const std::string &uuidOverride)

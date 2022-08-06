@@ -22,7 +22,7 @@
 
 #include "template_list_test.h"
 
-#include <libKitsunemimiHanamiSdk/template.h>
+#include <libKitsumiAiSdk/template.h>
 
 TemplateListTest::TemplateListTest(const bool expectSuccess)
         : TestStep(expectSuccess)

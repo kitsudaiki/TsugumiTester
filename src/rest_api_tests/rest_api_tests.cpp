@@ -24,10 +24,10 @@
 
 #include <libKitsunemimiConfig/config_handler.h>
 #include <libKitsunemimiJson/json_item.h>
-#include <libKitsunemimiHanamiSdk/init.h>
+#include <libKitsumiAiSdk/init.h>
 
 #include <common/test_thread.h>
-#include <libKitsunemimiHanamiSdk/template.h>
+#include <libKitsumiAiSdk/template.h>
 
 #include <rest_api_tests/misaki/user_create_test.h>
 #include <rest_api_tests/misaki/user_delete_test.h>

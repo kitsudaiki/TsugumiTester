@@ -22,8 +22,8 @@
 
 #include "direct_io_test.h"
 
-#include <libKitsunemimiHanamiSdk/messages/hanami_messages.h>
-#include <libKitsunemimiHanamiSdk/io.h>
+#include <libKitsumiAiSdk/messages/hanami_messages.h>
+#include <libKitsumiAiSdk/io.h>
 #include <common/test_thread.h>
 
 DirectIoTest::DirectIoTest(const bool expectSuccess)

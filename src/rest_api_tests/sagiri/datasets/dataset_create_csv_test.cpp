@@ -23,7 +23,7 @@
 #include "dataset_create_csv_test.h"
 
 #include <libKitsunemimiConfig/config_handler.h>
-#include <libKitsunemimiHanamiSdk/data_set.h>
+#include <libKitsumiAiSdk/data_set.h>
 
 DataSetCreateCsvTest::DataSetCreateCsvTest(const bool expectSuccess)
           : TestStep(expectSuccess)
