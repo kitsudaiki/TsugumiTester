@@ -1,5 +1,5 @@
 /**
- * @file        user_get_test.h
+ * @file        project_get_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,16 +20,16 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMITESTER_USERGETSTEP_H
-#define TSUGUMITESTER_USERGETSTEP_H
+#ifndef TSUGUMITESTER_PROJECTGETSTEP_H
+#define TSUGUMITESTER_PROJECTGETSTEP_H
 
 #include <common/test_step.h>
 
-class UserGetTest
+class ProjectGetTest
         : public TestStep
 {
 public:
-    UserGetTest(const bool expectSuccess,
+    ProjectGetTest(const bool expectSuccess,
                 const std::string &nameOverride = "");
 
     bool runTest(Kitsunemimi::Json::JsonItem &inputData,
@@ -39,4 +39,4 @@ private:
     std::string m_name = "";
 };
 
-#endif // TSUGUMITESTER_USERGETSTEP_H
+#endif // TSUGUMITESTER_PROJECTGETSTEP_H

@@ -1,5 +1,5 @@
 /**
- * @file        user_create_test.h
+ * @file        project_create_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,19 +20,19 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMITESTER_USERCREATESTEP_H
-#define TSUGUMITESTER_USERCREATESTEP_H
+#ifndef TSUGUMITESTER_PROJECTCREATESTEP_H
+#define TSUGUMITESTER_PROJECTCREATESTEP_H
 
 #include <common/test_step.h>
 
-class UserCreateTest
+class ProjectCreateTest
         : public TestStep
 {
 public:
-    UserCreateTest(const bool expectSuccess);
+    ProjectCreateTest(const bool expectSuccess);
 
     bool runTest(Kitsunemimi::Json::JsonItem &inputData,
                  Kitsunemimi::ErrorContainer &error);
 };
 
-#endif // TSUGUMITESTER_USERCREATESTEP_H
+#endif // TSUGUMITESTER_PROJECTCREATESTEP_H

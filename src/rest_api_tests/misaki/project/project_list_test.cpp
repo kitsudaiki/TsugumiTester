@@ -1,5 +1,5 @@
 /**
- * @file        user_list_test.cpp
+ * @file        project_list_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,14 +20,14 @@
  *      limitations under the License.
  */
 
-#include "user_list_test.h"
+#include "project_list_test.h"
 
-#include <libKitsumiAiSdk/user.h>
+#include <libKitsumiAiSdk/project.h>
 
-UserListTest::UserListTest(const bool expectSuccess)
+ProjectListTest::ProjectListTest(const bool expectSuccess)
     : TestStep(expectSuccess)
 {
-    m_testName = "list user";
+    m_testName = "list projects";
     if(expectSuccess) {
         m_testName += " (success)";
     } else {
@@ -36,12 +36,12 @@ UserListTest::UserListTest(const bool expectSuccess)
 }
 
 bool
-UserListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
-                      Kitsunemimi::ErrorContainer &error)
+ProjectListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+                         Kitsunemimi::ErrorContainer &error)
 {
     // list all users
     std::string result;
-    if(Kitsunemimi::Hanami::listUser(result, error) != m_expectSuccess) {
+    if(Kitsunemimi::Hanami::listProject(result, error) != m_expectSuccess) {
         return false;
     }
 
@@ -55,7 +55,7 @@ UserListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
         return false;
     }
 
-    inputData.insert("number_of_users", static_cast<long>(jsonItem.size()), true);
+    inputData.insert("number_of_projects", static_cast<long>(jsonItem.size()), true);
 
     return true;
 }

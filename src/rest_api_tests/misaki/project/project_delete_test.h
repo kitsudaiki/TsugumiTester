@@ -1,5 +1,5 @@
 /**
- * @file        user_delete_test.h
+ * @file        project_delete_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,16 +20,16 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMITESTER_USERDELETESTEP_H
-#define TSUGUMITESTER_USERDELETESTEP_H
+#ifndef TSUGUMITESTER_PROJECTDELETESTEP_H
+#define TSUGUMITESTER_PROJECTDELETESTEP_H
 
 #include <common/test_step.h>
 
-class UserDeleteTest
+class ProjectDeleteTest
         : public TestStep
 {
 public:
-    UserDeleteTest(const bool expectSuccess,
+    ProjectDeleteTest(const bool expectSuccess,
                    const std::string &nameOverride = "");
 
     bool runTest(Kitsunemimi::Json::JsonItem &inputData,
@@ -39,4 +39,4 @@ private:
     std::string m_nameOverride = "";
 };
 
-#endif // TSUGUMITESTER_USERDELETESTEP_H
+#endif // TSUGUMITESTER_PROJECTDELETESTEP_H

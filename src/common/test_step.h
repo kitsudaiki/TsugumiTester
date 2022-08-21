@@ -24,6 +24,8 @@
 #define TSUGUMI_TESTSTEP_H
 
 #include <vector>
+#include <unistd.h>
+
 #include <libKitsunemimiJson/json_item.h>
 #include <libKitsunemimiCommon/logger.h>
 

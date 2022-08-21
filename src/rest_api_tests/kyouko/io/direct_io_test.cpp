@@ -22,7 +22,6 @@
 
 #include "direct_io_test.h"
 
-#include <libKitsumiAiSdk/messages/hanami_messages.h>
 #include <libKitsumiAiSdk/io.h>
 #include <common/test_thread.h>
 

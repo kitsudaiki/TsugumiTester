@@ -1,5 +1,5 @@
 /**
- * @file        user_delete_test.cpp
+ * @file        project_delete_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,15 +20,15 @@
  *      limitations under the License.
  */
 
-#include "user_delete_test.h"
+#include "project_delete_test.h"
 
-#include <libKitsumiAiSdk/user.h>
+#include <libKitsumiAiSdk/project.h>
 
-UserDeleteTest::UserDeleteTest(const bool expectSuccess,
-                               const std::string &nameOverride)
+ProjectDeleteTest::ProjectDeleteTest(const bool expectSuccess,
+                                     const std::string &nameOverride)
     : TestStep(expectSuccess)
 {
-    m_testName = "delete user";
+    m_testName = "delete project";
     if(expectSuccess) {
         m_testName += " (success)";
     } else {
@@ -38,25 +38,25 @@ UserDeleteTest::UserDeleteTest(const bool expectSuccess,
 }
 
 bool
-UserDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
-                        Kitsunemimi::ErrorContainer &error)
+ProjectDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+                           Kitsunemimi::ErrorContainer &error)
 {
     // delete user by name
     std::string result;
     if(m_nameOverride != "")
     {
-        if(Kitsunemimi::Hanami::deleteUser(result,
-                                           m_nameOverride,
-                                           error) != m_expectSuccess)
+        if(Kitsunemimi::Hanami::deleteProject(result,
+                                              m_nameOverride,
+                                              error) != m_expectSuccess)
         {
             return false;
         }
     }
     else
     {
-        if(Kitsunemimi::Hanami::deleteUser(result,
-                                           inputData.get("user_name").getString(),
-                                           error) != m_expectSuccess)
+        if(Kitsunemimi::Hanami::deleteProject(result,
+                                              inputData.get("project_name").getString(),
+                                              error) != m_expectSuccess)
         {
             return false;
         }

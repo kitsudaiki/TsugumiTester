@@ -29,10 +29,15 @@
 #include <common/test_thread.h>
 #include <libKitsumiAiSdk/template.h>
 
-#include <rest_api_tests/misaki/user_create_test.h>
-#include <rest_api_tests/misaki/user_delete_test.h>
-#include <rest_api_tests/misaki/user_get_test.h>
-#include <rest_api_tests/misaki/user_list_test.h>
+#include <rest_api_tests/misaki/project/project_create_test.h>
+#include <rest_api_tests/misaki/project/project_delete_test.h>
+#include <rest_api_tests/misaki/project/project_get_test.h>
+#include <rest_api_tests/misaki/project/project_list_test.h>
+
+#include <rest_api_tests/misaki/user/user_create_test.h>
+#include <rest_api_tests/misaki/user/user_delete_test.h>
+#include <rest_api_tests/misaki/user/user_get_test.h>
+#include <rest_api_tests/misaki/user/user_list_test.h>
 
 #include <rest_api_tests/sagiri/datasets/dataset_create_mnist_test.h>
 #include <rest_api_tests/sagiri/datasets/dataset_create_csv_test.h>
@@ -125,7 +130,14 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
 
     Kitsunemimi::Json::JsonItem overrideData;
 
-    // test misaki
+    // test project in misaki
+    testThread.addTest(new ProjectCreateTest(true));
+    testThread.addTest(new ProjectCreateTest(false));
+    testThread.addTest(new ProjectListTest(true));
+    testThread.addTest(new ProjectGetTest(true));
+    testThread.addTest(new ProjectGetTest(false, "fail_project"));
+
+    // test user in misaki
     testThread.addTest(new UserCreateTest(true));
     testThread.addTest(new UserCreateTest(false));
     testThread.addTest(new UserListTest(true));
@@ -177,6 +189,8 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     // test delete of all
     testThread.addTest(new UserDeleteTest(true));
     testThread.addTest(new UserDeleteTest(false));
+    testThread.addTest(new ProjectDeleteTest(true));
+    testThread.addTest(new ProjectDeleteTest(false));
     testThread.addTest(new SnapshotDeleteTest(true));
     testThread.addTest(new ClusterDeleteTest(true));
     testThread.addTest(new ClusterDeleteTest(false));
@@ -218,6 +232,7 @@ runRestApiTests()
     inputData.insert("admin", true);
     inputData.insert("roles", "tester");
     inputData.insert("projects", "tester");
+    inputData.insert("project_name", "tester");
 
     // add data from config
     inputData.insert("learn_inputs", GET_STRING_CONFIG("test_data", "learn_inputs", success)),

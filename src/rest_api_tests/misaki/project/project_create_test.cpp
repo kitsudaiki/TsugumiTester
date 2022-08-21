@@ -1,5 +1,5 @@
 /**
- * @file        user_create_test.cpp
+ * @file        project_create_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,11 +20,11 @@
  *      limitations under the License.
  */
 
-#include "user_create_test.h"
+#include "project_create_test.h"
 
-#include <libKitsumiAiSdk/user.h>
+#include <libKitsumiAiSdk/project.h>
 
-UserCreateTest::UserCreateTest(const bool expectSuccess)
+ProjectCreateTest::ProjectCreateTest(const bool expectSuccess)
     : TestStep(expectSuccess)
 {
     m_testName = "create user";
@@ -36,18 +36,14 @@ UserCreateTest::UserCreateTest(const bool expectSuccess)
 }
 
 bool
-UserCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
-                        Kitsunemimi::ErrorContainer &error)
+ProjectCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+                           Kitsunemimi::ErrorContainer &error)
 {
     // create new user
     std::string result;
-    if(Kitsunemimi::Hanami::createUser(result,
-                                       inputData.get("user_name").getString(),
-                                       inputData.get("password").getString(),
-                                       inputData.get("is_admin").getBool(),
-                                       inputData.get("roles").getString(),
-                                       inputData.get("projects").getString(),
-                                       error) != m_expectSuccess)
+    if(Kitsunemimi::Hanami::createProject(result,
+                                          inputData.get("project_name").getString(),
+                                          error) != m_expectSuccess)
     {
         return false;
     }
@@ -62,7 +58,7 @@ UserCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
         return false;
     }
 
-    inputData.insert("user_uuid", jsonItem.get("uuid").getString(), true);
+    inputData.insert("project_uuid", jsonItem.get("uuid").getString(), true);
 
     return true;
 }

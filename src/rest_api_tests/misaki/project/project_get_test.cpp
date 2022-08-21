@@ -1,5 +1,5 @@
 /**
- * @file        user_get_test.cpp
+ * @file        project_get_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,15 +20,15 @@
  *      limitations under the License.
  */
 
-#include "user_get_test.h"
+#include "project_get_test.h"
 
-#include <libKitsumiAiSdk/user.h>
+#include <libKitsumiAiSdk/project.h>
 
-UserGetTest::UserGetTest(const bool expectSuccess,
-                         const std::string &nameOverride)
+ProjectGetTest::ProjectGetTest(const bool expectSuccess,
+                               const std::string &nameOverride)
     : TestStep(expectSuccess)
 {
-    m_testName = "get user";
+    m_testName = "get project";
     if(expectSuccess) {
         m_testName += " (success)";
     } else {
@@ -38,16 +38,16 @@ UserGetTest::UserGetTest(const bool expectSuccess,
 }
 
 bool
-UserGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
-                     Kitsunemimi::ErrorContainer &error)
+ProjectGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+                        Kitsunemimi::ErrorContainer &error)
 {
     if(m_name == "") {
-        m_name = inputData.get("user_name").getString();
+        m_name = inputData.get("project_name").getString();
     }
 
     // get user by name
     std::string result;
-    if(Kitsunemimi::Hanami::getUser(result, m_name, error) != m_expectSuccess) {
+    if(Kitsunemimi::Hanami::getProject(result, m_name, error) != m_expectSuccess) {
         return false;
     }
 
@@ -61,7 +61,7 @@ UserGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
         return false;
     }
 
-    inputData.insert("user_uuid", jsonItem.get("uuid").getString(), true);
+    inputData.insert("project_uuid", jsonItem.get("uuid").getString(), true);
 
     return true;
 }

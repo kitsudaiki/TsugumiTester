@@ -1,5 +1,5 @@
 /**
- * @file        user_list_test.h
+ * @file        project_list_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,19 +20,19 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMITESTER_USERLISTSTEP_H
-#define TSUGUMITESTER_USERLISTSTEP_H
+#ifndef TSUGUMITESTER_PROJECTLISTSTEP_H
+#define TSUGUMITESTER_PROJECTLISTSTEP_H
 
 #include <common/test_step.h>
 
-class UserListTest
+class ProjectListTest
         : public TestStep
 {
 public:
-    UserListTest(const bool expectSuccess);
+    ProjectListTest(const bool expectSuccess);
 
     bool runTest(Kitsunemimi::Json::JsonItem &inputData,
                  Kitsunemimi::ErrorContainer &error);
 };
 
-#endif // TSUGUMITESTER_USERLISTSTEP_H
+#endif // TSUGUMITESTER_PROJECTLISTSTEP_H
