@@ -1,5 +1,5 @@
 /**
- * @file        test_step.h
+ * @file        project_delete_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,29 +20,23 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMI_TESTSTEP_H
-#define TSUGUMI_TESTSTEP_H
+#ifndef TSUGUMITESTER_PROJECTDELETESTEP_H
+#define TSUGUMITESTER_PROJECTDELETESTEP_H
 
-#include <vector>
-#include <unistd.h>
+#include <common/test_step.h>
 
-#include <libKitsunemimiJson/json_item.h>
-#include <libKitsunemimiCommon/logger.h>
-
-class TestStep
+class ProjectDeleteTest
+        : public TestStep
 {
 public:
-    TestStep(const bool expectSuccess);
-    virtual ~TestStep();
+    ProjectDeleteTest(const bool expectSuccess,
+                   const std::string &nameOverride = "");
 
-    const std::string getTestName() const;
+    bool runTest(Kitsunemimi::Json::JsonItem &inputData,
+                 Kitsunemimi::ErrorContainer &error);
 
-    virtual bool runTest(Kitsunemimi::Json::JsonItem &inputData,
-                         Kitsunemimi::ErrorContainer &error) = 0;
-
-protected:
-    const bool m_expectSuccess;
-    std::string m_testName;
+private:
+    std::string m_nameOverride = "";
 };
 
-#endif // TSUGUMI_TESTSTEP_H
+#endif // TSUGUMITESTER_PROJECTDELETESTEP_H

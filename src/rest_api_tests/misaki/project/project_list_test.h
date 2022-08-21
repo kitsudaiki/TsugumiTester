@@ -1,5 +1,5 @@
 /**
- * @file        test_step.h
+ * @file        project_list_test.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,29 +20,19 @@
  *      limitations under the License.
  */
 
-#ifndef TSUGUMI_TESTSTEP_H
-#define TSUGUMI_TESTSTEP_H
+#ifndef TSUGUMITESTER_PROJECTLISTSTEP_H
+#define TSUGUMITESTER_PROJECTLISTSTEP_H
 
-#include <vector>
-#include <unistd.h>
+#include <common/test_step.h>
 
-#include <libKitsunemimiJson/json_item.h>
-#include <libKitsunemimiCommon/logger.h>
-
-class TestStep
+class ProjectListTest
+        : public TestStep
 {
 public:
-    TestStep(const bool expectSuccess);
-    virtual ~TestStep();
+    ProjectListTest(const bool expectSuccess);
 
-    const std::string getTestName() const;
-
-    virtual bool runTest(Kitsunemimi::Json::JsonItem &inputData,
-                         Kitsunemimi::ErrorContainer &error) = 0;
-
-protected:
-    const bool m_expectSuccess;
-    std::string m_testName;
+    bool runTest(Kitsunemimi::Json::JsonItem &inputData,
+                 Kitsunemimi::ErrorContainer &error);
 };
 
-#endif // TSUGUMI_TESTSTEP_H
+#endif // TSUGUMITESTER_PROJECTLISTSTEP_H
