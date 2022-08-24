@@ -152,9 +152,8 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     testThread.addTest(new DataSetGetTest(false, "learn", "fail_user"));
 
     // test templates of kyouko
-    testThread.addTest(new TemplateGenerateTest(true, "image"));
-    testThread.addTest(new TemplateGetTest(true));
     testThread.addTest(new TemplateUploadTest(true));
+    testThread.addTest(new TemplateGetTest(true));
     testThread.addTest(new TemplateListTest(true));
 
     // test cluster of kyouko
@@ -224,6 +223,72 @@ runRestApiTests()
         return false;
     }
 
+    const std::string segmentTemplate = "{\n"
+                                        "    \"version\": 1,\n"
+                                        "    \"segment_type\": \"dynamic_segment\",\n"
+                                        "    \"bricks\": [\n"
+                                        "        {\n"
+                                        "            \"number_of_nodes\": 784,\n"
+                                        "            \"position\": [ 1, 1, 1 ],\n"
+                                        "            \"type\": \"input\",\n"
+                                        "            \"name\": \"test_input\"\n"
+                                        "        },\n"
+                                        "        {\n"
+                                        "            \"number_of_nodes\": 300,\n"
+                                        "            \"position\": [ 2, 1, 1 ]\n"
+                                        "        },\n"
+                                        "        {\n"
+                                        "            \"number_of_nodes\": 10,\n"
+                                        "            \"position\": [ 3, 1, 1 ],\n"
+                                        "            \"type\": \"output\",\n"
+                                        "            \"name\": \"test_output\"\n"
+                                        "        }\n"
+                                        "    ],\n"
+                                        "    \"settings\": {\n"
+                                        "        \"action_potential\": 5.0,\n"
+                                        "        \"glia_value\": 1.1,\n"
+                                        "        \"max_synapse_sections\": 100000,\n"
+                                        "        \"max_synapse_weight\": 0.015,\n"
+                                        "        \"memorizing\": 0.5,\n"
+                                        "        \"node_cooldown\": 3000.0,\n"
+                                        "        \"potential_overflow\": 1.0,\n"
+                                        "        \"refraction_time\": 1,\n"
+                                        "        \"sign_neg\": 0.5,\n"
+                                        "        \"synapse_delete_border\": 0.0005\n"
+                                        "    }\n"
+                                        "}\n";
+    const std::string clusterDefinition = "{\n"
+                                          "    \"version\": 1,\n"
+                                          "    \"segments\": [\n"
+                                          "        {\n"
+                                          "            \"type\":\"input\",\n"
+                                          "            \"number_of_nodes\": 784,\n"
+                                          "            \"name\": \"input1\",\n"
+                                          "            \"out\": [\n"
+                                          "                {\n"
+                                          "                    \"target_segment\": \"central\",\n"
+                                          "                    \"target_brick\": \"test_input\"\n"
+                                          "                }\n"
+                                          "            ]\n"
+                                          "        },\n"
+                                          "        {\n"
+                                          "            \"type\":\"dynamic\",\n"
+                                          "            \"name\": \"central\",\n"
+                                          "            \"out\": [\n"
+                                          "                {\n"
+                                          "                    \"source_brick\": \"test_output\",\n"
+                                          "                    \"target_segment\": \"output2\"\n"
+                                          "                }\n"
+                                          "            ]\n"
+                                          "        },\n"
+                                          "        {\n"
+                                          "            \"type\": \"output\",\n"
+                                          "            \"name\": \"output2\",\n"
+                                          "            \"number_of_nodes\": 10\n"
+                                          "        }\n"
+                                          "    ]\n"
+                                          "}\n";
+
     Kitsunemimi::Json::JsonItem inputData;
 
     // add data for the test-user to create
@@ -244,8 +309,9 @@ runRestApiTests()
     // add predefined names for the coming test-resources
     inputData.insert("cluster_name", "test_cluster");
     inputData.insert("cluster_snapshot_name", "test_snapshot");
-    inputData.insert("template_name", "test_template");
-    inputData.insert("template_name_new", "test_template_new");
+    inputData.insert("template_name", "dynamic");
+    inputData.insert("template_segment", segmentTemplate);
+    inputData.insert("cluster_definition", clusterDefinition);
     inputData.insert("request_dataset_name", "request_test_dataset");
     inputData.insert("learn_dataset_name", "learn_test_dataset");
     inputData.insert("base_dataset_name", "base_test_dataset");
