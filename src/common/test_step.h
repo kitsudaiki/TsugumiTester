@@ -28,6 +28,7 @@
 
 #include <libKitsunemimiJson/json_item.h>
 #include <libKitsunemimiCommon/logger.h>
+#include <unistd.h>
 
 class TestStep
 {

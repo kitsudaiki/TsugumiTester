@@ -43,7 +43,7 @@ ClusterCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     std::string result;
     if(Kitsunemimi::Hanami::createCluster(result,
                                           inputData.get("cluster_name").getString(),
-                                          inputData.get("template_uuid").getString(),
+                                          inputData.get("cluster_definition").getString(),
                                           error) != m_expectSuccess)
     {
         return false;
