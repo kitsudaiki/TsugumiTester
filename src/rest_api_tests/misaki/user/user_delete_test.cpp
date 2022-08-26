@@ -55,7 +55,7 @@ UserDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     else
     {
         if(Kitsunemimi::Hanami::deleteUser(result,
-                                           inputData.get("user_name").getString(),
+                                           inputData.get("user_id").getString(),
                                            error) != m_expectSuccess)
         {
             return false;

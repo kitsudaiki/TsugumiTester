@@ -42,7 +42,7 @@ ProjectGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
                         Kitsunemimi::ErrorContainer &error)
 {
     if(m_name == "") {
-        m_name = inputData.get("project_name").getString();
+        m_name = inputData.get("project_id").getString();
     }
 
     // get user by name
@@ -61,7 +61,7 @@ ProjectGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
         return false;
     }
 
-    inputData.insert("project_uuid", jsonItem.get("uuid").getString(), true);
+    inputData.insert("project_id", jsonItem.get("id").getString(), true);
 
     return true;
 }
