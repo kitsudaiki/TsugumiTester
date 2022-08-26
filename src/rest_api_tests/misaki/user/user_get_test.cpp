@@ -42,7 +42,7 @@ UserGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
                      Kitsunemimi::ErrorContainer &error)
 {
     if(m_name == "") {
-        m_name = inputData.get("user_name").getString();
+        m_name = inputData.get("user_id").getString();
     }
 
     // get user by name
@@ -61,7 +61,7 @@ UserGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
         return false;
     }
 
-    inputData.insert("user_uuid", jsonItem.get("uuid").getString(), true);
+    inputData.insert("user_id", jsonItem.get("id").getString(), true);
 
     return true;
 }

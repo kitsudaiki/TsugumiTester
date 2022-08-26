@@ -42,6 +42,7 @@ UserCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     // create new user
     std::string result;
     if(Kitsunemimi::Hanami::createUser(result,
+                                       inputData.get("user_id").getString(),
                                        inputData.get("user_name").getString(),
                                        inputData.get("password").getString(),
                                        inputData.get("is_admin").getBool(),
@@ -62,7 +63,7 @@ UserCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
         return false;
     }
 
-    inputData.insert("user_uuid", jsonItem.get("uuid").getString(), true);
+    inputData.insert("user_id", jsonItem.get("id").getString(), true);
 
     return true;
 }

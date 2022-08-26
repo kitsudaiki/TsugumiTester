@@ -55,7 +55,7 @@ ProjectDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     else
     {
         if(Kitsunemimi::Hanami::deleteProject(result,
-                                              inputData.get("project_name").getString(),
+                                              inputData.get("project_id").getString(),
                                               error) != m_expectSuccess)
         {
             return false;

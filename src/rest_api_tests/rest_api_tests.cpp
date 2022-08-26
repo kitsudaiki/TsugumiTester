@@ -263,7 +263,7 @@ runRestApiTests()
                                           "        {\n"
                                           "            \"type\":\"input\",\n"
                                           "            \"number_of_nodes\": 784,\n"
-                                          "            \"name\": \"input1\",\n"
+                                          "            \"name\": \"input\",\n"
                                           "            \"out\": [\n"
                                           "                {\n"
                                           "                    \"target_segment\": \"central\",\n"
@@ -277,13 +277,13 @@ runRestApiTests()
                                           "            \"out\": [\n"
                                           "                {\n"
                                           "                    \"source_brick\": \"test_output\",\n"
-                                          "                    \"target_segment\": \"output2\"\n"
+                                          "                    \"target_segment\": \"output\"\n"
                                           "                }\n"
                                           "            ]\n"
                                           "        },\n"
                                           "        {\n"
                                           "            \"type\": \"output\",\n"
-                                          "            \"name\": \"output2\",\n"
+                                          "            \"name\": \"output\",\n"
                                           "            \"number_of_nodes\": 10\n"
                                           "        }\n"
                                           "    ]\n"
@@ -292,11 +292,13 @@ runRestApiTests()
     Kitsunemimi::Json::JsonItem inputData;
 
     // add data for the test-user to create
+    inputData.insert("user_id", "tsugumi");
     inputData.insert("user_name", "tsugumi");
     inputData.insert("password", "new password");
     inputData.insert("admin", true);
     inputData.insert("roles", "tester");
     inputData.insert("projects", "tester");
+    inputData.insert("project_id", "tester");
     inputData.insert("project_name", "tester");
 
     // add data from config
