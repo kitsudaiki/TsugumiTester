@@ -46,8 +46,6 @@ UserCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
                                        inputData.get("user_name").getString(),
                                        inputData.get("password").getString(),
                                        inputData.get("is_admin").getBool(),
-                                       inputData.get("roles").getString(),
-                                       inputData.get("projects").getString(),
                                        error) != m_expectSuccess)
     {
         return false;
