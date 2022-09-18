@@ -42,6 +42,7 @@ GraphRequestTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     // create new user
     std::string result;
     if(Kitsunemimi::Hanami::createGraphRequestTask(result,
+                                                   inputData.get("generic_task_name").getString(),
                                                    inputData.get("cluster_uuid").getString(),
                                                    inputData.get("base_dataset_uuid").getString(),
                                                    "Open",

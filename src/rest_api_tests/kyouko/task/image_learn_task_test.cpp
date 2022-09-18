@@ -51,6 +51,7 @@ ImageLearnTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     // create new user
     std::string result;
     if(Kitsunemimi::Hanami::createImageLearnTask(result,
+                                                 inputData.get("generic_task_name").getString(),
                                                  inputData.get("cluster_uuid").getString(),
                                                  inputData.get("learn_dataset_uuid").getString(),
                                                  error) != m_expectSuccess)
