@@ -85,6 +85,9 @@ SOURCES += src/main.cpp \
     src/rest_api_tests/sagiri/datasets/dataset_delete_test.cpp \
     src/rest_api_tests/sagiri/datasets/dataset_get_test.cpp \
     src/rest_api_tests/sagiri/datasets/dataset_list_test.cpp \
+    src/rest_api_tests/sagiri/request_results/request_result_delete_test.cpp \
+    src/rest_api_tests/sagiri/request_results/request_result_get_test.cpp \
+    src/rest_api_tests/sagiri/request_results/request_result_list_test.cpp \
     src/rest_api_tests/sagiri/snapshots/snapshot_delete_test.cpp \
     src/rest_api_tests/sagiri/snapshots/snapshot_get_test.cpp \
     src/rest_api_tests/sagiri/snapshots/snapshot_list_test.cpp
@@ -127,6 +130,9 @@ HEADERS += \
     src/rest_api_tests/sagiri/datasets/dataset_delete_test.h \
     src/rest_api_tests/sagiri/datasets/dataset_get_test.h \
     src/rest_api_tests/sagiri/datasets/dataset_list_test.h \
+    src/rest_api_tests/sagiri/request_results/request_result_delete_test.h \
+    src/rest_api_tests/sagiri/request_results/request_result_get_test.h \
+    src/rest_api_tests/sagiri/request_results/request_result_list_test.h \
     src/rest_api_tests/sagiri/snapshots/snapshot_delete_test.h \
     src/rest_api_tests/sagiri/snapshots/snapshot_get_test.h \
     src/rest_api_tests/sagiri/snapshots/snapshot_list_test.h
