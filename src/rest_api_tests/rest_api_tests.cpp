@@ -50,6 +50,10 @@
 #include <rest_api_tests/sagiri/snapshots/snapshot_get_test.h>
 #include <rest_api_tests/sagiri/snapshots/snapshot_list_test.h>
 
+#include <rest_api_tests/sagiri/request_results/request_result_get_test.h>
+#include <rest_api_tests/sagiri/request_results/request_result_list_test.h>
+#include <rest_api_tests/sagiri/request_results/request_result_delete_test.h>
+
 #include <rest_api_tests/kyouko/cluster/cluster_create_test.h>
 #include <rest_api_tests/kyouko/cluster/cluster_delete_test.h>
 #include <rest_api_tests/kyouko/cluster/cluster_get_test.h>
@@ -176,6 +180,10 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     testThread.addTest(new ImageRequestTaskTest(true));
     testThread.addTest(new DataSetCheckTest(true));
 
+    // test request-result endpoints in sagiri
+    testThread.addTest(new RequestResultGetTest(true));
+    testThread.addTest(new RequestResultListTest(true));
+
     // test snapshots of sagiri
     testThread.addTest(new SnapshotGetTest(true));
     testThread.addTest(new SnapshotListTest(true));
@@ -195,6 +203,8 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     testThread.addTest(new ClusterDeleteTest(false));
     testThread.addTest(new TemplateDeleteTest(true));
     testThread.addTest(new TemplateDeleteTest(false));
+    testThread.addTest(new RequestResultDeleteTest(true));
+    testThread.addTest(new RequestResultDeleteTest(false));
     testThread.addTest(new DataSetDeleteTest(true, "request"));
     testThread.addTest(new DataSetDeleteTest(true, "learn"));
     testThread.addTest(new DataSetDeleteTest(false, "learn"));
@@ -311,6 +321,7 @@ runRestApiTests()
     // add predefined names for the coming test-resources
     inputData.insert("cluster_name", "test_cluster");
     inputData.insert("cluster_snapshot_name", "test_snapshot");
+    inputData.insert("generic_task_name", "test_task");
     inputData.insert("template_name", "dynamic");
     inputData.insert("template_segment", segmentTemplate);
     inputData.insert("cluster_definition", clusterDefinition);
