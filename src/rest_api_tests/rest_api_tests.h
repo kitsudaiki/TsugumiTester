@@ -23,7 +23,7 @@
 #ifndef TSUGUMITESTER_REST_API_TESTS_H
 #define TSUGUMITESTER_REST_API_TESTS_H
 
-#include <libKitsumiAiSdk/common/websocket_client.h>
+#include <libHanamiAiSdk/common/websocket_client.h>
 
 bool runRestApiTests();
 

@@ -1,5 +1,5 @@
 /**
- * @file        request_result_get_test.cpp
+ * @file        snapshot_get_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,12 +20,12 @@
  *      limitations under the License.
  */
 
-#include "request_result_get_test.h"
+#include "snapshot_get_test.h"
 
-#include <libKitsumiAiSdk/request_result.h>
+#include <libHanamiAiSdk/snapshot.h>
 
-RequestResultGetTest::RequestResultGetTest(const bool expectSuccess,
-                                           const std::string &uuidOverride)
+SnapshotGetTest::SnapshotGetTest(const bool expectSuccess,
+                                 const std::string &uuidOverride)
     : TestStep(expectSuccess)
 {
     m_testName = "get snapshot";
@@ -38,16 +38,16 @@ RequestResultGetTest::RequestResultGetTest(const bool expectSuccess,
 }
 
 bool
-RequestResultGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
-                              Kitsunemimi::ErrorContainer &error)
+SnapshotGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+                         Kitsunemimi::ErrorContainer &error)
 {
     if(m_uuid == "") {
-        m_uuid = inputData.get("request_task_uuid").getString();
+        m_uuid = inputData.get("cluster_snapshot_uuid").getString();
     }
 
     // get user by name
     std::string result;
-    if(Kitsunemimi::Hanami::getRequestResult(result, m_uuid, error) != m_expectSuccess) {
+    if(Kitsunemimi::Hanami::getSnapshot(result, m_uuid, error) != m_expectSuccess) {
         return false;
     }
 

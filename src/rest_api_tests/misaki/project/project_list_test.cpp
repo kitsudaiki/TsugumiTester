@@ -22,7 +22,7 @@
 
 #include "project_list_test.h"
 
-#include <libKitsumiAiSdk/project.h>
+#include <libHanamiAiSdk/project.h>
 
 ProjectListTest::ProjectListTest(const bool expectSuccess)
     : TestStep(expectSuccess)

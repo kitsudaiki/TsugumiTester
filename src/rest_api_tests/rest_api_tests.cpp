@@ -24,10 +24,10 @@
 
 #include <libKitsunemimiConfig/config_handler.h>
 #include <libKitsunemimiJson/json_item.h>
-#include <libKitsumiAiSdk/init.h>
+#include <libHanamiAiSdk/init.h>
 
 #include <common/test_thread.h>
-#include <libKitsumiAiSdk/template.h>
+#include <libHanamiAiSdk/template.h>
 
 #include <rest_api_tests/misaki/project/project_create_test.h>
 #include <rest_api_tests/misaki/project/project_delete_test.h>
@@ -39,20 +39,20 @@
 #include <rest_api_tests/misaki/user/user_get_test.h>
 #include <rest_api_tests/misaki/user/user_list_test.h>
 
-#include <rest_api_tests/sagiri/datasets/dataset_create_mnist_test.h>
-#include <rest_api_tests/sagiri/datasets/dataset_create_csv_test.h>
-#include <rest_api_tests/sagiri/datasets/dataset_delete_test.h>
-#include <rest_api_tests/sagiri/datasets/dataset_get_test.h>
-#include <rest_api_tests/sagiri/datasets/dataset_list_test.h>
-#include <rest_api_tests/sagiri/datasets/dataset_check_test.h>
+#include <rest_api_tests/shiori/datasets/dataset_create_mnist_test.h>
+#include <rest_api_tests/shiori/datasets/dataset_create_csv_test.h>
+#include <rest_api_tests/shiori/datasets/dataset_delete_test.h>
+#include <rest_api_tests/shiori/datasets/dataset_get_test.h>
+#include <rest_api_tests/shiori/datasets/dataset_list_test.h>
+#include <rest_api_tests/shiori/datasets/dataset_check_test.h>
 
-#include <rest_api_tests/sagiri/snapshots/snapshot_delete_test.h>
-#include <rest_api_tests/sagiri/snapshots/snapshot_get_test.h>
-#include <rest_api_tests/sagiri/snapshots/snapshot_list_test.h>
+#include <rest_api_tests/shiori/snapshots/snapshot_delete_test.h>
+#include <rest_api_tests/shiori/snapshots/snapshot_get_test.h>
+#include <rest_api_tests/shiori/snapshots/snapshot_list_test.h>
 
-#include <rest_api_tests/sagiri/request_results/request_result_get_test.h>
-#include <rest_api_tests/sagiri/request_results/request_result_list_test.h>
-#include <rest_api_tests/sagiri/request_results/request_result_delete_test.h>
+#include <rest_api_tests/shiori/request_results/request_result_get_test.h>
+#include <rest_api_tests/shiori/request_results/request_result_list_test.h>
+#include <rest_api_tests/shiori/request_results/request_result_delete_test.h>
 
 #include <rest_api_tests/kyouko/cluster/cluster_create_test.h>
 #include <rest_api_tests/kyouko/cluster/cluster_delete_test.h>
@@ -148,7 +148,7 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     testThread.addTest(new UserGetTest(true));
     testThread.addTest(new UserGetTest(false, "fail_user"));
 
-    // test data-sets of sagiri
+    // test data-sets of shiori
     testThread.addTest(new DataSetCreateMnistTest(true, "request"));
     testThread.addTest(new DataSetCreateMnistTest(true, "learn"));
     testThread.addTest(new DataSetListTest(true));
@@ -170,7 +170,7 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
         testThread.addTest(new ImageLearnTaskTest(true));
     }
 
-    // test cluster load and restore of kyouko and sagiri
+    // test cluster load and restore of kyouko and shiori
     testThread.addTest(new ClusterSaveTest(true));
     testThread.addTest(new ClusterDeleteTest(true));
     testThread.addTest(new ClusterCreateTest(true));
@@ -180,11 +180,11 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     testThread.addTest(new ImageRequestTaskTest(true));
     testThread.addTest(new DataSetCheckTest(true));
 
-    // test request-result endpoints in sagiri
+    // test request-result endpoints in shiori
     testThread.addTest(new RequestResultGetTest(true));
     testThread.addTest(new RequestResultListTest(true));
 
-    // test snapshots of sagiri
+    // test snapshots of shiori
     testThread.addTest(new SnapshotGetTest(true));
     testThread.addTest(new SnapshotListTest(true));
 

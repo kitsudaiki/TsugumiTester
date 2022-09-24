@@ -22,7 +22,7 @@
 
 #include "cluster_list_test.h"
 
-#include <libKitsumiAiSdk/cluster.h>
+#include <libHanamiAiSdk/cluster.h>
 
 ClusterListTest::ClusterListTest(const bool expectSuccess)
       : TestStep(expectSuccess)

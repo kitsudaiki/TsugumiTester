@@ -22,7 +22,7 @@
 
 #include "graph_learn_task_test.h"
 
-#include <libKitsumiAiSdk/task.h>
+#include <libHanamiAiSdk/task.h>
 
 GraphLearnTaskTest::GraphLearnTaskTest(const bool expectSuccess)
   : TestStep(expectSuccess)

@@ -26,7 +26,7 @@
 #include <deque>
 #include <mutex>
 
-#include <libKitsumiAiSdk/common/websocket_client.h>
+#include <libHanamiAiSdk/common/websocket_client.h>
 
 #include <libKitsunemimiCommon/threading/thread.h>
 #include <libKitsunemimiJson/json_item.h>

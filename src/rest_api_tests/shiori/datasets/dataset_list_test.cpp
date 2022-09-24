@@ -22,7 +22,7 @@
 
 #include "dataset_list_test.h"
 
-#include <libKitsumiAiSdk/data_set.h>
+#include <libHanamiAiSdk/data_set.h>
 
 DataSetListTest::DataSetListTest(const bool expectSuccess)
       : TestStep(expectSuccess)

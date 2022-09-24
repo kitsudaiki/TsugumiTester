@@ -1,5 +1,5 @@
 /**
- * @file        dataset_check_test.cpp
+ * @file        request_result_list_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,15 +20,14 @@
  *      limitations under the License.
  */
 
-#include "dataset_check_test.h"
+#include "request_result_list_test.h"
 
-#include <libKitsunemimiConfig/config_handler.h>
-#include <libKitsumiAiSdk/data_set.h>
+#include <libHanamiAiSdk/request_result.h>
 
-DataSetCheckTest::DataSetCheckTest(const bool expectSuccess)
-          : TestStep(expectSuccess)
+RequestResultListTest::RequestResultListTest(const bool expectSuccess)
+      : TestStep(expectSuccess)
 {
-    m_testName = "check data-set";
+    m_testName = "list snapshot";
     if(expectSuccess) {
         m_testName += " (success)";
     } else {
@@ -37,16 +36,12 @@ DataSetCheckTest::DataSetCheckTest(const bool expectSuccess)
 }
 
 bool
-DataSetCheckTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
-                          Kitsunemimi::ErrorContainer &error)
+RequestResultListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+                               Kitsunemimi::ErrorContainer &error)
 {
-    // get template by name
+    // list all data
     std::string result;
-    if(Kitsunemimi::Hanami::checkDataset(result,
-                                         inputData.get("request_dataset_uuid").getString(),
-                                         inputData.get("request_task_uuid").getString(),
-                                         error) != m_expectSuccess)
-    {
+    if(Kitsunemimi::Hanami::listRequestResult(result, error) != m_expectSuccess) {
         return false;
     }
 
@@ -60,7 +55,8 @@ DataSetCheckTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
         return false;
     }
 
-    std::cout<<jsonItem.toString(true)<<std::endl;
+    inputData.insert("number_of_request_results", static_cast<long>(jsonItem.size()), true);
 
     return true;
 }
+

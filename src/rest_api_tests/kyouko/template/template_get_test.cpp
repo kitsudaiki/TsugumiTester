@@ -22,7 +22,7 @@
 
 #include "template_get_test.h"
 
-#include <libKitsumiAiSdk/template.h>
+#include <libHanamiAiSdk/template.h>
 
 TemplateGetTest::TemplateGetTest(const bool expectSuccess,
                                  const std::string &nameOverride)

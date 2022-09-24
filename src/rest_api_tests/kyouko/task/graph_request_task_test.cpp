@@ -22,7 +22,7 @@
 
 #include "graph_request_task_test.h"
 
-#include <libKitsumiAiSdk/task.h>
+#include <libHanamiAiSdk/task.h>
 
 GraphRequestTaskTest::GraphRequestTaskTest(const bool expectSuccess)
       : TestStep(expectSuccess)

@@ -22,7 +22,7 @@
 
 #include "user_create_test.h"
 
-#include <libKitsumiAiSdk/user.h>
+#include <libHanamiAiSdk/user.h>
 
 UserCreateTest::UserCreateTest(const bool expectSuccess)
     : TestStep(expectSuccess)

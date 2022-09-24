@@ -1,5 +1,5 @@
 /**
- * @file        request_result_list_test.cpp
+ * @file        request_result_get_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,28 +20,34 @@
  *      limitations under the License.
  */
 
-#include "request_result_list_test.h"
+#include "request_result_get_test.h"
 
-#include <libKitsumiAiSdk/request_result.h>
+#include <libHanamiAiSdk/request_result.h>
 
-RequestResultListTest::RequestResultListTest(const bool expectSuccess)
-      : TestStep(expectSuccess)
+RequestResultGetTest::RequestResultGetTest(const bool expectSuccess,
+                                           const std::string &uuidOverride)
+    : TestStep(expectSuccess)
 {
-    m_testName = "list snapshot";
+    m_testName = "get snapshot";
     if(expectSuccess) {
         m_testName += " (success)";
     } else {
         m_testName += " (fail)";
     }
+    m_uuid = uuidOverride;
 }
 
 bool
-RequestResultListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
-                               Kitsunemimi::ErrorContainer &error)
+RequestResultGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+                              Kitsunemimi::ErrorContainer &error)
 {
-    // list all data
+    if(m_uuid == "") {
+        m_uuid = inputData.get("request_task_uuid").getString();
+    }
+
+    // get user by name
     std::string result;
-    if(Kitsunemimi::Hanami::listRequestResult(result, error) != m_expectSuccess) {
+    if(Kitsunemimi::Hanami::getRequestResult(result, m_uuid, error) != m_expectSuccess) {
         return false;
     }
 
@@ -54,8 +60,6 @@ RequestResultListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     if(jsonItem.parse(result, error) == false) {
         return false;
     }
-
-    inputData.insert("number_of_request_results", static_cast<long>(jsonItem.size()), true);
 
     return true;
 }

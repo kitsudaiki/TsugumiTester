@@ -24,7 +24,7 @@ function build_kitsune_lib_repo () {
     cd $REPO_DIR
 
     # build repo library with qmake
-    if [[ $REPO_NAME == "libKitsumiAiSdk" ]]
+    if [[ $REPO_NAME == "libHanamiAiSdk" ]]
     then
         /usr/lib/x86_64-linux-gnu/qt5/bin/qmake "$PARENT_DIR/$REPO_NAME/cpp/$REPO_NAME.pro" -spec linux-g++ "CONFIG += optimize_full staticlib"
     else
@@ -36,7 +36,7 @@ function build_kitsune_lib_repo () {
     echo "----------------------------------------------------------------------"
     echo $RESULT_DIR
     cp $REPO_DIR/src/$REPO_NAME.a $RESULT_DIR/
-    if [[ $REPO_NAME == "libKitsumiAiSdk" ]]
+    if [[ $REPO_NAME == "libHanamiAiSdk" ]]
     then
         cp -r $PARENT_DIR/$REPO_NAME/cpp/include $RESULT_DIR/
     else
@@ -104,7 +104,7 @@ echo "##########################################################################
 echo ""
 get_required_private_repo_github "libKitsunemimiHanamiCommon" "develop" 8
 download_private_repo_github "libKitsunemimiHanamiMessages" "develop"
-get_required_private_repo_github "libKitsumiAiSdk" "develop"  8
+get_required_private_repo_github "libHanamiAiSdk" "develop"  8
 echo ""
 echo "###########################################################################################################"
 echo ""

@@ -1,5 +1,5 @@
 /**
- * @file        snapshot_get_test.cpp
+ * @file        snapshot_list_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,34 +20,28 @@
  *      limitations under the License.
  */
 
-#include "snapshot_get_test.h"
+#include "snapshot_list_test.h"
 
-#include <libKitsumiAiSdk/snapshot.h>
+#include <libHanamiAiSdk/snapshot.h>
 
-SnapshotGetTest::SnapshotGetTest(const bool expectSuccess,
-                                 const std::string &uuidOverride)
-    : TestStep(expectSuccess)
+SnapshotListTest::SnapshotListTest(const bool expectSuccess)
+      : TestStep(expectSuccess)
 {
-    m_testName = "get snapshot";
+    m_testName = "list snapshot";
     if(expectSuccess) {
         m_testName += " (success)";
     } else {
         m_testName += " (fail)";
     }
-    m_uuid = uuidOverride;
 }
 
 bool
-SnapshotGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
-                         Kitsunemimi::ErrorContainer &error)
+SnapshotListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+                          Kitsunemimi::ErrorContainer &error)
 {
-    if(m_uuid == "") {
-        m_uuid = inputData.get("cluster_snapshot_uuid").getString();
-    }
-
-    // get user by name
+    // list all data
     std::string result;
-    if(Kitsunemimi::Hanami::getSnapshot(result, m_uuid, error) != m_expectSuccess) {
+    if(Kitsunemimi::Hanami::listSnapshot(result, error) != m_expectSuccess) {
         return false;
     }
 
@@ -60,6 +54,8 @@ SnapshotGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     if(jsonItem.parse(result, error) == false) {
         return false;
     }
+
+    inputData.insert("number_of_snapshotss", static_cast<long>(jsonItem.size()), true);
 
     return true;
 }
