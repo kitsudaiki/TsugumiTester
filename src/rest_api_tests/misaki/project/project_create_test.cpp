@@ -22,7 +22,7 @@
 
 #include "project_create_test.h"
 
-#include <libKitsumiAiSdk/project.h>
+#include <libHanamiAiSdk/project.h>
 
 ProjectCreateTest::ProjectCreateTest(const bool expectSuccess)
     : TestStep(expectSuccess)

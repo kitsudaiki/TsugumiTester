@@ -22,7 +22,7 @@
 
 #include "image_request_task_test.h"
 
-#include <libKitsumiAiSdk/task.h>
+#include <libHanamiAiSdk/task.h>
 
 ImageRequestTaskTest::ImageRequestTaskTest(const bool expectSuccess)
       : TestStep(expectSuccess)

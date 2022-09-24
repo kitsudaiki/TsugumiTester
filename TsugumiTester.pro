@@ -4,10 +4,10 @@ TARGET = TsugumiTester
 CONFIG += console c++17
 CONFIG -= app_bundle
 
-LIBS += -L../libKitsumiAiSdk/src -lKitsumiAiSdk
-LIBS += -L../libKitsumiAiSdk/src/debug -lKitsumiAiSdk
-LIBS += -L../libKitsumiAiSdk/src/release -lKitsumiAiSdk
-INCLUDEPATH += ../libKitsumiAiSdk/cpp/include
+LIBS += -L../libHanamiAiSdk/src -lKitsumiAiSdk
+LIBS += -L../libHanamiAiSdk/src/debug -lKitsumiAiSdk
+LIBS += -L../libHanamiAiSdk/src/release -lKitsumiAiSdk
+INCLUDEPATH += ../libHanamiAiSdk/cpp/include
 
 LIBS += -L../libKitsunemimiHanamiCommon/src -lKitsunemimiHanamiCommon
 LIBS += -L../libKitsunemimiHanamiCommon/src/debug -lKitsunemimiHanamiCommon
@@ -79,18 +79,18 @@ SOURCES += src/main.cpp \
     src/rest_api_tests/misaki/user/user_get_test.cpp \
     src/rest_api_tests/misaki/user/user_list_test.cpp \
     src/rest_api_tests/rest_api_tests.cpp \
-    src/rest_api_tests/sagiri/datasets/dataset_check_test.cpp \
-    src/rest_api_tests/sagiri/datasets/dataset_create_csv_test.cpp \
-    src/rest_api_tests/sagiri/datasets/dataset_create_mnist_test.cpp \
-    src/rest_api_tests/sagiri/datasets/dataset_delete_test.cpp \
-    src/rest_api_tests/sagiri/datasets/dataset_get_test.cpp \
-    src/rest_api_tests/sagiri/datasets/dataset_list_test.cpp \
-    src/rest_api_tests/sagiri/request_results/request_result_delete_test.cpp \
-    src/rest_api_tests/sagiri/request_results/request_result_get_test.cpp \
-    src/rest_api_tests/sagiri/request_results/request_result_list_test.cpp \
-    src/rest_api_tests/sagiri/snapshots/snapshot_delete_test.cpp \
-    src/rest_api_tests/sagiri/snapshots/snapshot_get_test.cpp \
-    src/rest_api_tests/sagiri/snapshots/snapshot_list_test.cpp
+    src/rest_api_tests/shiori/datasets/dataset_check_test.cpp \
+    src/rest_api_tests/shiori/datasets/dataset_create_csv_test.cpp \
+    src/rest_api_tests/shiori/datasets/dataset_create_mnist_test.cpp \
+    src/rest_api_tests/shiori/datasets/dataset_delete_test.cpp \
+    src/rest_api_tests/shiori/datasets/dataset_get_test.cpp \
+    src/rest_api_tests/shiori/datasets/dataset_list_test.cpp \
+    src/rest_api_tests/shiori/request_results/request_result_delete_test.cpp \
+    src/rest_api_tests/shiori/request_results/request_result_get_test.cpp \
+    src/rest_api_tests/shiori/request_results/request_result_list_test.cpp \
+    src/rest_api_tests/shiori/snapshots/snapshot_delete_test.cpp \
+    src/rest_api_tests/shiori/snapshots/snapshot_get_test.cpp \
+    src/rest_api_tests/shiori/snapshots/snapshot_list_test.cpp
 
 HEADERS += \
     src/args.h \
@@ -124,15 +124,15 @@ HEADERS += \
     src/rest_api_tests/misaki/user/user_get_test.h \
     src/rest_api_tests/misaki/user/user_list_test.h \
     src/rest_api_tests/rest_api_tests.h \
-    src/rest_api_tests/sagiri/datasets/dataset_check_test.h \
-    src/rest_api_tests/sagiri/datasets/dataset_create_csv_test.h \
-    src/rest_api_tests/sagiri/datasets/dataset_create_mnist_test.h \
-    src/rest_api_tests/sagiri/datasets/dataset_delete_test.h \
-    src/rest_api_tests/sagiri/datasets/dataset_get_test.h \
-    src/rest_api_tests/sagiri/datasets/dataset_list_test.h \
-    src/rest_api_tests/sagiri/request_results/request_result_delete_test.h \
-    src/rest_api_tests/sagiri/request_results/request_result_get_test.h \
-    src/rest_api_tests/sagiri/request_results/request_result_list_test.h \
-    src/rest_api_tests/sagiri/snapshots/snapshot_delete_test.h \
-    src/rest_api_tests/sagiri/snapshots/snapshot_get_test.h \
-    src/rest_api_tests/sagiri/snapshots/snapshot_list_test.h
+    src/rest_api_tests/shiori/datasets/dataset_check_test.h \
+    src/rest_api_tests/shiori/datasets/dataset_create_csv_test.h \
+    src/rest_api_tests/shiori/datasets/dataset_create_mnist_test.h \
+    src/rest_api_tests/shiori/datasets/dataset_delete_test.h \
+    src/rest_api_tests/shiori/datasets/dataset_get_test.h \
+    src/rest_api_tests/shiori/datasets/dataset_list_test.h \
+    src/rest_api_tests/shiori/request_results/request_result_delete_test.h \
+    src/rest_api_tests/shiori/request_results/request_result_get_test.h \
+    src/rest_api_tests/shiori/request_results/request_result_list_test.h \
+    src/rest_api_tests/shiori/snapshots/snapshot_delete_test.h \
+    src/rest_api_tests/shiori/snapshots/snapshot_get_test.h \
+    src/rest_api_tests/shiori/snapshots/snapshot_list_test.h

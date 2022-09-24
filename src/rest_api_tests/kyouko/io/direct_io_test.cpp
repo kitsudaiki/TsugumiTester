@@ -22,7 +22,7 @@
 
 #include "direct_io_test.h"
 
-#include <libKitsumiAiSdk/io.h>
+#include <libHanamiAiSdk/io.h>
 #include <common/test_thread.h>
 
 DirectIoTest::DirectIoTest(const bool expectSuccess)

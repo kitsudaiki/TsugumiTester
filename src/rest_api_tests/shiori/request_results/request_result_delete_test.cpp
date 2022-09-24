@@ -1,5 +1,5 @@
 /**
- * @file        dataset_delete_test.cpp
+ * @file        request_result_delete_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,40 +20,30 @@
  *      limitations under the License.
  */
 
-#include "dataset_delete_test.h"
+#include "request_result_delete_test.h"
 
-#include <libKitsumiAiSdk/data_set.h>
+#include <libHanamiAiSdk/request_result.h>
 
-DataSetDeleteTest::DataSetDeleteTest(const bool expectSuccess,
-                                     const std::string &type)
+RequestResultDeleteTest::RequestResultDeleteTest(const bool expectSuccess)
           : TestStep(expectSuccess)
 {
-    m_testName = "delete data-set";
+    m_testName = "delete snapshot";
     if(expectSuccess) {
         m_testName += " (success)";
     } else {
         m_testName += " (fail)";
     }
-    m_type = type;
 }
 
 bool
-DataSetDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
-                           Kitsunemimi::ErrorContainer &error)
+RequestResultDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+                                 Kitsunemimi::ErrorContainer &error)
 {
-    std::string uuid = "";
-    if(m_type == "learn") {
-        uuid = inputData.get("learn_dataset_uuid").getString();
-    } else if(m_type == "request") {
-        uuid = inputData.get("request_dataset_uuid").getString();
-    } else {
-        uuid = inputData.get("base_dataset_uuid").getString();
-    }
+    const std::string uuid = inputData.get("request_task_uuid").getString();
 
     // delete user by name
     std::string result;
-    if(Kitsunemimi::Hanami::deleteDataset(result, uuid, error) != m_expectSuccess)
-    {
+    if(Kitsunemimi::Hanami::deleteRequestResult(result, uuid, error) != m_expectSuccess) {
         return false;
     }
 

@@ -22,8 +22,8 @@
 
 #include "cluster_load_test.h"
 
-#include <libKitsumiAiSdk/cluster.h>
-#include <libKitsumiAiSdk/task.h>
+#include <libHanamiAiSdk/cluster.h>
+#include <libHanamiAiSdk/task.h>
 
 ClusterLoadTest::ClusterLoadTest(const bool expectSuccess)
           : TestStep(expectSuccess)

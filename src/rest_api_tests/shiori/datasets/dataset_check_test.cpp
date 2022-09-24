@@ -1,5 +1,5 @@
 /**
- * @file        snapshot_list_test.cpp
+ * @file        dataset_check_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,14 +20,15 @@
  *      limitations under the License.
  */
 
-#include "snapshot_list_test.h"
+#include "dataset_check_test.h"
 
-#include <libKitsumiAiSdk/snapshot.h>
+#include <libKitsunemimiConfig/config_handler.h>
+#include <libHanamiAiSdk/data_set.h>
 
-SnapshotListTest::SnapshotListTest(const bool expectSuccess)
-      : TestStep(expectSuccess)
+DataSetCheckTest::DataSetCheckTest(const bool expectSuccess)
+          : TestStep(expectSuccess)
 {
-    m_testName = "list snapshot";
+    m_testName = "check data-set";
     if(expectSuccess) {
         m_testName += " (success)";
     } else {
@@ -36,12 +37,16 @@ SnapshotListTest::SnapshotListTest(const bool expectSuccess)
 }
 
 bool
-SnapshotListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+DataSetCheckTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
                           Kitsunemimi::ErrorContainer &error)
 {
-    // list all data
+    // get template by name
     std::string result;
-    if(Kitsunemimi::Hanami::listSnapshot(result, error) != m_expectSuccess) {
+    if(Kitsunemimi::Hanami::checkDataset(result,
+                                         inputData.get("request_dataset_uuid").getString(),
+                                         inputData.get("request_task_uuid").getString(),
+                                         error) != m_expectSuccess)
+    {
         return false;
     }
 
@@ -55,8 +60,7 @@ SnapshotListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
         return false;
     }
 
-    inputData.insert("number_of_snapshotss", static_cast<long>(jsonItem.size()), true);
+    std::cout<<jsonItem.toString(true)<<std::endl;
 
     return true;
 }
-

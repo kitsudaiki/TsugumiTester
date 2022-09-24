@@ -22,7 +22,7 @@
 
 #include "snapshot_delete_test.h"
 
-#include <libKitsumiAiSdk/snapshot.h>
+#include <libHanamiAiSdk/snapshot.h>
 
 SnapshotDeleteTest::SnapshotDeleteTest(const bool expectSuccess)
           : TestStep(expectSuccess)
