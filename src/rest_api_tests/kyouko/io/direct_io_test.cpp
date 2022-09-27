@@ -93,6 +93,10 @@ DirectIoTest::requestTest()
     float inputValues[784];
     fillInputValues(&inputValues[0]);
 
+    for(uint64_t i = 0; i < 784; i++) {
+        inputValues[i] *= 255.0f;
+    }
+
     uint64_t numberOfValues = 0;
     float* values = Kitsunemimi::Hanami::request(TestThread::m_wsClient,
                                                  inputValues,
