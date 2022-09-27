@@ -1,5 +1,5 @@
 /**
- * @file        graph_request_task_test.cpp
+ * @file        table_request_task_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,11 +20,11 @@
  *      limitations under the License.
  */
 
-#include "graph_request_task_test.h"
+#include "table_request_task_test.h"
 
 #include <libHanamiAiSdk/task.h>
 
-GraphRequestTaskTest::GraphRequestTaskTest(const bool expectSuccess)
+TableRequestTaskTest::TableRequestTaskTest(const bool expectSuccess)
       : TestStep(expectSuccess)
 {
     m_testName = "graph-request-task";
@@ -36,7 +36,7 @@ GraphRequestTaskTest::GraphRequestTaskTest(const bool expectSuccess)
 }
 
 bool
-GraphRequestTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+TableRequestTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
                               Kitsunemimi::ErrorContainer &error)
 {
     // create new user

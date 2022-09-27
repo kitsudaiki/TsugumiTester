@@ -73,8 +73,8 @@
 
 #include <rest_api_tests/kyouko/task/image_learn_task_test.h>
 #include <rest_api_tests/kyouko/task/image_request_task_test.h>
-#include <rest_api_tests/kyouko/task/graph_learn_task_test.h>
-#include <rest_api_tests/kyouko/task/graph_request_task_test.h>
+#include <rest_api_tests/kyouko/task/table_learn_task_test.h>
+#include <rest_api_tests/kyouko/task/table_request_task_test.h>
 
 /**
  * @brief initialize client by requesting a token, which is used for all tests
@@ -303,13 +303,12 @@ runRestApiTests()
 
     // add data for the test-user to create
     inputData.insert("user_id", "tsugumi");
-    inputData.insert("user_name", "tsugumi");
+    inputData.insert("user_name", "Tsugumi");
     inputData.insert("password", "new password");
     inputData.insert("admin", true);
-    inputData.insert("roles", "tester");
-    inputData.insert("projects", "tester");
-    inputData.insert("project_id", "tester");
-    inputData.insert("project_name", "tester");
+    inputData.insert("role", "tester");
+    inputData.insert("project_id", "test_project");
+    inputData.insert("project_name", "Test Project");
 
     // add data from config
     inputData.insert("learn_inputs", GET_STRING_CONFIG("test_data", "learn_inputs", success)),

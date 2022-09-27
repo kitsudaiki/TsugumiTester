@@ -1,5 +1,5 @@
 /**
- * @file        graph_learn_task_test.cpp
+ * @file        table_learn_task_test.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,14 +20,14 @@
  *      limitations under the License.
  */
 
-#include "graph_learn_task_test.h"
+#include "table_learn_task_test.h"
 
 #include <libHanamiAiSdk/task.h>
 
-GraphLearnTaskTest::GraphLearnTaskTest(const bool expectSuccess)
+TableLearnTaskTest::TableLearnTaskTest(const bool expectSuccess)
   : TestStep(expectSuccess)
 {
-    m_testName = "graph-learn-task";
+    m_testName = "table-learn-task";
     if(expectSuccess) {
         m_testName += " (success)";
     } else {
@@ -36,7 +36,7 @@ GraphLearnTaskTest::GraphLearnTaskTest(const bool expectSuccess)
 }
 
 bool
-GraphLearnTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+TableLearnTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
                             Kitsunemimi::ErrorContainer &error)
 {
     // create new user
