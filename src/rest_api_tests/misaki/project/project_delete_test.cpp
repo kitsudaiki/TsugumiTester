@@ -45,18 +45,18 @@ ProjectDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     std::string result;
     if(m_nameOverride != "")
     {
-        if(Kitsunemimi::Hanami::deleteProject(result,
-                                              m_nameOverride,
-                                              error) != m_expectSuccess)
+        if(HanamiAI::deleteProject(result,
+                                   m_nameOverride,
+                                   error) != m_expectSuccess)
         {
             return false;
         }
     }
     else
     {
-        if(Kitsunemimi::Hanami::deleteProject(result,
-                                              inputData.get("project_id").getString(),
-                                              error) != m_expectSuccess)
+        if(HanamiAI::deleteProject(result,
+                                   inputData.get("project_id").getString(),
+                                   error) != m_expectSuccess)
         {
             return false;
         }

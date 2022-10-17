@@ -70,12 +70,12 @@ DirectIoTest::learnTest()
             std::cout<<"run: "<<i<<std::endl;
         }
 
-        if(Kitsunemimi::Hanami::learn(TestThread::m_wsClient,
-                                      inputValues,
-                                      784,
-                                      shouldValues,
-                                      10,
-                                      error) == false)
+        if(HanamiAI::learn(TestThread::m_wsClient,
+                           inputValues,
+                           784,
+                           shouldValues,
+                           10,
+                           error) == false)
         {
             return false;
         }
@@ -98,11 +98,11 @@ DirectIoTest::requestTest()
     }
 
     uint64_t numberOfValues = 0;
-    float* values = Kitsunemimi::Hanami::request(TestThread::m_wsClient,
-                                                 inputValues,
-                                                 784,
-                                                 numberOfValues,
-                                                 error);
+    float* values = HanamiAI::request(TestThread::m_wsClient,
+                                      inputValues,
+                                      784,
+                                      numberOfValues,
+                                      error);
     if(values == nullptr) {
         return false;
     }

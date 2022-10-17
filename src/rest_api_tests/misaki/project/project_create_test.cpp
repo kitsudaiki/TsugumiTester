@@ -41,10 +41,10 @@ ProjectCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // create new user
     std::string result;
-    if(Kitsunemimi::Hanami::createProject(result,
-                                          inputData.get("project_id").getString(),
-                                          inputData.get("project_name").getString(),
-                                          error) != m_expectSuccess)
+    if(HanamiAI::createProject(result,
+                               inputData.get("project_id").getString(),
+                               inputData.get("project_name").getString(),
+                               error) != m_expectSuccess)
     {
         return false;
     }

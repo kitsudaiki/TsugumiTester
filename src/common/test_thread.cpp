@@ -24,7 +24,7 @@
 
 #include <common/test_step.h>
 
-Kitsunemimi::Hanami::WebsocketClient* TestThread::m_wsClient = nullptr;
+HanamiAI::WebsocketClient* TestThread::m_wsClient = nullptr;
 
 /**
  * @brief constructor

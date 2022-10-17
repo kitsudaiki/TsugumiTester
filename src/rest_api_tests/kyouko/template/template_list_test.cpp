@@ -41,7 +41,7 @@ TemplateListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // list templates
     std::string result;
-    if(Kitsunemimi::Hanami::listTemplate(result, error) != m_expectSuccess) {
+    if(HanamiAI::listTemplate(result, error) != m_expectSuccess) {
         return false;
     }
 

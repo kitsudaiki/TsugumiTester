@@ -34,20 +34,20 @@ UserGetTest::UserGetTest(const bool expectSuccess,
     } else {
         m_testName += " (fail)";
     }
-    m_name = nameOverride;
+    m_id = nameOverride;
 }
 
 bool
 UserGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
                      Kitsunemimi::ErrorContainer &error)
 {
-    if(m_name == "") {
-        m_name = inputData.get("user_id").getString();
+    if(m_id == "") {
+        m_id = inputData.get("user_id").getString();
     }
 
     // get user by name
     std::string result;
-    if(Kitsunemimi::Hanami::getUser(result, m_name, error) != m_expectSuccess) {
+    if(HanamiAI::getUser(result, m_id, error) != m_expectSuccess) {
         return false;
     }
 

@@ -41,7 +41,7 @@ DataSetListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // list all data
     std::string result;
-    if(Kitsunemimi::Hanami::listDatasets(result, error) != m_expectSuccess) {
+    if(HanamiAI::listDatasets(result, error) != m_expectSuccess) {
         return false;
     }
 

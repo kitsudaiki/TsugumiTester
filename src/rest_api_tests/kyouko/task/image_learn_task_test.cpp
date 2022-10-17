@@ -50,11 +50,11 @@ ImageLearnTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // create new user
     std::string result;
-    if(Kitsunemimi::Hanami::createImageLearnTask(result,
-                                                 inputData.get("generic_task_name").getString(),
-                                                 inputData.get("cluster_uuid").getString(),
-                                                 inputData.get("learn_dataset_uuid").getString(),
-                                                 error) != m_expectSuccess)
+    if(HanamiAI::createImageLearnTask(result,
+                                      inputData.get("generic_task_name").getString(),
+                                      inputData.get("cluster_uuid").getString(),
+                                      inputData.get("learn_dataset_uuid").getString(),
+                                      error) != m_expectSuccess)
     {
         return false;
     }
@@ -79,26 +79,26 @@ ImageLearnTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     // wait until task is finished
     do
     {
-        sleep(1);
+        usleep(100000);
 
-        Kitsunemimi::Hanami::getTask(result,
-                                     inputData.get("learn_task_uuid").getString(),
-                                     inputData.get("cluster_uuid").getString(),
-                                     error);
+        HanamiAI::getTask(result,
+                          inputData.get("learn_task_uuid").getString(),
+                          inputData.get("cluster_uuid").getString(),
+                          error);
 
         // parse output
         if(jsonItem.parse(result, error) == false) {
             return false;
         }
-        std::cout<<jsonItem.toString(true)<<std::endl;
+        //std::cout<<jsonItem.toString(true)<<std::endl;
     }
     while(jsonItem.get("state").getString() != "finished");
     end = std::chrono::system_clock::now();
     const float time2 = std::chrono::duration_cast<chronoMilliSec>(end - start).count();
 
-    std::cout<<"#############################################################################################"<<std::endl;
+    std::cout<<"#######################################################################"<<std::endl;
     std::cout<<"learn_time: "<<time2<<" ms"<<std::endl;
-    std::cout<<"#############################################################################################"<<std::endl;
+    std::cout<<"#######################################################################"<<std::endl;
 
     return true;
 }

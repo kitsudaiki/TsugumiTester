@@ -41,10 +41,10 @@ DataSetCreateCsvTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
                               Kitsunemimi::ErrorContainer &error)
 {
     std::string result;
-    if(Kitsunemimi::Hanami::uploadCsvData(result,
-                                          inputData.get("base_dataset_name").getString(),
-                                          inputData.get("base_inputs").getString(),
-                                          error) != m_expectSuccess)
+    if(HanamiAI::uploadCsvData(result,
+                               inputData.get("base_dataset_name").getString(),
+                               inputData.get("base_inputs").getString(),
+                               error) != m_expectSuccess)
     {
         return false;
     }

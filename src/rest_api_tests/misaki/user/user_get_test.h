@@ -36,7 +36,7 @@ public:
                  Kitsunemimi::ErrorContainer &error);
 
 private:
-    std::string m_name = "";
+    std::string m_id = "";
 };
 
 #endif // TSUGUMITESTER_USERGETSTEP_H

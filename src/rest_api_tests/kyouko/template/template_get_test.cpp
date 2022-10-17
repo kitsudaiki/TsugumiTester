@@ -47,7 +47,7 @@ TemplateGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 
     // get template by name
     std::string result;
-    if(Kitsunemimi::Hanami::getTemplate(result, m_name, error) != m_expectSuccess) {
+    if(HanamiAI::getTemplate(result, m_name, error) != m_expectSuccess) {
         return false;
     }
 

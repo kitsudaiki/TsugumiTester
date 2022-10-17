@@ -41,10 +41,10 @@ ClusterCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // create new cluster
     std::string result;
-    if(Kitsunemimi::Hanami::createCluster(result,
-                                          inputData.get("cluster_name").getString(),
-                                          inputData.get("cluster_definition").getString(),
-                                          error) != m_expectSuccess)
+    if(HanamiAI::createCluster(result,
+                               inputData.get("cluster_name").getString(),
+                               inputData.get("cluster_definition").getString(),
+                               error) != m_expectSuccess)
     {
         return false;
     }

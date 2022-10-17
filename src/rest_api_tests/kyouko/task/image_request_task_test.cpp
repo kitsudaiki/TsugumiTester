@@ -21,8 +21,17 @@
  */
 
 #include "image_request_task_test.h"
+#include <chrono>
 
 #include <libHanamiAiSdk/task.h>
+
+typedef std::chrono::milliseconds chronoMilliSec;
+typedef std::chrono::microseconds chronoMicroSec;
+typedef std::chrono::nanoseconds chronoNanoSec;
+typedef std::chrono::seconds chronoSec;
+typedef std::chrono::high_resolution_clock::time_point chronoTimePoint;
+typedef std::chrono::high_resolution_clock chronoClock;
+
 
 ImageRequestTaskTest::ImageRequestTaskTest(const bool expectSuccess)
       : TestStep(expectSuccess)
@@ -41,11 +50,11 @@ ImageRequestTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // create new user
     std::string result;
-    if(Kitsunemimi::Hanami::createImageRequestTask(result,
-                                                   inputData.get("generic_task_name").getString(),
-                                                   inputData.get("cluster_uuid").getString(),
-                                                   inputData.get("request_dataset_uuid").getString(),
-                                                   error) != m_expectSuccess)
+    if(HanamiAI::createImageRequestTask(result,
+                                        inputData.get("generic_task_name").getString(),
+                                        inputData.get("cluster_uuid").getString(),
+                                        inputData.get("request_dataset_uuid").getString(),
+                                        error) != m_expectSuccess)
     {
         return false;
     }
@@ -62,22 +71,33 @@ ImageRequestTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 
     inputData.insert("request_task_uuid", jsonItem.get("uuid").getString(), true);
 
+    std::chrono::high_resolution_clock::time_point start;
+    std::chrono::high_resolution_clock::time_point end;
+
+    start = std::chrono::system_clock::now();
+
     // wait until task is finished
     do
     {
-        sleep(1);
-        Kitsunemimi::Hanami::getTask(result,
-                                     inputData.get("request_task_uuid").getString(),
-                                     inputData.get("cluster_uuid").getString(),
-                                     error);
+        usleep(100000);
+        HanamiAI::getTask(result,
+                          inputData.get("request_task_uuid").getString(),
+                          inputData.get("cluster_uuid").getString(),
+                          error);
 
         // parse output
         if(jsonItem.parse(result, error) == false) {
             return false;
         }
-        std::cout<<jsonItem.toString(true)<<std::endl;
+        //std::cout<<jsonItem.toString(true)<<std::endl;
     }
     while(jsonItem.get("state").getString() != "finished");
+    end = std::chrono::system_clock::now();
+    const float time2 = std::chrono::duration_cast<chronoMilliSec>(end - start).count();
+
+    std::cout<<"#######################################################################"<<std::endl;
+    std::cout<<"reqzest_time: "<<time2<<" ms"<<std::endl;
+    std::cout<<"#######################################################################"<<std::endl;
 
     // get task-result
     //Kitsunemimi::Hanami::getTask(result, m_taskUuid, m_clusterUuid, true, error);

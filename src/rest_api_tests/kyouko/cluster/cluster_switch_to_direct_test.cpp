@@ -44,10 +44,10 @@ ClusterSwitchToDirectTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // create new cluster
     std::string result;
-    Kitsunemimi::Hanami::WebsocketClient* client = nullptr;
-    client = Kitsunemimi::Hanami::switchToDirectMode(result,
-                                                     inputData.get("cluster_uuid").getString(),
-                                                     error);
+    HanamiAI::WebsocketClient* client = nullptr;
+    client = HanamiAI::switchToDirectMode(result,
+                                          inputData.get("cluster_uuid").getString(),
+                                          error);
     bool success = client != nullptr;
     if(success != m_expectSuccess)
     {

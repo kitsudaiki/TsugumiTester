@@ -47,7 +47,7 @@ ProjectGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 
     // get user by name
     std::string result;
-    if(Kitsunemimi::Hanami::getProject(result, m_name, error) != m_expectSuccess) {
+    if(HanamiAI::getProject(result, m_name, error) != m_expectSuccess) {
         return false;
     }
 

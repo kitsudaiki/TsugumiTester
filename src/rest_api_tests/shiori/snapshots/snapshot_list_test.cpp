@@ -41,7 +41,7 @@ SnapshotListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // list all data
     std::string result;
-    if(Kitsunemimi::Hanami::listSnapshot(result, error) != m_expectSuccess) {
+    if(HanamiAI::listSnapshot(result, error) != m_expectSuccess) {
         return false;
     }
 

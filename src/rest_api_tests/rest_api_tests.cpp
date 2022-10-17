@@ -65,7 +65,6 @@
 
 #include <rest_api_tests/kyouko/io/direct_io_test.h>
 
-#include <rest_api_tests/kyouko/template/template_generate_test.h>
 #include <rest_api_tests/kyouko/template/template_upload_test.h>
 #include <rest_api_tests/kyouko/template/template_delete_test.h>
 #include <rest_api_tests/kyouko/template/template_get_test.h>
@@ -90,7 +89,7 @@ initClient()
     const std::string user = GET_STRING_CONFIG("connection", "test_user", success);
     const std::string pw = GET_STRING_CONFIG("connection", "test_pw", success);
 
-    if(Kitsunemimi::Hanami::initClient(host, port, user, pw, error) == false)
+    if(HanamiAI::initClient(host, port, user, pw, error) == false)
     {
         LOG_ERROR(error);
         return false;
@@ -107,7 +106,7 @@ deleteTemplate()
 {
     std::string result = "";
     Kitsunemimi::ErrorContainer error;
-    Kitsunemimi::Hanami::listTemplate(result, error);
+    HanamiAI::listTemplate(result, error);
 
     Kitsunemimi::Json::JsonItem parsedList;
     parsedList.parse(result, error);
@@ -116,7 +115,7 @@ deleteTemplate()
     for(uint64_t i = 0; i < body.size(); i++)
     {
         const std::string uuid = body.get(i).get(0).getString();
-        Kitsunemimi::Hanami::deleteTemplate(result, uuid, error);
+        HanamiAI::deleteTemplate(result, uuid, error);
     }
 }
 
@@ -166,7 +165,7 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     testThread.addTest(new ClusterListTest(true));
 
     // test learning-tasks of kyouko
-    for(int i = 0; i < 2; i++) {
+    for(int i = 0; i < 10; i++) {
         testThread.addTest(new ImageLearnTaskTest(true));
     }
 
@@ -256,8 +255,7 @@ runRestApiTests()
                                         "    ],\n"
                                         "    \"settings\": {\n"
                                         "        \"max_synapse_sections\": 100000,\n"
-                                        "        \"max_synapse_segmentation\": 10.0,\n"
-                                        "        \"potential_overflow\": 1.0,\n"
+                                        "        \"synapse_segmentation\": 10.0,\n"
                                         "        \"sign_neg\": 0.5\n"
                                         "    }\n"
                                         "}\n";

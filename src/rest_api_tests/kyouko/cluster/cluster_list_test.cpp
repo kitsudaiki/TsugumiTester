@@ -41,7 +41,7 @@ ClusterListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // list clusters
     std::string result;
-    if(Kitsunemimi::Hanami::listCluster(result, error) != m_expectSuccess) {
+    if(HanamiAI::listCluster(result, error) != m_expectSuccess) {
         return false;
     }
 

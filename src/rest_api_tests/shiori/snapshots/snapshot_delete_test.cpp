@@ -43,7 +43,7 @@ SnapshotDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 
     // delete user by name
     std::string result;
-    if(Kitsunemimi::Hanami::deleteSnapshot(result, uuid, error) != m_expectSuccess) {
+    if(HanamiAI::deleteSnapshot(result, uuid, error) != m_expectSuccess) {
         return false;
     }
 

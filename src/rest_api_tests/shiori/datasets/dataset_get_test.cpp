@@ -54,7 +54,7 @@ DataSetGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 
     // get user by name
     std::string result;
-    if(Kitsunemimi::Hanami::getDataset(result, m_uuid, error) != m_expectSuccess) {
+    if(HanamiAI::getDataset(result, m_uuid, error) != m_expectSuccess) {
         return false;
     }
 

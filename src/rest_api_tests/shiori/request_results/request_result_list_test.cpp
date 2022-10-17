@@ -41,7 +41,7 @@ RequestResultListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // list all data
     std::string result;
-    if(Kitsunemimi::Hanami::listRequestResult(result, error) != m_expectSuccess) {
+    if(HanamiAI::listRequestResult(result, error) != m_expectSuccess) {
         return false;
     }
 

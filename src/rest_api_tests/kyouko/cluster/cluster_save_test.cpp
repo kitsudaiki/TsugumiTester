@@ -42,10 +42,10 @@ ClusterSaveTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // create new cluster
     std::string result;
-    if(Kitsunemimi::Hanami::saveCluster(result,
-                                        inputData.get("cluster_uuid").getString(),
-                                        inputData.get("cluster_snapshot_name").getString(),
-                                        error) != m_expectSuccess)
+    if(HanamiAI::saveCluster(result,
+                             inputData.get("cluster_uuid").getString(),
+                             inputData.get("cluster_snapshot_name").getString(),
+                             error) != m_expectSuccess)
     {
         return false;
     }
@@ -67,10 +67,10 @@ ClusterSaveTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     {
         sleep(1);
 
-        Kitsunemimi::Hanami::getTask(result,
-                                     inputData.get("cluster_snapshot_uuid").getString(),
-                                     inputData.get("cluster_uuid").getString(),
-                                     error);
+        HanamiAI::getTask(result,
+                          inputData.get("cluster_snapshot_uuid").getString(),
+                          inputData.get("cluster_uuid").getString(),
+                          error);
 
         // parse output
         if(jsonItem.parse(result, error) == false) {

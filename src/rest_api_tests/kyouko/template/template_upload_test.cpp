@@ -41,10 +41,10 @@ TemplateUploadTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // create new template
     std::string result = "";
-    if(Kitsunemimi::Hanami::uploadTemplate(result,
-                                           inputData.get("template_name").getString(),
-                                           inputData.get("template_segment").getString(),
-                                           error) != m_expectSuccess)
+    if(HanamiAI::uploadTemplate(result,
+                                inputData.get("template_name").getString(),
+                                inputData.get("template_segment").getString(),
+                                error) != m_expectSuccess)
     {
         return false;
     }

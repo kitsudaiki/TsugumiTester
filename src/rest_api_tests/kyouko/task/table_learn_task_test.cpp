@@ -41,12 +41,11 @@ TableLearnTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // create new user
     std::string result;
-    if(Kitsunemimi::Hanami::createGraphLearnTask(result,
-                                                 inputData.get("generic_task_name").getString(),
-                                                 inputData.get("cluster_uuid").getString(),
-                                                 inputData.get("base_dataset_uuid").getString(),
-                                                 "Open",
-                                                 error) != m_expectSuccess)
+    if(HanamiAI::createTableLearnTask(result,
+                                      inputData.get("generic_task_name").getString(),
+                                      inputData.get("cluster_uuid").getString(),
+                                      inputData.get("base_dataset_uuid").getString(),
+                                      error) != m_expectSuccess)
     {
         return false;
     }
@@ -68,10 +67,10 @@ TableLearnTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     {
         sleep(1);
 
-        Kitsunemimi::Hanami::getTask(result,
-                                     inputData.get("learn_task_uuid").getString(),
-                                     inputData.get("cluster_uuid").getString(),
-                                     error);
+        HanamiAI::getTask(result,
+                          inputData.get("learn_task_uuid").getString(),
+                          inputData.get("cluster_uuid").getString(),
+                          error);
 
         // parse output
         if(jsonItem.parse(result, error) == false) {

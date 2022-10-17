@@ -41,7 +41,7 @@ UserListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // list all users
     std::string result;
-    if(Kitsunemimi::Hanami::listUser(result, error) != m_expectSuccess) {
+    if(HanamiAI::listUser(result, error) != m_expectSuccess) {
         return false;
     }
 

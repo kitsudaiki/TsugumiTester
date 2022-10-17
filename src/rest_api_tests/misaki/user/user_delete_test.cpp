@@ -45,18 +45,18 @@ UserDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     std::string result;
     if(m_nameOverride != "")
     {
-        if(Kitsunemimi::Hanami::deleteUser(result,
-                                           m_nameOverride,
-                                           error) != m_expectSuccess)
+        if(HanamiAI::deleteUser(result,
+                                m_nameOverride,
+                                error) != m_expectSuccess)
         {
             return false;
         }
     }
     else
     {
-        if(Kitsunemimi::Hanami::deleteUser(result,
-                                           inputData.get("user_id").getString(),
-                                           error) != m_expectSuccess)
+        if(HanamiAI::deleteUser(result,
+                                inputData.get("user_id").getString(),
+                                error) != m_expectSuccess)
         {
             return false;
         }

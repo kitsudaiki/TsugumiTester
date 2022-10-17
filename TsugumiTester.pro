@@ -4,9 +4,9 @@ TARGET = TsugumiTester
 CONFIG += console c++17
 CONFIG -= app_bundle
 
-LIBS += -L../libHanamiAiSdk/src -lKitsumiAiSdk
-LIBS += -L../libHanamiAiSdk/src/debug -lKitsumiAiSdk
-LIBS += -L../libHanamiAiSdk/src/release -lKitsumiAiSdk
+LIBS += -L../libHanamiAiSdk/src -lHanamiAiSdk
+LIBS += -L../libHanamiAiSdk/src/debug -lHanamiAiSdk
+LIBS += -L../libHanamiAiSdk/src/release -lHanamiAiSdk
 INCLUDEPATH += ../libHanamiAiSdk/cpp/include
 
 LIBS += -L../libKitsunemimiHanamiCommon/src -lKitsunemimiHanamiCommon
@@ -66,7 +66,6 @@ SOURCES += src/main.cpp \
     src/rest_api_tests/kyouko/task/table_learn_task_test.cpp \
     src/rest_api_tests/kyouko/task/table_request_task_test.cpp \
     src/rest_api_tests/kyouko/template/template_delete_test.cpp \
-    src/rest_api_tests/kyouko/template/template_generate_test.cpp \
     src/rest_api_tests/kyouko/template/template_get_test.cpp \
     src/rest_api_tests/kyouko/template/template_list_test.cpp \
     src/rest_api_tests/kyouko/template/template_upload_test.cpp \
@@ -111,7 +110,6 @@ HEADERS += \
     src/rest_api_tests/kyouko/task/table_learn_task_test.h \
     src/rest_api_tests/kyouko/task/table_request_task_test.h \
     src/rest_api_tests/kyouko/template/template_delete_test.h \
-    src/rest_api_tests/kyouko/template/template_generate_test.h \
     src/rest_api_tests/kyouko/template/template_get_test.h \
     src/rest_api_tests/kyouko/template/template_list_test.h \
     src/rest_api_tests/kyouko/template/template_upload_test.h \

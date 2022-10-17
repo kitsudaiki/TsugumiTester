@@ -34,20 +34,20 @@ ClusterGetTest::ClusterGetTest(const bool expectSuccess,
     } else {
         m_testName += " (fail)";
     }
-    m_name = nameOverride;
+    m_uuid = nameOverride;
 }
 
 bool
 ClusterGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
                         Kitsunemimi::ErrorContainer &error)
 {
-    if(m_name == "") {
-        m_name = inputData.get("cluster_uuid").getString();
+    if(m_uuid == "") {
+        m_uuid = inputData.get("cluster_uuid").getString();
     }
 
     // get cluster-infos
     std::string result;
-    if(Kitsunemimi::Hanami::getCluster(result, m_name, error) != m_expectSuccess) {
+    if(HanamiAI::getCluster(result, m_uuid, error) != m_expectSuccess) {
         return false;
     }
 

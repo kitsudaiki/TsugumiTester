@@ -47,7 +47,7 @@ RequestResultGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 
     // get user by name
     std::string result;
-    if(Kitsunemimi::Hanami::getRequestResult(result, m_uuid, error) != m_expectSuccess) {
+    if(HanamiAI::getRequestResult(result, m_uuid, error) != m_expectSuccess) {
         return false;
     }
 

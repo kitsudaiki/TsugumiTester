@@ -41,9 +41,9 @@ TemplateDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // delete template by name
     std::string result;
-    if(Kitsunemimi::Hanami::deleteTemplate(result,
-                                           inputData.get("template_uuid").getString(),
-                                           error) != m_expectSuccess)
+    if(HanamiAI::deleteTemplate(result,
+                                inputData.get("template_uuid").getString(),
+                                error) != m_expectSuccess)
     {
         return false;
     }

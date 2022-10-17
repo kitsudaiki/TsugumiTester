@@ -42,10 +42,10 @@ DataSetCheckTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
 {
     // get template by name
     std::string result;
-    if(Kitsunemimi::Hanami::checkDataset(result,
-                                         inputData.get("request_dataset_uuid").getString(),
-                                         inputData.get("request_task_uuid").getString(),
-                                         error) != m_expectSuccess)
+    if(HanamiAI::checkDataset(result,
+                              inputData.get("request_dataset_uuid").getString(),
+                              inputData.get("request_task_uuid").getString(),
+                              error) != m_expectSuccess)
     {
         return false;
     }
