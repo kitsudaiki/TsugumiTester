@@ -44,7 +44,7 @@ LIBS += -L../libKitsunemimiCommon/src/debug -lKitsunemimiCommon
 LIBS += -L../libKitsunemimiCommon/src/release -lKitsunemimiCommon
 INCLUDEPATH += ../libKitsunemimiCommon/include
 
-LIBS += -lcryptopp -lssl -luuid -lcrypto
+LIBS += -lcryptopp -lssl -luuid -lcrypto -pthread -lprotobuf
 
 INCLUDEPATH += $$PWD \
                src
