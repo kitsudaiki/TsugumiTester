@@ -61,7 +61,6 @@ TemplateGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
         return false;
     }
 
-    std::cout<<"template:\n"<<jsonItem.get("template").toString(true)<<std::endl;
     inputData.insert("template", jsonItem.get("template").toString(), true);
 
     return true;
