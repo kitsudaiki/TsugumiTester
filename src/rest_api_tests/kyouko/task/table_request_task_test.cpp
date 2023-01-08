@@ -36,7 +36,7 @@ TableRequestTaskTest::TableRequestTaskTest(const bool expectSuccess)
 }
 
 bool
-TableRequestTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+TableRequestTaskTest::runTest(Kitsunemimi::JsonItem &inputData,
                               Kitsunemimi::ErrorContainer &error)
 {
     // create new user
@@ -55,7 +55,7 @@ TableRequestTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

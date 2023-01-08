@@ -36,7 +36,7 @@ TableLearnTaskTest::TableLearnTaskTest(const bool expectSuccess)
 }
 
 bool
-TableLearnTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+TableLearnTaskTest::runTest(Kitsunemimi::JsonItem &inputData,
                             Kitsunemimi::ErrorContainer &error)
 {
     // create new user
@@ -55,7 +55,7 @@ TableLearnTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

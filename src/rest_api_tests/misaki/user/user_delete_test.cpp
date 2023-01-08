@@ -38,7 +38,7 @@ UserDeleteTest::UserDeleteTest(const bool expectSuccess,
 }
 
 bool
-UserDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+UserDeleteTest::runTest(Kitsunemimi::JsonItem &inputData,
                         Kitsunemimi::ErrorContainer &error)
 {
     // delete user by name
@@ -67,7 +67,7 @@ UserDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

@@ -36,7 +36,7 @@ ClusterDeleteTest::ClusterDeleteTest(const bool expectSuccess)
 }
 
 bool
-ClusterDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+ClusterDeleteTest::runTest(Kitsunemimi::JsonItem &inputData,
                            Kitsunemimi::ErrorContainer &error)
 {
     // delete cluster
@@ -53,7 +53,7 @@ ClusterDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

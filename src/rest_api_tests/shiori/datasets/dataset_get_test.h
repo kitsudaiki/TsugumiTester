@@ -33,7 +33,7 @@ public:
                    const std::string &type,
                    const std::string &uuidOverride = "");
 
-    bool runTest(Kitsunemimi::Json::JsonItem &inputData,
+    bool runTest(Kitsunemimi::JsonItem &inputData,
                  Kitsunemimi::ErrorContainer &error);
 
 private:

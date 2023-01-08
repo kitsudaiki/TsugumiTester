@@ -31,7 +31,7 @@ class DirectIoTest
 public:
     DirectIoTest(const bool expectSuccess);
 
-    bool runTest(Kitsunemimi::Json::JsonItem &,
+    bool runTest(Kitsunemimi::JsonItem &,
                  Kitsunemimi::ErrorContainer &);
 
 private:

@@ -36,7 +36,7 @@ RequestResultListTest::RequestResultListTest(const bool expectSuccess)
 }
 
 bool
-RequestResultListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+RequestResultListTest::runTest(Kitsunemimi::JsonItem &inputData,
                                Kitsunemimi::ErrorContainer &error)
 {
     // list all data
@@ -50,7 +50,7 @@ RequestResultListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

@@ -36,7 +36,7 @@ ClusterListTest::ClusterListTest(const bool expectSuccess)
 }
 
 bool
-ClusterListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+ClusterListTest::runTest(Kitsunemimi::JsonItem &inputData,
                          Kitsunemimi::ErrorContainer &error)
 {
     // list clusters
@@ -50,7 +50,7 @@ ClusterListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

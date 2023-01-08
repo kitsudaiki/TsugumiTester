@@ -38,7 +38,7 @@ ClusterGetTest::ClusterGetTest(const bool expectSuccess,
 }
 
 bool
-ClusterGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+ClusterGetTest::runTest(Kitsunemimi::JsonItem &inputData,
                         Kitsunemimi::ErrorContainer &error)
 {
     if(m_uuid == "") {
@@ -56,7 +56,7 @@ ClusterGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

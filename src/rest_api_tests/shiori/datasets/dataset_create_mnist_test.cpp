@@ -39,7 +39,7 @@ DataSetCreateMnistTest::DataSetCreateMnistTest(const bool expectSuccess,
 }
 
 bool
-DataSetCreateMnistTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+DataSetCreateMnistTest::runTest(Kitsunemimi::JsonItem &inputData,
                                 Kitsunemimi::ErrorContainer &error)
 {
     std::string result;
@@ -72,7 +72,7 @@ DataSetCreateMnistTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

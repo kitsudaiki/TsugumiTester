@@ -37,7 +37,7 @@ DirectIoTest::DirectIoTest(const bool expectSuccess)
 }
 
 bool
-DirectIoTest::runTest(Kitsunemimi::Json::JsonItem &,
+DirectIoTest::runTest(Kitsunemimi::JsonItem &,
                       Kitsunemimi::ErrorContainer &)
 {
     if(learnTest() == false) {

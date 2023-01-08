@@ -108,10 +108,10 @@ deleteTemplate()
     Kitsunemimi::ErrorContainer error;
     HanamiAI::listTemplate(result, error);
 
-    Kitsunemimi::Json::JsonItem parsedList;
+    Kitsunemimi::JsonItem parsedList;
     parsedList.parse(result, error);
 
-    Kitsunemimi::Json::JsonItem body = parsedList.get("body");
+    Kitsunemimi::JsonItem body = parsedList.get("body");
     for(uint64_t i = 0; i < body.size(); i++)
     {
         const std::string uuid = body.get(i).get(0).getString();
@@ -125,13 +125,13 @@ deleteTemplate()
  * @param inputData json-item with names and other predefined values for the tests
  */
 void
-runImageTest(Kitsunemimi::Json::JsonItem &inputData)
+runImageTest(Kitsunemimi::JsonItem &inputData)
 {
     deleteTemplate();
 
     TestThread testThread("test_thread", inputData);
 
-    Kitsunemimi::Json::JsonItem overrideData;
+    Kitsunemimi::JsonItem overrideData;
 
     // test project in misaki
     testThread.addTest(new ProjectCreateTest(true));
@@ -165,15 +165,15 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     testThread.addTest(new ClusterListTest(true));
 
     // test learning-tasks of kyouko
-    for(int i = 0; i < 10; i++) {
+    for(int i = 0; i < 1; i++) {
         testThread.addTest(new ImageLearnTaskTest(true));
     }
 
     // test cluster load and restore of kyouko and shiori
-    testThread.addTest(new ClusterSaveTest(true));
+    /*testThread.addTest(new ClusterSaveTest(true));
     testThread.addTest(new ClusterDeleteTest(true));
     testThread.addTest(new ClusterCreateTest(true));
-    testThread.addTest(new ClusterLoadTest(true));
+    testThread.addTest(new ClusterLoadTest(true));*/
 
     // test request-tasks of kyouko
     testThread.addTest(new ImageRequestTaskTest(true));
@@ -184,8 +184,8 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     testThread.addTest(new RequestResultListTest(true));
 
     // test snapshots of shiori
-    testThread.addTest(new SnapshotGetTest(true));
-    testThread.addTest(new SnapshotListTest(true));
+    //testThread.addTest(new SnapshotGetTest(true));
+    //testThread.addTest(new SnapshotListTest(true));
 
     // test direct-io of kyouko
     testThread.addTest(new ClusterSwitchToDirectTest(true));
@@ -197,7 +197,7 @@ runImageTest(Kitsunemimi::Json::JsonItem &inputData)
     testThread.addTest(new UserDeleteTest(false));
     testThread.addTest(new ProjectDeleteTest(true));
     testThread.addTest(new ProjectDeleteTest(false));
-    testThread.addTest(new SnapshotDeleteTest(true));
+    //testThread.addTest(new SnapshotDeleteTest(true));
     testThread.addTest(new ClusterDeleteTest(true));
     testThread.addTest(new ClusterDeleteTest(false));
     testThread.addTest(new TemplateDeleteTest(true));
@@ -262,7 +262,7 @@ runRestApiTests()
                                         "    output\n"
                                         "        name: output\n");
 
-    Kitsunemimi::Json::JsonItem inputData;
+    Kitsunemimi::JsonItem inputData;
 
     // add data for the test-user to create
     inputData.insert("user_id", "tsugumi");

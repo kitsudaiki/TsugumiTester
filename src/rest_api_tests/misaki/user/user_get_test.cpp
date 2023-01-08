@@ -38,7 +38,7 @@ UserGetTest::UserGetTest(const bool expectSuccess,
 }
 
 bool
-UserGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+UserGetTest::runTest(Kitsunemimi::JsonItem &inputData,
                      Kitsunemimi::ErrorContainer &error)
 {
     if(m_id == "") {
@@ -56,7 +56,7 @@ UserGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

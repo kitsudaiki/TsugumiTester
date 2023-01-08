@@ -38,7 +38,7 @@ TemplateGetTest::TemplateGetTest(const bool expectSuccess,
 }
 
 bool
-TemplateGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+TemplateGetTest::runTest(Kitsunemimi::JsonItem &inputData,
                          Kitsunemimi::ErrorContainer &error)
 {
     if(m_name == "") {
@@ -56,7 +56,7 @@ TemplateGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

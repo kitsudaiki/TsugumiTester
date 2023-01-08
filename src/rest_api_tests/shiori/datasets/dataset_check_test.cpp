@@ -37,7 +37,7 @@ DataSetCheckTest::DataSetCheckTest(const bool expectSuccess)
 }
 
 bool
-DataSetCheckTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+DataSetCheckTest::runTest(Kitsunemimi::JsonItem &inputData,
                           Kitsunemimi::ErrorContainer &error)
 {
     // get template by name
@@ -55,7 +55,7 @@ DataSetCheckTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }
