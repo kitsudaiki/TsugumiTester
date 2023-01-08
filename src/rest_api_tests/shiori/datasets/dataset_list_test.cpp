@@ -36,7 +36,7 @@ DataSetListTest::DataSetListTest(const bool expectSuccess)
 }
 
 bool
-DataSetListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+DataSetListTest::runTest(Kitsunemimi::JsonItem &inputData,
                          Kitsunemimi::ErrorContainer &error)
 {
     // list all data
@@ -50,7 +50,7 @@ DataSetListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

@@ -45,7 +45,7 @@ ImageRequestTaskTest::ImageRequestTaskTest(const bool expectSuccess)
 }
 
 bool
-ImageRequestTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+ImageRequestTaskTest::runTest(Kitsunemimi::JsonItem &inputData,
                               Kitsunemimi::ErrorContainer &error)
 {
     // create new user
@@ -64,7 +64,7 @@ ImageRequestTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }
@@ -79,7 +79,7 @@ ImageRequestTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     // wait until task is finished
     do
     {
-        usleep(100000);
+        usleep(1000000);
         HanamiAI::getTask(result,
                           inputData.get("request_task_uuid").getString(),
                           inputData.get("cluster_uuid").getString(),

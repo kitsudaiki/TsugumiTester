@@ -38,7 +38,7 @@ class TestThread
 {
 public:
     TestThread(const std::string &name,
-               Kitsunemimi::Json::JsonItem &inputData);
+               Kitsunemimi::JsonItem &inputData);
     ~TestThread();
 
     void addTest(TestStep* newStep);
@@ -52,7 +52,7 @@ protected:
 private:
     std::deque<TestStep*> m_taskQueue;
     std::mutex m_queueLock;
-    Kitsunemimi::Json::JsonItem m_inputData;
+    Kitsunemimi::JsonItem m_inputData;
 
     TestStep* getTest();
 };

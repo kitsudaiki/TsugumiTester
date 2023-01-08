@@ -38,7 +38,7 @@ RequestResultGetTest::RequestResultGetTest(const bool expectSuccess,
 }
 
 bool
-RequestResultGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+RequestResultGetTest::runTest(Kitsunemimi::JsonItem &inputData,
                               Kitsunemimi::ErrorContainer &error)
 {
     if(m_uuid == "") {
@@ -56,7 +56,7 @@ RequestResultGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

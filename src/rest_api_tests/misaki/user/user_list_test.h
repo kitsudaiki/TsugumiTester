@@ -31,7 +31,7 @@ class UserListTest
 public:
     UserListTest(const bool expectSuccess);
 
-    bool runTest(Kitsunemimi::Json::JsonItem &inputData,
+    bool runTest(Kitsunemimi::JsonItem &inputData,
                  Kitsunemimi::ErrorContainer &error);
 };
 

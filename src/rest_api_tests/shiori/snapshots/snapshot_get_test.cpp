@@ -38,7 +38,7 @@ SnapshotGetTest::SnapshotGetTest(const bool expectSuccess,
 }
 
 bool
-SnapshotGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+SnapshotGetTest::runTest(Kitsunemimi::JsonItem &inputData,
                          Kitsunemimi::ErrorContainer &error)
 {
     if(m_uuid == "") {
@@ -56,7 +56,7 @@ SnapshotGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

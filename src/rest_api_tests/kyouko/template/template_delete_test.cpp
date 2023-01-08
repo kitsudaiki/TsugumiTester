@@ -36,7 +36,7 @@ TemplateDeleteTest::TemplateDeleteTest(const bool expectSuccess)
 }
 
 bool
-TemplateDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+TemplateDeleteTest::runTest(Kitsunemimi::JsonItem &inputData,
                             Kitsunemimi::ErrorContainer &error)
 {
     // delete template by name
@@ -53,7 +53,7 @@ TemplateDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

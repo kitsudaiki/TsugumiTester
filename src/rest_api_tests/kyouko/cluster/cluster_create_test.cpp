@@ -36,7 +36,7 @@ ClusterCreateTest::ClusterCreateTest(const bool expectSuccess)
 }
 
 bool
-ClusterCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+ClusterCreateTest::runTest(Kitsunemimi::JsonItem &inputData,
                            Kitsunemimi::ErrorContainer &error)
 {
     // create new cluster
@@ -54,7 +54,7 @@ ClusterCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

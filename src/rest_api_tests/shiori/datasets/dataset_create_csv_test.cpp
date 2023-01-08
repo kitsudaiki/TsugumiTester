@@ -37,7 +37,7 @@ DataSetCreateCsvTest::DataSetCreateCsvTest(const bool expectSuccess)
 }
 
 bool
-DataSetCreateCsvTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+DataSetCreateCsvTest::runTest(Kitsunemimi::JsonItem &inputData,
                               Kitsunemimi::ErrorContainer &error)
 {
     std::string result;
@@ -54,7 +54,7 @@ DataSetCreateCsvTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

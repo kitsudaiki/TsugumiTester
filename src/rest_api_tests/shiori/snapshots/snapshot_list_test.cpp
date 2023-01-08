@@ -36,7 +36,7 @@ SnapshotListTest::SnapshotListTest(const bool expectSuccess)
 }
 
 bool
-SnapshotListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+SnapshotListTest::runTest(Kitsunemimi::JsonItem &inputData,
                           Kitsunemimi::ErrorContainer &error)
 {
     // list all data
@@ -50,7 +50,7 @@ SnapshotListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

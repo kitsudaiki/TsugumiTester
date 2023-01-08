@@ -37,7 +37,7 @@ ClusterLoadTest::ClusterLoadTest(const bool expectSuccess)
 }
 
 bool
-ClusterLoadTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+ClusterLoadTest::runTest(Kitsunemimi::JsonItem &inputData,
                          Kitsunemimi::ErrorContainer &error)
 {
     // create new cluster
@@ -55,7 +55,7 @@ ClusterLoadTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

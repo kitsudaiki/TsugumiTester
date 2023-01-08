@@ -36,7 +36,7 @@ RequestResultDeleteTest::RequestResultDeleteTest(const bool expectSuccess)
 }
 
 bool
-RequestResultDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+RequestResultDeleteTest::runTest(Kitsunemimi::JsonItem &inputData,
                                  Kitsunemimi::ErrorContainer &error)
 {
     const std::string uuid = inputData.get("request_task_uuid").getString();
@@ -52,7 +52,7 @@ RequestResultDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

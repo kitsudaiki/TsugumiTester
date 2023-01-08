@@ -36,7 +36,7 @@ ProjectCreateTest::ProjectCreateTest(const bool expectSuccess)
 }
 
 bool
-ProjectCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+ProjectCreateTest::runTest(Kitsunemimi::JsonItem &inputData,
                            Kitsunemimi::ErrorContainer &error)
 {
     // create new user
@@ -54,7 +54,7 @@ ProjectCreateTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

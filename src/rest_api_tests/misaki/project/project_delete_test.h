@@ -32,7 +32,7 @@ public:
     ProjectDeleteTest(const bool expectSuccess,
                    const std::string &nameOverride = "");
 
-    bool runTest(Kitsunemimi::Json::JsonItem &inputData,
+    bool runTest(Kitsunemimi::JsonItem &inputData,
                  Kitsunemimi::ErrorContainer &error);
 
 private:

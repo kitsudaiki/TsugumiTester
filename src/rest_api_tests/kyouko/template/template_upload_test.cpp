@@ -36,7 +36,7 @@ TemplateUploadTest::TemplateUploadTest(const bool expectSuccess)
 }
 
 bool
-TemplateUploadTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+TemplateUploadTest::runTest(Kitsunemimi::JsonItem &inputData,
                             Kitsunemimi::ErrorContainer &error)
 {
     // create new template
@@ -54,7 +54,7 @@ TemplateUploadTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

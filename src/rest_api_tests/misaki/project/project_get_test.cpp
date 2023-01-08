@@ -38,7 +38,7 @@ ProjectGetTest::ProjectGetTest(const bool expectSuccess,
 }
 
 bool
-ProjectGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+ProjectGetTest::runTest(Kitsunemimi::JsonItem &inputData,
                         Kitsunemimi::ErrorContainer &error)
 {
     if(m_name == "") {
@@ -56,7 +56,7 @@ ProjectGetTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

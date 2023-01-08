@@ -36,7 +36,7 @@ SnapshotDeleteTest::SnapshotDeleteTest(const bool expectSuccess)
 }
 
 bool
-SnapshotDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+SnapshotDeleteTest::runTest(Kitsunemimi::JsonItem &inputData,
                             Kitsunemimi::ErrorContainer &error)
 {
     const std::string uuid = inputData.get("cluster_snapshot_uuid").getString();
@@ -52,7 +52,7 @@ SnapshotDeleteTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

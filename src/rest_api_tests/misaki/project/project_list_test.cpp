@@ -36,7 +36,7 @@ ProjectListTest::ProjectListTest(const bool expectSuccess)
 }
 
 bool
-ProjectListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+ProjectListTest::runTest(Kitsunemimi::JsonItem &inputData,
                          Kitsunemimi::ErrorContainer &error)
 {
     // list all users
@@ -50,7 +50,7 @@ ProjectListTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
     }
 
     // parse output
-    Kitsunemimi::Json::JsonItem jsonItem;
+    Kitsunemimi::JsonItem jsonItem;
     if(jsonItem.parse(result, error) == false) {
         return false;
     }

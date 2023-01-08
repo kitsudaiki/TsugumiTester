@@ -32,7 +32,7 @@ public:
     DataSetCreateMnistTest(const bool expectSuccess,
                            const std::string &type);
 
-    bool runTest(Kitsunemimi::Json::JsonItem &inputData,
+    bool runTest(Kitsunemimi::JsonItem &inputData,
                  Kitsunemimi::ErrorContainer &error);
 
 private:

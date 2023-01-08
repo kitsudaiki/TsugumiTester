@@ -38,7 +38,7 @@ public:
 
     const std::string getTestName() const;
 
-    virtual bool runTest(Kitsunemimi::Json::JsonItem &inputData,
+    virtual bool runTest(Kitsunemimi::JsonItem &inputData,
                          Kitsunemimi::ErrorContainer &error) = 0;
 
 protected:

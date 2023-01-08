@@ -36,7 +36,7 @@ ClusterSwitchToTaskTest::ClusterSwitchToTaskTest(const bool expectSuccess)
 }
 
 bool
-ClusterSwitchToTaskTest::runTest(Kitsunemimi::Json::JsonItem &inputData,
+ClusterSwitchToTaskTest::runTest(Kitsunemimi::JsonItem &inputData,
                                  Kitsunemimi::ErrorContainer &error)
 {
     // create new cluster
