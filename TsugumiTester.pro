@@ -4,6 +4,9 @@ TARGET = TsugumiTester
 CONFIG += console c++17
 CONFIG -= app_bundle
 
+LIBS += -L../libHanamiAiSdk/cpp/src -lHanamiAiSdk
+LIBS += -L../libHanamiAiSdk/cpp/src/debug -lHanamiAiSdk
+LIBS += -L../libHanamiAiSdk/cpp/src/release -lHanamiAiSdk
 LIBS += -L../libHanamiAiSdk/src -lHanamiAiSdk
 LIBS += -L../libHanamiAiSdk/src/debug -lHanamiAiSdk
 LIBS += -L../libHanamiAiSdk/src/release -lHanamiAiSdk
